@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Book, CreateBookDto } from '../types/Book';
+import { CreateBookDto } from '../types/Book';
 import { bookService } from '../services/api';
 import './BookForm.css';
 

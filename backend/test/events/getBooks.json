@@ -1,0 +1,23 @@
+{
+  "httpMethod": "GET",
+  "path": "/books",
+  "resource": "/books",
+  "pathParameters": null,
+  "queryStringParameters": null,
+  "headers": {
+    "Accept": "application/json, text/plain, */*",
+    "Content-Type": "application/json",
+    "Host": "localhost:3000",
+    "User-Agent": "axios/1.6.0"
+  },
+  "body": null,
+  "isBase64Encoded": false,
+  "requestContext": {
+    "accountId": "123456789012",
+    "apiId": "1234567890",
+    "httpMethod": "GET",
+    "requestId": "test-request-id",
+    "resourcePath": "/books",
+    "stage": "dev"
+  }
+}

@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  postgres-prod:
+    image: postgres:15
+    container_name: bookstore_postgres_prod
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: prodpassword123
+      POSTGRES_DB: bookstore_prod
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_prod_data:/var/lib/postgresql/data
+      - ./init-scripts:/docker-entrypoint-initdb.d
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    container_name: bookstore_redis
+    ports:
+      - "6379:6379"
+    restart: unless-stopped
+
+volumes:
+  postgres_prod_data:
