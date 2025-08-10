@@ -5,6 +5,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { BooksModule } from './books/books.module';
 import { Book } from './entities/book.entity';
+import { getDatabaseConfig } from './config/database.config';
 
 @Module({
   imports: [
@@ -13,16 +14,18 @@ import { Book } from './entities/book.entity';
     }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
-      useFactory: (configService: ConfigService) => ({
-        type: 'postgres',
-        host: configService.get('DB_HOST'),
-        port: +(configService.get('DB_PORT') || '5432'),
-        username: configService.get('DB_USERNAME'),
-        password: configService.get('DB_PASSWORD'),
-        database: configService.get('DB_DATABASE'),
-        entities: [Book],
-        synchronize: true, // Only for development
-      }),
+      useFactory: (configService: ConfigService) => {
+        const config = getDatabaseConfig();
+        // Override with environment variables if they exist
+        return {
+          ...config,
+          host: configService.get('DB_HOST') || config.host,
+          port: configService.get('DB_PORT') ? +configService.get('DB_PORT') : config.port,
+          username: configService.get('DB_USERNAME') || config.username,
+          password: configService.get('DB_PASSWORD') || config.password,
+          database: configService.get('DB_NAME') || config.database,
+        };
+      },
       inject: [ConfigService],
     }),
     BooksModule,

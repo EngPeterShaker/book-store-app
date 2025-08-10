@@ -1,7 +1,17 @@
 import axios from 'axios';
 import { Book, CreateBookDto, UpdateBookDto } from '../types/Book';
 
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001';
+// Auto-detect environment and set appropriate API URL
+const getApiBaseUrl = () => {
+  if (process.env.NODE_ENV === 'production') {
+    // In production (Vercel), the API is served from the same domain
+    return window.location.origin;
+  }
+  // In development, use the local backend
+  return process.env.REACT_APP_API_URL || 'http://localhost:3001';
+};
+
+const API_BASE_URL = getApiBaseUrl();
 
 const api = axios.create({
   baseURL: API_BASE_URL,
