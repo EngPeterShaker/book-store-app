@@ -1,0 +1,34 @@
+{
+  "name": "book-store-app",
+  "version": "1.0.0",
+  "description": "Full-stack book store application with NestJS backend and React frontend",
+  "private": true,
+  "scripts": {
+    "vercel-build": "cd backend && yarn vercel-build && cd ../frontend && yarn build",
+    "build": "yarn vercel-build",
+    "install:all": "yarn install && cd backend && yarn install && cd ../frontend && yarn install",
+    "start:backend": "cd backend && yarn start:dev",
+    "start:frontend": "cd frontend && yarn start",
+    "test": "cd backend && yarn test && cd ../frontend && yarn test",
+    "build:backend": "cd backend && yarn build",
+    "build:frontend": "cd frontend && yarn build"
+  },
+  "workspaces": [
+    "backend",
+    "frontend"
+  ],
+  "engines": {
+    "node": ">=18.0.0",
+    "yarn": ">=1.22.0"
+  },
+  "keywords": [
+    "nestjs",
+    "react",
+    "typescript",
+    "postgresql",
+    "vercel",
+    "fullstack"
+  ],
+  "author": "Your Name",
+  "license": "MIT"
+}

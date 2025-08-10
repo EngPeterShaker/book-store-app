@@ -30,73 +30,45 @@ A full-stack MERN application for managing a book store inventory, built with Re
 - **PostgreSQL 15**
 - **pgAdmin** for database administration
 
-## 📋 Prerequisites
+## Getting Started
 
-Before running this application, make sure you have:
+### Prerequisites
+- Node.js (v18 or higher)
+- Yarn package manager
+- PostgreSQL database
 
-- **Node.js** (v16 or higher)
-- **npm** or **yarn**
-- **Docker** and **Docker Compose** (for PostgreSQL)
+### Installation
 
-## 🚀 Getting Started
+1. **Install dependencies:**
+   ```bash
+   # Install root dependencies
+   yarn install
+   
+   # Install backend dependencies
+   cd backend
+   yarn install
+   
+   # Install frontend dependencies
+   cd ../frontend
+   yarn install
+   ```
 
-### 1. Clone the Repository
+2. **Set up environment variables:**
+   ```bash
+   # Copy environment template
+   cp env.example .env
+   
+   # Edit .env with your database credentials
+   ```
 
-```bash
-git clone <your-repo-url>
-cd book-store-app
-```
-
-### 2. Start the Database
-
-```bash
-# Start PostgreSQL and pgAdmin using Docker Compose
-docker-compose up -d
-
-# Verify containers are running
-docker-compose ps
-```
-
-**Database Access:**
-- **PostgreSQL**: `localhost:5432`
-  - Username: `postgres`
-  - Password: `password`
-  - Database: `bookstore`
-- **pgAdmin**: http://localhost:5050
-  - Email: `admin@bookstore.com`
-  - Password: `admin`
-
-### 3. Setup Backend (NestJS)
-
-```bash
-# Navigate to backend directory
-cd backend
-
-# Install dependencies
-npm install
-
-# Start the development server
-npm run start:dev
-```
-
-The backend API will be available at: http://localhost:3001
-
-### 4. Setup Frontend (React)
-
-Open a new terminal:
-
-```bash
-# Navigate to frontend directory
-cd frontend
-
-# Install dependencies
-npm install
-
-# Start the development server
-npm start
-```
-
-The frontend will be available at: http://localhost:3000
+3. **Start development servers:**
+   ```bash
+   # Backend (from backend directory)
+   yarn start:dev
+   
+   # Frontend (from frontend directory)
+   yarn start
+   ```
 
 ## 📁 Project Structure
 
@@ -186,14 +158,14 @@ book-store-app/
 cd backend
 
 # Development mode
-npm run start:dev
+yarn start:dev
 
 # Production build
-npm run build
-npm run start:prod
+yarn build
+yarn start:prod
 
 # Run tests
-npm run test
+yarn test
 ```
 
 ### Frontend Development
@@ -202,13 +174,13 @@ npm run test
 cd frontend
 
 # Development mode
-npm start
+yarn start
 
 # Production build
-npm run build
+yarn build
 
 # Run tests
-npm test
+yarn test
 ```
 
 ## 🚀 Deployment
@@ -233,14 +205,27 @@ NODE_ENV=production
 ### Build for Production
 
 ```bash
-# Build backend
+# Backend
 cd backend
-npm run build
+yarn build
 
-# Build frontend
+# Frontend
 cd frontend
-npm run build
+yarn build
 ```
+
+## 📋 Available Scripts
+
+### Backend (NestJS)
+- **Development**: `yarn start:dev` - Start with hot reload
+- **Production**: `yarn start:prod` - Start production server
+- **Build**: `yarn build` - Build for production
+- **Testing**: `yarn test` - Run unit tests
+
+### Frontend (React)
+- **Development**: `yarn start` - Start development server
+- **Production**: `yarn build` - Build for production
+- **Testing**: `yarn test` - Run tests
 
 ## 🤝 Contributing
 

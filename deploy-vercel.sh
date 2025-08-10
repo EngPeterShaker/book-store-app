@@ -29,7 +29,7 @@ print_error() {
 # Check if Vercel CLI is installed
 if ! command -v vercel &> /dev/null; then
     print_error "Vercel CLI is not installed. Please install it first:"
-    echo "npm i -g vercel"
+    echo "yarn global add vercel"
     exit 1
 fi
 

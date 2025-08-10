@@ -15,7 +15,7 @@ case $PLATFORM in
     # Build and deploy backend
     echo "🔨 Building backend..."
     cd backend
-    npm run build
+    yarn build
     
     echo "☁️ Deploying to AWS Lambda..."
     if [ "$STAGE" = "prod" ]; then
@@ -31,7 +31,7 @@ case $PLATFORM in
     # Build and deploy frontend
     cd ../frontend
     echo "🔨 Building frontend with API_URL: $API_URL"
-    REACT_APP_API_URL=$API_URL npm run build
+    REACT_APP_API_URL=$API_URL yarn build
     
     echo "📤 Deploying frontend to S3..."
     # Note: You'll need to replace with your actual S3 bucket name
@@ -48,7 +48,7 @@ case $PLATFORM in
     # Deploy backend
     echo "☁️ Deploying backend to Vercel..."
     cd backend
-    npm run build
+    yarn build
     
     if [ "$STAGE" = "prod" ]; then
       vercel --prod --yes

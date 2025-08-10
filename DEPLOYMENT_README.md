@@ -34,7 +34,7 @@ This guide covers the complete setup for auto-deploying your book store app to V
 1. **Vercel Account**: Sign up at [vercel.com](https://vercel.com)
 2. **Vercel CLI**: Install globally
    ```bash
-   npm i -g vercel
+   yarn global add vercel
    ```
 3. **GitHub Repository**: Ensure your code is pushed to GitHub
 
@@ -80,8 +80,8 @@ NODE_ENV=production
 ```
 
 ### Build Process
-1. **Backend**: `npm run vercel-build` → `dist/vercel.js`
-2. **Frontend**: `npm run build` → `build/` directory
+1. **Backend**: `yarn vercel-build` → `dist/vercel.js`
+2. **Frontend**: `yarn build` → `build/` directory
 3. **Deployment**: Vercel serves both from the same domain
 
 ## 📊 GitHub Actions Integration
@@ -146,15 +146,15 @@ vercel env ls          # List environment variables
 ```bash
 # Test backend locally
 cd backend
-npm run start:dev
+yarn start:dev
 
 # Test frontend locally
 cd frontend
-npm start
+yarn start
 
 # Test production build
-cd backend && npm run vercel-build
-cd frontend && npm run build
+cd backend && yarn vercel-build
+cd frontend && yarn build
 ```
 
 ## 🚨 Troubleshooting
@@ -167,9 +167,9 @@ cd frontend && npm run build
 vercel logs
 
 # Verify dependencies
-npm install
-cd backend && npm install
-cd frontend && npm install
+yarn install
+cd backend && yarn install
+cd frontend && yarn install
 ```
 
 #### Database Connection Issues

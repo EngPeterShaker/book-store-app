@@ -178,7 +178,7 @@ For production applications, store database credentials in AWS Secrets Manager.
 3. **Update frontend API URL** and deploy:
    ```bash
    cd frontend
-   REACT_APP_API_URL="https://your-api-url" npm run build
+   REACT_APP_API_URL="https://your-api-url" yarn build
    ```
 
 ---

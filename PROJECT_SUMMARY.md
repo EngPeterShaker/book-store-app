@@ -103,10 +103,10 @@ book-store-app/
 docker-compose up -d
 
 # Backend (Terminal 1)
-cd backend && npm install && npm run start:dev
+cd backend && yarn install && yarn start:dev
 
 # Frontend (Terminal 2) 
-cd frontend && npm install && npm start
+cd frontend && yarn install && yarn start
 ```
 
 ### Serverless Deployment

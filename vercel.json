@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "buildCommand": "cd backend && npm run vercel-build && cd ../frontend && npm run build",
-  "installCommand": "npm install && cd backend && npm install && cd ../frontend && npm install",
+  "buildCommand": "cd backend && yarn vercel-build && cd ../frontend && yarn build",
+  "installCommand": "yarn install && cd backend && yarn install && cd ../frontend && yarn install",
   "builds": [
     {
       "src": "backend/dist/vercel.js",

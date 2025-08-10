@@ -19,11 +19,11 @@ import { getDatabaseConfig } from './config/database.config';
         // Override with environment variables if they exist
         return {
           ...config,
-          host: configService.get('DB_HOST') || config.host,
-          port: configService.get('DB_PORT') ? +configService.get('DB_PORT') : config.port,
-          username: configService.get('DB_USERNAME') || config.username,
-          password: configService.get('DB_PASSWORD') || config.password,
-          database: configService.get('DB_NAME') || config.database,
+          host: configService.get('DB_HOST') || (config as any).host,
+          port: configService.get('DB_PORT') ? +configService.get('DB_PORT') : (config as any).port,
+          username: configService.get('DB_USERNAME') || (config as any).username,
+          password: configService.get('DB_PASSWORD') || (config as any).password,
+          database: configService.get('DB_NAME') || (config as any).database,
         };
       },
       inject: [ConfigService],

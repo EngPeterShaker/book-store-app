@@ -46,94 +46,67 @@ aws configure
 # Enter your AWS Access Key ID, Secret, Region (us-east-1), and output format (json)
 ```
 
-### Deploy Backend to AWS Lambda
+## Deploy Backend to AWS Lambda
+
 ```bash
 cd backend
-
-# Set production environment variables
-export DB_HOST="your-production-db-host"
-export DB_USERNAME="your-username"
-export DB_PASSWORD="your-password"
-export DB_DATABASE="bookstore_prod"
-
-# Deploy to AWS
-npm run sls:deploy
-
-# The command will output your API Gateway URL like:
-# https://xxxxxxxxxx.execute-api.us-east-1.amazonaws.com/dev
+yarn sls:deploy
 ```
 
-### Deploy Frontend to AWS S3 + CloudFront
+## Deploy Frontend to S3
+
 ```bash
 cd frontend
-
-# Build for production with the API URL
-REACT_APP_API_URL=https://your-lambda-api-url.execute-api.us-east-1.amazonaws.com/dev npm run build
-
-# Create S3 bucket and deploy
-aws s3 mb s3://bookstore-frontend-unique-name
-aws s3 sync build/ s3://bookstore-frontend-unique-name --delete
-aws s3 website s3://bookstore-frontend-unique-name --index-document index.html
+REACT_APP_API_URL=https://your-lambda-api-url.execute-api.us-east-1.amazonaws.com/dev yarn build
 ```
 
-### Manage AWS Lambda Deployment
+## Local Development
+
 ```bash
 cd backend
-
-# Test locally with serverless offline
-npm run sls:offline
-
-# View logs
-npx serverless logs -f api
-
-# Remove deployment
-npm run sls:remove
+yarn sls:offline
 ```
 
----
+## Remove Deployment
 
-## Option 2: Vercel Deployment (Recommended)
+```bash
+cd backend
+yarn sls:remove
+```
 
-### Setup Vercel
+## Deploy to Vercel
+
 ```bash
 # Install Vercel CLI
-npm install -g vercel
+yarn global add vercel
 
-# Login to Vercel
-vercel login
-```
-
-### Deploy Backend API to Vercel
-```bash
-cd backend
-
-# Build the application
-npm run build
-
-# Deploy to Vercel
-vercel
-
-# Set environment variables in Vercel dashboard or via CLI:
-vercel env add DB_HOST production
-vercel env add DB_PORT production
-vercel env add DB_USERNAME production  
-vercel env add DB_PASSWORD production
-vercel env add DB_DATABASE production
-
-# Redeploy after setting env vars
+# Deploy
 vercel --prod
 ```
 
-### Deploy Frontend to Vercel
+## Build for Production
+
 ```bash
 cd frontend
+yarn build
+```
 
-# Set the API URL environment variable
-vercel env add REACT_APP_API_URL production
-# Enter your Vercel backend URL (e.g., https://your-api.vercel.app)
+## Database Migrations
 
-# Deploy frontend
-vercel --prod
+```bash
+cd backend
+yarn typeorm migration:generate -- -n InitialMigration
+yarn typeorm migration:run
+```
+
+## Complete Deployment
+
+```bash
+# Deploy backend to AWS Lambda
+cd backend && yarn sls:deploy
+
+# Deploy frontend to S3
+cd frontend && REACT_APP_API_URL=your-lambda-url yarn build
 ```
 
 ## 💾 Database Migration

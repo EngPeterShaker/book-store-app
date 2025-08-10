@@ -7,44 +7,49 @@ This guide explains how to populate your book store database with sample data.
 1. Make sure PostgreSQL is running (via Docker or local installation)
 2. The backend application should be able to connect to the database
 
-## Quick Start
+## Backend Seeding
 
-### Option 1: Using Docker Compose (Recommended)
+### 1. Install Dependencies
+```bash
+cd backend
+yarn install
+```
 
-1. **Start the database:**
-   ```bash
-   docker-compose up -d postgres
-   ```
+### 2. Run the Seed Script
+```bash
+yarn seed
+```
 
-2. **Navigate to the backend directory:**
+## Frontend Seeding
+
+### 1. Install Dependencies
+```bash
+cd frontend
+yarn install
+```
+
+### 2. Run the Seed Script
+```bash
+yarn seed
+```
+
+## Production Seeding
+
+For production environments, use the production seed script:
+
+```bash
+cd backend
+yarn seed:prod
+```
+
+## Manual Seeding
+
+If you prefer to seed manually or need to customize the data:
+
+1. **Start the backend server:**
    ```bash
    cd backend
-   ```
-
-3. **Install dependencies (if not already done):**
-   ```bash
-   npm install
-   ```
-
-4. **Run the seeding script:**
-   ```bash
-   npm run seed
-   ```
-
-### Option 2: Manual Setup
-
-1. **Ensure PostgreSQL is running on:**
-   - Host: localhost
-   - Port: 5432
-   - Database: bookstore
-   - Username: postgres
-   - Password: password
-
-2. **Navigate to the backend directory and run:**
-   ```bash
-   cd backend
-   npm install
-   npm run seed
+   yarn start:dev
    ```
 
 ## What the Seeding Script Does
