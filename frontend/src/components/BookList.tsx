@@ -28,7 +28,12 @@ const BookList: React.FC<BookListProps> = ({ searchQuery, genre }) => {
           data = await bookService.getAllBooks();
         }
         
-        setBooks(data);
+                if (Array.isArray(response.data)) {
+          setBooks(response.data);
+        } else {
+          console.error('API response data is not an array:', response.data);
+          setBooks([]);
+        }
         setError(null);
       } catch (err) {
         setError('Failed to fetch books');

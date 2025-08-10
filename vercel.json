@@ -1,39 +1,24 @@
 {
   "version": 2,
-  "buildCommand": "cd backend && yarn vercel-build && cd ../frontend && yarn build",
-  "installCommand": "yarn install && cd backend && yarn install && cd ../frontend && yarn install",
-  "builds": [
-    {
-      "src": "backend/dist/vercel.js",
-      "use": "@vercel/node",
-      "config": {
-        "includeFiles": ["backend/dist/**"]
-      }
-    },
-    {
-      "src": "frontend/package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "frontend/build"
-      }
+  "buildCommand": "yarn vercel-build",
+  "installCommand": "yarn install:all",
+  "outputDirectory": "frontend/build",
+  "functions": {
+    "api/[...].ts": {
+      "maxDuration": 30
     }
-  ],
-  "routes": [
+  },
+  "rewrites": [
     {
-      "src": "/api/(.*)",
-      "dest": "backend/dist/vercel.js"
+      "source": "/api/(.*)",
+      "destination": "/api/[...]"
     },
     {
-      "src": "/(.*)",
-      "dest": "frontend/build/index.html"
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
   ],
   "env": {
     "NODE_ENV": "production"
-  },
-  "functions": {
-    "backend/dist/vercel.js": {
-      "maxDuration": 30
-    }
   }
 }
