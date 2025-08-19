@@ -4,6 +4,7 @@ import BookList from './components/BookList';
 import BookForm from './components/BookForm';
 import BookDetails from './components/BookDetails';
 import SearchBar from './components/SearchBar';
+import ApiStatus from './components/ApiStatus';
 import './App.css';
 
 function App() {
@@ -51,6 +52,7 @@ function App() {
           <Routes>
             <Route path="/" element={
               <div>
+                <ApiStatus />
                 <div className="page-header">
                   <SearchBar 
                     onSearch={handleSearch}
