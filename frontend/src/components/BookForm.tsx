@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { CreateBookDto } from '../types/Book';
-import { bookService } from '../services/api';
+import { booksApi } from '../services/api';
 import './BookForm.css';
 
 const BookForm: React.FC = () => {
@@ -27,7 +27,7 @@ const BookForm: React.FC = () => {
     if (isEditing && id) {
       const fetchBook = async () => {
         try {
-          const book = await bookService.getBookById(parseInt(id));
+          const book = await booksApi.getById(parseInt(id));
           setFormData({
             title: book.title,
             author: book.author,
@@ -62,9 +62,9 @@ const BookForm: React.FC = () => {
 
     try {
       if (isEditing && id) {
-        await bookService.updateBook(parseInt(id), formData);
+        await booksApi.update(parseInt(id), formData);
       } else {
-        await bookService.createBook(formData);
+        await booksApi.create(formData);
       }
       navigate('/');
     } catch (err) {

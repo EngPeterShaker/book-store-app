@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { Book } from '../types/Book';
-import { bookService } from '../services/api';
+import { booksApi } from '../services/api';
 import './BookDetails.css';
 
 const BookDetails: React.FC = () => {
@@ -17,7 +17,7 @@ const BookDetails: React.FC = () => {
       
       try {
         setLoading(true);
-        const data = await bookService.getBookById(parseInt(id));
+        const data = await booksApi.getById(parseInt(id));
         setBook(data);
         setError(null);
       } catch (err) {
@@ -36,7 +36,7 @@ const BookDetails: React.FC = () => {
     
     if (window.confirm(`Are you sure you want to delete "${book.title}"?`)) {
       try {
-        await bookService.deleteBook(book.id);
+        await booksApi.delete(book.id);
         navigate('/');
       } catch (err) {
         setError('Failed to delete book');

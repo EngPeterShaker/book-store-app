@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Book } from '../types/Book';
-import { bookService } from '../services/api';
+import { booksApi } from '../services/api';
 import BookCard from './BookCard';
 import './BookList.css';
 
@@ -18,26 +18,29 @@ const BookList: React.FC<BookListProps> = ({ searchQuery, genre }) => {
     const fetchBooks = async () => {
       try {
         setLoading(true);
+        setError(null);
         let data: Book[];
         
         if (searchQuery) {
-          data = await bookService.searchBooks(searchQuery);
+          data = await booksApi.search(searchQuery);
         } else if (genre) {
-          data = await bookService.getBooksByGenre(genre);
+          data = await booksApi.getAll(); // TODO: Add genre filter
         } else {
-          data = await bookService.getAllBooks();
+          data = await booksApi.getAll();
         }
         
-                if (Array.isArray(response.data)) {
-          setBooks(response.data);
+        // Ensure data is an array
+        if (Array.isArray(data)) {
+          setBooks(data);
         } else {
-          console.error('API response data is not an array:', response.data);
+          console.error('API returned non-array data:', data);
           setBooks([]);
+          setError('Invalid data format received from server');
         }
-        setError(null);
       } catch (err) {
-        setError('Failed to fetch books');
         console.error('Error fetching books:', err);
+        setBooks([]);
+        setError('Failed to fetch books. Please check if the backend is running.');
       } finally {
         setLoading(false);
       }
@@ -48,8 +51,11 @@ const BookList: React.FC<BookListProps> = ({ searchQuery, genre }) => {
 
   const handleDeleteBook = async (bookId: number) => {
     try {
-      await bookService.deleteBook(bookId);
-      setBooks(books.filter(book => book.id !== bookId));
+      await booksApi.delete(bookId);
+      // Ensure books is an array before filtering
+      if (Array.isArray(books)) {
+        setBooks(books.filter(book => book.id !== bookId));
+      }
     } catch (err) {
       setError('Failed to delete book');
       console.error('Error deleting book:', err);
@@ -67,11 +73,13 @@ const BookList: React.FC<BookListProps> = ({ searchQuery, genre }) => {
            genre ? `Books in ${genre}` : 
            'All Books'}
         </h2>
-        <p>{books.length} book{books.length !== 1 ? 's' : ''} found</p>
+        <p>{Array.isArray(books) ? books.length : 0} book{(Array.isArray(books) && books.length !== 1) ? 's' : ''} found</p>
       </div>
       
-      {books.length === 0 ? (
-        <div className="no-books">No books found.</div>
+      {!Array.isArray(books) || books.length === 0 ? (
+        <div className="no-books">
+          {!Array.isArray(books) ? 'Error loading books.' : 'No books found.'}
+        </div>
       ) : (
         <div className="books-grid">
           {books.map(book => (

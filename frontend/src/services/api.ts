@@ -1,17 +1,9 @@
 import axios from 'axios';
 import { Book, CreateBookDto, UpdateBookDto } from '../types/Book';
 
-// Auto-detect environment and set appropriate API URL
-const getApiBaseUrl = () => {
-  if (process.env.NODE_ENV === 'production') {
-    // In production (Vercel), the API is served from the same domain
-    return window.location.origin;
-  }
-  // In development, use the local backend
-  return process.env.REACT_APP_API_URL || 'http://localhost:3001';
-};
-
-const API_BASE_URL = getApiBaseUrl();
+// API base URL - can be configured via environment variable
+// In production (monorepo), use relative path. In development, use localhost
+const API_BASE_URL = process.env.REACT_APP_API_URL || (process.env.NODE_ENV === 'production' ? '/api' : 'http://localhost:3001');
 
 const api = axios.create({
   baseURL: API_BASE_URL,
@@ -20,46 +12,92 @@ const api = axios.create({
   },
 });
 
-export const bookService = {
+// Add request interceptor for logging (development only)
+if (process.env.NODE_ENV === 'development') {
+  api.interceptors.request.use((config) => {
+    console.log('API Request:', config.method?.toUpperCase(), config.url);
+    return config;
+  });
+}
+
+// Add response interceptor for logging and error handling
+api.interceptors.response.use(
+  (response) => {
+    if (process.env.NODE_ENV === 'development') {
+      console.log('API Response:', response.status, response.config.url);
+    }
+    return response;
+  },
+  (error) => {
+    console.error('API Error:', error.response?.status, error.config?.url, error.message);
+    
+    // Handle authentication errors (401) from Vercel SSO
+    if (error.response?.status === 401) {
+      console.warn('Authentication required - likely Vercel SSO protection is enabled');
+      // Return a more user-friendly error
+      const authError = new Error('Backend authentication required. Please disable Vercel protection or use local development.');
+      authError.name = 'AuthenticationError';
+      return Promise.reject(authError);
+    }
+    
+    return Promise.reject(error);
+  }
+);
+
+export const booksApi = {
   // Get all books
-  getAllBooks: async (): Promise<Book[]> => {
-    const response = await api.get('/books');
-    return response.data;
+  getAll: async (): Promise<Book[]> => {
+    try {
+      const response = await api.get('/books');
+      if (Array.isArray(response.data)) {
+        return response.data;
+      } else {
+        console.error('API returned non-array data for getAll:', response.data);
+        return [];
+      }
+    } catch (error) {
+      console.error('Error in booksApi.getAll:', error);
+      throw error;
+    }
   },
 
-  // Get book by ID
-  getBookById: async (id: number): Promise<Book> => {
+  // Get a single book by ID
+  getById: async (id: number): Promise<Book> => {
     const response = await api.get(`/books/${id}`);
     return response.data;
   },
 
-  // Create new book
-  createBook: async (book: CreateBookDto): Promise<Book> => {
+  // Create a new book
+  create: async (book: CreateBookDto): Promise<Book> => {
     const response = await api.post('/books', book);
     return response.data;
   },
 
-  // Update book
-  updateBook: async (id: number, book: UpdateBookDto): Promise<Book> => {
-    const response = await api.patch(`/books/${id}`, book);
+  // Update an existing book
+  update: async (id: number, book: UpdateBookDto): Promise<Book> => {
+    const response = await api.put(`/books/${id}`, book);
     return response.data;
   },
 
-  // Delete book
-  deleteBook: async (id: number): Promise<void> => {
+  // Delete a book
+  delete: async (id: number): Promise<void> => {
     await api.delete(`/books/${id}`);
   },
 
   // Search books
-  searchBooks: async (query: string): Promise<Book[]> => {
-    const response = await api.get(`/books?search=${encodeURIComponent(query)}`);
-    return response.data;
-  },
-
-  // Get books by genre
-  getBooksByGenre: async (genre: string): Promise<Book[]> => {
-    const response = await api.get(`/books?genre=${encodeURIComponent(genre)}`);
-    return response.data;
+  search: async (query: string): Promise<Book[]> => {
+    try {
+      const response = await api.get(`/books/search?q=${encodeURIComponent(query)}`);
+      if (Array.isArray(response.data)) {
+        return response.data;
+      } else {
+        console.error('API returned non-array data for search:', response.data);
+        return [];
+      }
+    } catch (error) {
+      console.error('Error in booksApi.search:', error);
+      throw error;
+    }
   },
 };
 
