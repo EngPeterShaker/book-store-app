@@ -12,10 +12,10 @@ case $PLATFORM in
   "aws")
     echo "📦 Deploying to AWS Lambda..."
     
-    # Build and deploy backend
-    echo "🔨 Building backend..."
+    # Build and validate backend
+    echo "🔨 Building and validating backend..."
     cd backend
-    yarn build
+    yarn validate:deployment
     
     echo "☁️ Deploying to AWS Lambda..."
     if [ "$STAGE" = "prod" ]; then
@@ -45,10 +45,10 @@ case $PLATFORM in
   "vercel")
     echo "📦 Deploying to Vercel..."
     
-    # Deploy backend
+    # Build and validate backend
     echo "☁️ Deploying backend to Vercel..."
     cd backend
-    yarn build
+    yarn validate:deployment
     
     if [ "$STAGE" = "prod" ]; then
       vercel --prod --yes
