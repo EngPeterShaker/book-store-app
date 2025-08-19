@@ -16,6 +16,8 @@ export const getDatabaseConfig = (): TypeOrmModuleOptions => {
       synchronize: true, // TODO: Replace with proper migrations in production
       ssl: process.env.DB_SSL === 'true' ? { rejectUnauthorized: false } : false,
       logging: false,
+      retryAttempts: 3,
+      retryDelay: 3000,
     };
   }
   
@@ -30,5 +32,12 @@ export const getDatabaseConfig = (): TypeOrmModuleOptions => {
     entities: [Book],
     synchronize: true,
     logging: true,
+    retryAttempts: 2,
+    retryDelay: 1000,
   };
+};
+
+export const shouldUseDatabase = (): boolean => {
+  // Skip database in production if DB_DISABLED is set
+  return process.env.DB_DISABLED !== 'true';
 };

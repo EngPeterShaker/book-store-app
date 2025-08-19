@@ -2,29 +2,46 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from '../src/app.module';
 import { ValidationPipe } from '@nestjs/common';
 import { ExpressAdapter } from '@nestjs/platform-express';
+import type { VercelRequest, VercelResponse } from '@vercel/node';
 import express from 'express';
 
-const expressApp = express();
-let nestApp: any = null;
+let cachedApp: any = null;
 
-async function createNestApp() {
-  if (!nestApp) {
+async function bootstrap() {
+  if (!cachedApp) {
+    const expressApp = express();
     const adapter = new ExpressAdapter(expressApp);
-    nestApp = await NestFactory.create(AppModule, adapter);
     
-    nestApp.useGlobalPipes(new ValidationPipe());
-    nestApp.enableCors({
+    cachedApp = await NestFactory.create(AppModule.forRoot(), adapter);
+    
+    cachedApp.useGlobalPipes(new ValidationPipe({
+      whitelist: true,
+      forbidNonWhitelisted: true,
+      transform: true,
+    }));
+    
+    cachedApp.enableCors({
       origin: process.env.FRONTEND_URL || '*',
-      methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+      methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
       credentials: true,
     });
     
-    await nestApp.init();
+    await cachedApp.init();
+    console.log('NestJS app initialized for Vercel');
   }
-  return nestApp;
+  return cachedApp;
 }
 
-export default async (req: any, res: any) => {
-  await createNestApp();
-  return expressApp(req, res);
+export default async (req: VercelRequest, res: VercelResponse) => {
+  try {
+    const app = await bootstrap();
+    const httpAdapter = app.getHttpAdapter();
+    const instance = httpAdapter.getInstance();
+    
+    // Handle the request
+    instance(req, res);
+  } catch (error) {
+    console.error('Error in Vercel handler:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
 };
