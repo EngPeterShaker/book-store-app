@@ -23,7 +23,7 @@ import { getDatabaseConfig } from './config/database.config';
           port: configService.get('DB_PORT') ? +configService.get('DB_PORT') : (config as any).port,
           username: configService.get('DB_USERNAME') || (config as any).username,
           password: configService.get('DB_PASSWORD') || (config as any).password,
-          database: configService.get('DB_NAME') || (config as any).database,
+          database: configService.get('DB_DATABASE') || configService.get('DB_NAME') || (config as any).database,
         };
       },
       inject: [ConfigService],

@@ -11,9 +11,9 @@ export const getDatabaseConfig = (): TypeOrmModuleOptions => {
       port: parseInt(process.env.DB_PORT || '5432'),
       username: process.env.DB_USERNAME || 'postgres',
       password: process.env.DB_PASSWORD || '',
-      database: process.env.DB_NAME || 'bookstore',
+      database: process.env.DB_DATABASE || process.env.DB_NAME || 'bookstore',
       entities: [Book],
-      synchronize: false, // Never use synchronize in production
+      synchronize: true, // TODO: Replace with proper migrations in production
       ssl: process.env.DB_SSL === 'true' ? { rejectUnauthorized: false } : false,
       logging: false,
     };
@@ -26,7 +26,7 @@ export const getDatabaseConfig = (): TypeOrmModuleOptions => {
     port: parseInt(process.env.DB_PORT || '5432'),
     username: process.env.DB_USERNAME || 'postgres',
     password: process.env.DB_PASSWORD || 'password',
-    database: process.env.DB_NAME || 'bookstore',
+    database: process.env.DB_DATABASE || process.env.DB_NAME || 'bookstore',
     entities: [Book],
     synchronize: true,
     logging: true,
