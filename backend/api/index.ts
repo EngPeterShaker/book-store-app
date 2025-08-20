@@ -21,7 +21,28 @@ async function bootstrap() {
     }));
     
     cachedApp.enableCors({
-      origin: process.env.FRONTEND_URL || '*',
+      origin: (origin, callback) => {
+        // Allow requests with no origin (like mobile apps or curl requests)
+        if (!origin) return callback(null, true);
+        
+        // Allow any Vercel frontend deployment
+        if (origin.includes('frontend-') && origin.includes('vercel.app')) {
+          return callback(null, true);
+        }
+        
+        // Allow localhost for development
+        if (origin.includes('localhost')) {
+          return callback(null, true);
+        }
+        
+        // Allow specific frontend URL if set
+        if (process.env.FRONTEND_URL && origin === process.env.FRONTEND_URL) {
+          return callback(null, true);
+        }
+        
+        // Reject other origins
+        callback(new Error('Not allowed by CORS'));
+      },
       methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
       credentials: true,
     });

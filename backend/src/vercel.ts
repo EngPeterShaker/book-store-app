@@ -8,14 +8,14 @@ import { seedProduction } from './seed.prod';
 const server = express();
 
 server.use((req, res, next) => {
-  console.log('Incoming Request Headers:', req.headers);
+  console.log('Incoming Request:', req.method, req.url);
   next();
 });
 
 async function createNestServer(expressInstance: express.Express) {
   try {
     const app = await NestFactory.create(
-      AppModule,
+      AppModule.forRoot(),
       new ExpressAdapter(expressInstance),
       {
         logger: ['error', 'warn', 'log'],

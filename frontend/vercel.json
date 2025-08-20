@@ -20,6 +20,6 @@
     }
   ],
   "env": {
-    "REACT_APP_API_URL": "https://backend-nmh69b81i-engpetershakers-projects.vercel.app"
+    "REACT_APP_API_URL": "https://backend-kv52gmqd8-engpetershakers-projects.vercel.app"
   }
 }
