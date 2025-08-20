@@ -9,23 +9,32 @@
       }
     },
     {
-      "src": "backend/api/[...].ts",
+      "src": "backend/src/main.vercel.ts",
       "use": "@vercel/node"
     }
   ],
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "/backend/api/[...]"
+      "dest": "/backend/src/main.vercel.ts"
+    },
+    {
+      "src": "/static/(.*)",
+      "dest": "/frontend/static/$1"
+    },
+    {
+      "src": "/(.*\\.(js|css|png|jpg|jpeg|gif|ico|svg))",
+      "dest": "/frontend/$1"
     },
     {
       "src": "/(.*)",
-      "dest": "/frontend/$1"
+      "dest": "/frontend/index.html"
     }
   ],
   "env": {
-    "NODE_ENV": "production"
+    "NODE_ENV": "production",
+    "DB_DISABLED": "true"
   },
-  "installCommand": "npm install --prefix frontend && npm install --prefix backend",
-  "buildCommand": "cd frontend && REACT_APP_API_URL=/api npm run build"
+  "installCommand": "corepack yarn install && cd frontend && corepack yarn install && cd ../backend && corepack yarn install",
+  "buildCommand": "cd backend && corepack yarn build && cd ../frontend && REACT_APP_API_URL=/api corepack yarn build"
 }
