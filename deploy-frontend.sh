@@ -42,8 +42,8 @@ if [ ! -f "vercel.json" ]; then
     exit 1
 fi
 
-print_info "Building frontend..."
-corepack yarn build
+print_info "Building frontend with production API URL..."
+REACT_APP_API_URL=https://backend-2nwv7ft5e-engpetershakers-projects.vercel.app corepack yarn build
 
 if [ $? -ne 0 ]; then
     print_error "Frontend build failed"
@@ -55,7 +55,9 @@ vercel --prod
 
 if [ $? -eq 0 ]; then
     print_success "Frontend deployment completed successfully!"
-    print_info "Remember to update REACT_APP_API_URL to point to your backend URL"
+    print_info "Frontend URL: https://frontend-tau-topaz-30.vercel.app"
+    print_info "Backend API URL: https://backend-nlz3qt6e9-engpetershakers-projects.vercel.app"
+    print_info "The frontend is configured to use the separate backend deployment"
 else
     print_error "Frontend deployment failed"
     exit 1

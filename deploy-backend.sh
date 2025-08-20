@@ -55,6 +55,9 @@ vercel --prod
 
 if [ $? -eq 0 ]; then
     print_success "Backend deployment completed successfully!"
+    print_info "Backend is now running with mock data (DB_DISABLED=true)"
+    print_info "Backend URL: https://backend-nlz3qt6e9-engpetershakers-projects.vercel.app"
+    print_info "Test API: curl https://backend-nlz3qt6e9-engpetershakers-projects.vercel.app/books"
     print_info "You can now deploy your frontend separately"
 else
     print_error "Backend deployment failed"
