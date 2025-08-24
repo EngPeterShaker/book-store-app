@@ -1,13 +1,31 @@
 # Book Store App
 
-A full-stack book store application built with **NestJS** (backend) and **React** (frontend), designed for deployment on **Vercel**.
+A **full-stack serverless book store application** built with **NestJS** (backend) and **React** (frontend), featuring **multiple serverless deployment strategies** and **cloud-native architecture**.
 
-## 🏗️ **Architecture**
+## 🏗️ **Serverless Architecture**
 
-- **Backend**: NestJS API with TypeScript, TypeORM, and PostgreSQL
-- **Frontend**: React app with TypeScript and modern UI components
-- **Database**: PostgreSQL with automatic seeding
-- **Deployment**: Separate Vercel projects for backend and frontend
+**Fully serverless, cloud-native implementation** with multiple deployment options:
+
+```
+┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
+│   React SPA     │    │  Vercel/AWS      │    │   Supabase      │
+│  (Static Files) │────│  Serverless      │────│   Database      │
+│                 │    │  Functions       │    │  (Serverless)   │
+└─────────────────┘    └──────────────────┘    └─────────────────┘
+```
+
+**Key Features:**
+- ✅ **Pay-per-execution** - Zero idle costs
+- ✅ **Auto-scaling** - 0 to 1000+ concurrent requests
+- ✅ **Global edge deployment** - <50ms worldwide
+- ✅ **Multiple deployment options** - Vercel, AWS Lambda, or hybrid
+- ✅ **Zero infrastructure management** - No servers to maintain
+
+### **Technology Stack:**
+- **Backend**: NestJS with serverless functions, TypeScript, Supabase integration
+- **Frontend**: React SPA with TypeScript and modern UI components  
+- **Database**: Supabase (serverless PostgreSQL) with real-time capabilities
+- **Deployment**: Vercel monolithic (recommended) or AWS Lambda
 
 ## 🚀 **Quick Start**
 
@@ -60,47 +78,75 @@ A full-stack book store application built with **NestJS** (backend) and **React*
    - Backend API: http://localhost:3001
    - Frontend: http://localhost:3000
 
-## 🚀 **Deployment**
+## 🚀 **Serverless Deployment**
 
-This project uses **separate deployments** on Vercel:
+This project supports **multiple serverless deployment strategies**:
 
-- **Backend**: Deployed as serverless functions
-- **Frontend**: Deployed as static files
-
-### **Deploy Backend:**
+### **Option 1: Vercel Monolithic** (Recommended - Production)
 ```bash
-./deploy-backend.sh
+# Single command deploys both frontend and backend
+vercel --prod
+
+# ✅ Production: https://book-store-xyz.vercel.app
+# 🌐 Frontend: Static files from edge
+# ⚡ Backend: Serverless functions at /api/*
 ```
 
-### **Deploy Frontend:**
+### **Option 2: AWS Lambda + CloudFront**
 ```bash
-./deploy-frontend.sh
+# Deploy backend to AWS Lambda
+cd backend && corepack yarn sls:deploy
+
+# Deploy frontend separately
+cd frontend && REACT_APP_API_URL=your-lambda-url corepack yarn build
 ```
 
-📖 **See [SEPARATE_DEPLOYMENT.md](./SEPARATE_DEPLOYMENT.md) for detailed deployment instructions.**
+### **Option 3: Hybrid Multi-Cloud**
+```bash
+# Backend on AWS Lambda
+cd backend && corepack yarn sls:deploy
 
-## 📁 **Project Structure**
+# Frontend on Vercel
+cd frontend && vercel --prod
+```
+
+### **Serverless Benefits:**
+- 💰 **Cost**: ~$0/month (free tiers)
+- 🚀 **Performance**: <50ms global response times  
+- 🔄 **Scaling**: 0 to 1000+ requests automatically
+- 🛠️ **Maintenance**: Zero server management
+- 🌍 **Global**: Edge locations worldwide
+
+📜 **See [Serverless Deployment Guide](./docs/deployment/DEPLOYMENT_SERVERLESS.md) for comprehensive serverless guide.**
+
+## 📝 **Project Structure**
 
 ```
 book-store-app/
-├── backend/                 # NestJS API
+├── backend/                 # NestJS API (Serverless)
 │   ├── src/
 │   │   ├── books/          # Book CRUD operations
-│   │   ├── entities/        # TypeORM entities
+│   │   ├── config/         # Database & Supabase configuration
 │   │   ├── dto/            # Data transfer objects
-│   │   └── config/         # Database configuration
-│   ├── vercel.json         # Backend Vercel config
-│   └── package.json
-├── frontend/                # React app
+│   │   ├── lambda.ts       # AWS Lambda handler
+│   │   └── main.vercel.ts  # Vercel serverless handler
+│   ├── serverless.yml      # AWS Lambda configuration
+│   └── package.json        # Dependencies & scripts
+├── frontend/                # React SPA (Static)
 │   ├── src/
 │   │   ├── components/     # React components
-│   │   ├── services/       # API service
-│   │   └── types/          # TypeScript types
-│   ├── vercel.json         # Frontend Vercel config
-│   └── package.json
-├── deploy-backend.sh        # Backend deployment script
-├── deploy-frontend.sh       # Frontend deployment script
-└── README.md
+│   │   ├── services/       # API service layer
+│   │   └── types/          # TypeScript definitions
+│   └── package.json        # Dependencies & scripts
+├── docs/                    # 📚 Documentation
+│   ├── deployment/         # Deployment strategies
+│   ├── guides/             # Setup & configuration
+│   ├── troubleshooting/    # Problem-solving
+│   ├── archive/           # Historical docs
+│   ├── WARP.md            # Project configuration
+│   └── README.md          # Documentation index
+├── vercel.json              # Monolithic deployment config
+└── README.md                # Main project documentation
 ```
 
 ## 🛠️ **Available Scripts**
@@ -168,10 +214,25 @@ corepack yarn test
 
 ## 📖 **Documentation**
 
-- [Separate Deployment Guide](./SEPARATE_DEPLOYMENT.md)
-- [Database Seeding](./DATABASE_SEEDING.md)
-- [AWS Setup Guide](./AWS_SETUP_GUIDE.md)
-- [Serverless Deployment](./DEPLOYMENT_SERVERLESS.md)
+📚 **[Complete Documentation](./docs/)** - Comprehensive guides and resources
+
+### **Quick Links:**
+- 🚀 **[Serverless Deployment Guide](./docs/deployment/DEPLOYMENT_SERVERLESS.md)** - Primary deployment strategy
+- 📋 **[Database Seeding](./docs/guides/DATABASE_SEEDING.md)** - Sample data setup
+- 🔧 **[AWS Setup Guide](./docs/guides/AWS_SETUP_GUIDE.md)** - Lambda deployment
+- 🏗️ **[WARP Configuration](./docs/WARP.md)** - Development environment
+- 🔧 **[Troubleshooting](./docs/troubleshooting/)** - Common issues and fixes
+
+### **Documentation Structure:**
+```
+docs/
+├── deployment/          # Deployment strategies and guides
+├── guides/             # Setup and configuration guides  
+├── troubleshooting/    # Problem-solving and fixes
+├── archive/           # Historical and deprecated docs
+├── WARP.md           # Project configuration
+└── README.md         # Documentation index
+```
 
 ## 🤝 **Contributing**
 
