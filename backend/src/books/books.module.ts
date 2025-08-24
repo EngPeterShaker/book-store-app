@@ -1,34 +1,37 @@
 import { Module, DynamicModule } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { BooksService } from './books.service';
-import { BooksMockService } from './books.mock.service';
 import { BooksController } from './books.controller';
-import { Book } from '../entities/book.entity';
-import { shouldUseDatabase } from '../config/database.config';
+import { BooksSupabaseService } from './books.supabase.service';
+import { BooksMockService } from './books.mock.service';
+import { SupabaseService } from '../config/supabase.service';
 
 @Module({})
 export class BooksModule {
   static forRoot(): DynamicModule {
-    const imports: any[] = [];
-    const providers: any[] = [];
+    const providers: any[] = [SupabaseService];
 
-    if (shouldUseDatabase()) {
-      imports.push(TypeOrmModule.forFeature([Book]));
-      providers.push(BooksService);
+    // Check if database should be disabled via environment variable
+    const dbDisabled = process.env.DB_DISABLED === 'true';
+    
+    if (!dbDisabled) {
+      // Use Supabase service when database is enabled
+      providers.push({
+        provide: 'BooksService',
+        useClass: BooksSupabaseService,
+      });
     } else {
       // Use mock service when database is not available
       providers.push({
-        provide: BooksService,
+        provide: 'BooksService',
         useClass: BooksMockService,
       });
     }
 
     return {
       module: BooksModule,
-      imports,
+      imports: [],
       controllers: [BooksController],
       providers,
-      exports: [BooksService],
+      exports: ['BooksService'],
     };
   }
 }

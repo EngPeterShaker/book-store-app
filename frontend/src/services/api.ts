@@ -75,7 +75,7 @@ export const booksApi = {
 
   // Update an existing book
   update: async (id: number, book: UpdateBookDto): Promise<Book> => {
-    const response = await api.put(`/books/${id}`, book);
+    const response = await api.patch(`/books/${id}`, book);
     return response.data;
   },
 
@@ -87,7 +87,7 @@ export const booksApi = {
   // Search books
   search: async (query: string): Promise<Book[]> => {
     try {
-      const response = await api.get(`/books/search?q=${encodeURIComponent(query)}`);
+      const response = await api.get(`/books?search=${encodeURIComponent(query)}`);
       if (Array.isArray(response.data)) {
         return response.data;
       } else {

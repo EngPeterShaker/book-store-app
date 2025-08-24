@@ -3,7 +3,6 @@ import { ExpressAdapter } from '@nestjs/platform-express';
 import { ValidationPipe } from '@nestjs/common';
 import { AppModule } from './app.module';
 import express from 'express';
-import { seedProduction } from './seed.prod';
 
 const server = express();
 
@@ -37,15 +36,6 @@ async function createNestServer(expressInstance: express.Express) {
 
     await app.init();
     
-    // Seed database on first deployment (production only)
-    if (process.env.NODE_ENV === 'production') {
-      try {
-        await seedProduction();
-      } catch (error) {
-        console.log('Database seeding skipped or failed:', error.message);
-      }
-    }
-
     console.log('Nest Ready for Vercel');
   } catch (error) {
     console.error('Failed to initialize NestJS app:', error);

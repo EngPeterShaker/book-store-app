@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { CreateBookDto } from '../dto/create-book.dto';
 import { UpdateBookDto } from '../dto/update-book.dto';
-import { Book } from '../entities/book.entity';
+import { Book } from '../types/book.interface';
 
 @Injectable()
 export class BooksMockService {
@@ -13,11 +13,12 @@ export class BooksMockService {
       description: "A classic American novel set in the summer of 1922.",
       isbn: "978-0-7432-7356-5",
       price: 15.99,
-      stock: 25,
-      genre: "Classic Fiction",
-      publishedDate: new Date("1925-04-10"),
-      createdAt: new Date(),
-      updatedAt: new Date(),
+      publishedDate: "1925-04-10",
+      imageUrl: "/images/great-gatsby.jpg",
+      category: "Classic Literature",
+      inStock: true,
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
     },
     {
       id: 2,
@@ -26,11 +27,12 @@ export class BooksMockService {
       description: "A gripping tale of coming-of-age in the American South.",
       isbn: "978-0-06-112008-4",
       price: 18.50,
-      stock: 30,
-      genre: "Classic Fiction",
-      publishedDate: new Date("1960-07-11"),
-      createdAt: new Date(),
-      updatedAt: new Date(),
+      publishedDate: "1960-07-11",
+      imageUrl: "/images/to-kill-a-mockingbird.jpg",
+      category: "Classic Literature",
+      inStock: true,
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
     },
     {
       id: 3,
@@ -39,11 +41,12 @@ export class BooksMockService {
       description: "A dystopian social science fiction novel.",
       isbn: "978-0-452-28423-4",
       price: 16.75,
-      stock: 20,
-      genre: "Dystopian Fiction",
-      publishedDate: new Date("1949-06-08"),
-      createdAt: new Date(),
-      updatedAt: new Date(),
+      publishedDate: "1949-06-08",
+      imageUrl: "/images/1984.jpg",
+      category: "Science Fiction",
+      inStock: true,
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
     }
   ];
 
@@ -51,15 +54,16 @@ export class BooksMockService {
     const newBook: Book = {
       id: Math.max(...this.books.map(b => b.id)) + 1,
       title: createBookDto.title,
-      author: createBookDto.author,
+      author: createBookDto.author || '',
       description: createBookDto.description || '',
       isbn: createBookDto.isbn,
       price: createBookDto.price,
-      stock: createBookDto.stock || 0,
-      genre: createBookDto.genre || '',
-      publishedDate: new Date(createBookDto.publishedDate || new Date()),
-      createdAt: new Date(),
-      updatedAt: new Date(),
+      publishedDate: createBookDto.publishedDate || new Date().toISOString(),
+      imageUrl: undefined, // Not in DTO
+      category: createBookDto.genre, // Use genre from DTO
+      inStock: true,
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
     };
     this.books.push(newBook);
     return newBook;
@@ -83,15 +87,10 @@ export class BooksMockService {
       throw new Error(`Book with ID ${id} not found`);
     }
     
-    const updatedData: any = { ...updateBookDto };
-    if (updatedData.publishedDate && typeof updatedData.publishedDate === 'string') {
-      updatedData.publishedDate = new Date(updatedData.publishedDate);
-    }
-    
     this.books[bookIndex] = {
       ...this.books[bookIndex],
-      ...updatedData,
-      updatedAt: new Date(),
+      ...updateBookDto,
+      updated_at: new Date().toISOString(),
     };
     return this.books[bookIndex];
   }
@@ -106,15 +105,19 @@ export class BooksMockService {
 
   async findByGenre(genre: string): Promise<Book[]> {
     return this.books.filter(book => 
-      book.genre.toLowerCase().includes(genre.toLowerCase())
+      book.category && book.category.toLowerCase().includes(genre.toLowerCase())
     );
   }
 
   async search(searchTerm: string): Promise<Book[]> {
     return this.books.filter(book =>
       book.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      book.author.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      book.description.toLowerCase().includes(searchTerm.toLowerCase())
+      (book.author && book.author.toLowerCase().includes(searchTerm.toLowerCase())) ||
+      (book.description && book.description.toLowerCase().includes(searchTerm.toLowerCase()))
     );
+  }
+
+  async getCount(): Promise<number> {
+    return this.books.length;
   }
 }

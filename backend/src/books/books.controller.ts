@@ -9,18 +9,28 @@ import {
   Query,
   ParseIntPipe,
   ValidationPipe,
+  Inject,
 } from '@nestjs/common';
-import { BooksService } from './books.service';
 import { CreateBookDto } from '../dto/create-book.dto';
 import { UpdateBookDto } from '../dto/update-book.dto';
 
 @Controller('books')
 export class BooksController {
-  constructor(private readonly booksService: BooksService) {}
+  constructor(@Inject('BooksService') private readonly booksService: any) {}
 
   @Post()
   create(@Body(ValidationPipe) createBookDto: CreateBookDto) {
     return this.booksService.create(createBookDto);
+  }
+
+  @Get('test/count')
+  async getCount() {
+    try {
+      const count = await this.booksService.getCount();
+      return { success: true, count, message: 'Database connection working!' };
+    } catch (error) {
+      return { success: false, error: error.message, message: 'Database connection failed' };
+    }
   }
 
   @Get()
