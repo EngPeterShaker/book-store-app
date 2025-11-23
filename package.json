@@ -3,29 +3,38 @@
   "version": "1.0.0",
   "description": "Full-stack book store application with NestJS backend and React frontend",
   "private": true,
+  "packageManager": "yarn@1.22.22",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
   "engines": {
     "node": ">=18.0.0",
     "npm": ">=8.0.0"
   },
   "scripts": {
-    "install:all": "npm install --prefix frontend && npm install --prefix backend",
-    "build": "cd frontend && REACT_APP_API_URL=/api npm run build",
-    "dev:frontend": "cd frontend && npm start",
-    "dev:backend": "cd backend && yarn start:dev",
-    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\""
+    "dev": "turbo dev",
+    "build": "turbo build",
+    "test": "turbo test",
+    "lint": "turbo lint",
+    "clean": "turbo clean && rm -rf node_modules",
+    "install:all": "yarn install"
   },
   "keywords": [
     "nestjs",
     "react",
+    "react-native",
     "typescript",
     "postgresql",
     "vercel",
     "fullstack",
-    "monorepo"
+    "monorepo",
+    "turborepo"
   ],
   "author": "Your Name",
   "license": "MIT",
   "devDependencies": {
-    "concurrently": "^8.2.2"
+    "concurrently": "^8.2.2",
+    "turbo": "^2.6.1"
   }
 }

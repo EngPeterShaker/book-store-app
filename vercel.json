@@ -2,39 +2,39 @@
   "version": 2,
   "builds": [
     {
-      "src": "frontend/package.json",
+      "src": "apps/web/package.json",
       "use": "@vercel/static-build",
       "config": {
         "distDir": "build"
       }
     },
     {
-      "src": "backend/src/main.vercel.ts",
+      "src": "apps/api/src/main.vercel.ts",
       "use": "@vercel/node"
     }
   ],
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "/backend/src/main.vercel.ts"
+      "dest": "/apps/api/src/main.vercel.ts"
     },
     {
       "src": "/static/(.*)",
-      "dest": "/frontend/static/$1"
+      "dest": "/apps/web/static/$1"
     },
     {
       "src": "/(.*\\.(js|css|png|jpg|jpeg|gif|ico|svg))",
-      "dest": "/frontend/$1"
+      "dest": "/apps/web/$1"
     },
     {
       "src": "/(.*)",
-      "dest": "/frontend/index.html"
+      "dest": "/apps/web/index.html"
     }
   ],
   "env": {
     "NODE_ENV": "production",
     "DB_DISABLED": "false"
   },
-  "installCommand": "corepack yarn install && cd frontend && corepack yarn install && cd ../backend && corepack yarn install",
-  "buildCommand": "cd backend && corepack yarn build && cd ../frontend && REACT_APP_API_URL=/api corepack yarn build"
+  "installCommand": "corepack yarn install",
+  "buildCommand": "turbo build --filter=@book-store/web --filter=@book-store/api"
 }
