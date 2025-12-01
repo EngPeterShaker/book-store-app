@@ -2,19 +2,14 @@
   "version": 2,
   "builds": [
     {
-      "src": "api/index.ts",
+      "src": "api/[...].ts",
       "use": "@vercel/node@3"
     }
   ],
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "api/index.ts"
+      "dest": "api/[...].ts"
     }
-  ],
-  "env": {
-    "NODE_ENV": "production",
-    "DB_DISABLED": "true",
-    "FRONTEND_URL": "https://frontend-tau-topaz-30.vercel.app"
-  }
+  ]
 }

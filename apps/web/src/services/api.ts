@@ -1,9 +1,9 @@
 import axios from 'axios';
 import { Book, CreateBookDto, UpdateBookDto } from '../types/Book';
 
-// API base URL - can be configured via environment variable
-// In production (monorepo), use relative path to /api. In development, use localhost
-const API_BASE_URL = process.env.REACT_APP_API_URL || '/api';
+// API base URL - configured via environment variable
+// REACT_APP_API_URL should be set in Vercel dashboard for production
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001';
 
 const api = axios.create({
   baseURL: API_BASE_URL,
