@@ -69,7 +69,8 @@ const BookDetails: React.FC = () => {
         <div className="book-main-info">
           <h1 className="book-title">{book.title}</h1>
           <h2 className="book-author">by {book.author}</h2>
-          
+          {book.publisher && <h3 className="book-publisher">{book.publisher}</h3>}
+
           {book.genre && (
             <span className="book-genre-tag">{book.genre}</span>
           )}

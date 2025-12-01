@@ -2,6 +2,7 @@ export interface Book {
   id: number;
   title: string;
   author: string;
+  publisher?: string;
   description?: string;
   isbn: string;
   price: number;
@@ -15,6 +16,7 @@ export interface Book {
 export interface CreateBookDto {
   title: string;
   author: string;
+  publisher?: string;
   description?: string;
   isbn: string;
   price: number;

@@ -11,6 +11,10 @@ export class CreateBookDto {
 
   @IsOptional()
   @IsString()
+  publisher?: string;
+
+  @IsOptional()
+  @IsString()
   description?: string;
 
   @IsNotEmpty()

@@ -12,6 +12,7 @@ const BookForm: React.FC = () => {
   const [formData, setFormData] = useState<CreateBookDto>({
     title: '',
     author: '',
+    publisher: '',
     description: '',
     isbn: '',
     price: 0,
@@ -31,6 +32,7 @@ const BookForm: React.FC = () => {
           setFormData({
             title: book.title,
             author: book.author,
+            publisher: book.publisher || '',
             description: book.description || '',
             isbn: book.isbn,
             price: book.price,
@@ -108,6 +110,18 @@ const BookForm: React.FC = () => {
             value={formData.author}
             onChange={handleChange}
             required
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="publisher">Publisher</label>
+          <input
+            type="text"
+            id="publisher"
+            name="publisher"
+            value={formData.publisher}
+            onChange={handleChange}
+            placeholder="e.g., Penguin Books"
           />
         </div>
 
