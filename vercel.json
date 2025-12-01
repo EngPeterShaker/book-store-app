@@ -1,36 +1,11 @@
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "apps/web/package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "apps/web/build"
-      }
-    },
-    {
-      "src": "apps/api/api/index.ts",
-      "use": "@vercel/node"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "/apps/api/api/index.ts"
-    },
-    {
-      "src": "/static/(.*)",
-      "dest": "/apps/web/build/static/$1"
-    },
-    {
-      "src": "/(.*\\.(js|css|png|jpg|jpeg|gif|ico|svg|json|txt|woff|woff2|ttf|eot))",
-      "dest": "/apps/web/build/$1"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/apps/web/build/index.html"
-    }
-  ],
+  "buildCommand": "cd apps/web && yarn build",
+  "outputDirectory": "apps/web/build",
   "installCommand": "yarn install",
-  "buildCommand": "yarn build"
+  "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "/api"
+    }
+  ]
 }
