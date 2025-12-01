@@ -31,7 +31,13 @@ const BookCard: React.FC<BookCardProps> = ({ book, onDelete }) => {
       
       <div className="book-details">
         <p className="book-author">by {book.author}</p>
-        {book.publisher && <p className="book-publisher">{book.publisher}</p>}
+        {book.publisher && (
+          <p className="book-publisher">
+            <Link to={`/publishers/${encodeURIComponent(book.publisher)}`} className="publisher-link">
+              {book.publisher}
+            </Link>
+          </p>
+        )}
         {book.genre && <span className="book-genre">{book.genre}</span>}
         
         {book.description && (

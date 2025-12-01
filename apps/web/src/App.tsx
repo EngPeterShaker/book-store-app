@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import BookList from './components/BookList';
 import BookForm from './components/BookForm';
 import BookDetails from './components/BookDetails';
+import PublisherDetails from './components/PublisherDetails';
 import SearchBar from './components/SearchBar';
 import ApiStatus from './components/ApiStatus';
 import './App.css';
@@ -83,6 +84,7 @@ function App() {
             <Route path="/books/new" element={<BookForm />} />
             <Route path="/books/:id/edit" element={<BookForm />} />
             <Route path="/books/:id" element={<BookDetails />} />
+            <Route path="/publishers/:name" element={<PublisherDetails />} />
           </Routes>
         </main>
 
