@@ -5,36 +5,32 @@
       "src": "apps/web/package.json",
       "use": "@vercel/static-build",
       "config": {
-        "distDir": "build"
+        "distDir": "apps/web/build"
       }
     },
     {
-      "src": "apps/api/src/main.vercel.ts",
+      "src": "apps/api/api/index.ts",
       "use": "@vercel/node"
     }
   ],
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "/apps/api/src/main.vercel.ts"
+      "dest": "/apps/api/api/index.ts"
     },
     {
       "src": "/static/(.*)",
-      "dest": "/apps/web/static/$1"
+      "dest": "/apps/web/build/static/$1"
     },
     {
-      "src": "/(.*\\.(js|css|png|jpg|jpeg|gif|ico|svg))",
-      "dest": "/apps/web/$1"
+      "src": "/(.*\\.(js|css|png|jpg|jpeg|gif|ico|svg|json|txt|woff|woff2|ttf|eot))",
+      "dest": "/apps/web/build/$1"
     },
     {
       "src": "/(.*)",
-      "dest": "/apps/web/index.html"
+      "dest": "/apps/web/build/index.html"
     }
   ],
-  "env": {
-    "NODE_ENV": "production",
-    "DB_DISABLED": "false"
-  },
-  "installCommand": "corepack yarn install",
-  "buildCommand": "turbo build --filter=@book-store/web --filter=@book-store/api"
+  "installCommand": "yarn install",
+  "buildCommand": "yarn build"
 }

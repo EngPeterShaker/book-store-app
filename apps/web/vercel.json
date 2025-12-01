@@ -18,8 +18,5 @@
       "src": "/(.*)",
       "dest": "/index.html"
     }
-  ],
-  "env": {
-    "REACT_APP_API_URL": "https://backend-kv52gmqd8-engpetershakers-projects.vercel.app"
-  }
+  ]
 }

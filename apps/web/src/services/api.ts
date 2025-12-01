@@ -2,8 +2,8 @@ import axios from 'axios';
 import { Book, CreateBookDto, UpdateBookDto } from '../types/Book';
 
 // API base URL - can be configured via environment variable
-// In production (monorepo), use relative path. In development, use localhost
-const API_BASE_URL = process.env.REACT_APP_API_URL || (process.env.NODE_ENV === 'production' ? '/api' : 'http://localhost:3001');
+// In production (monorepo), use relative path to /api. In development, use localhost
+const API_BASE_URL = process.env.REACT_APP_API_URL || '/api';
 
 const api = axios.create({
   baseURL: API_BASE_URL,

@@ -24,24 +24,20 @@ async function bootstrap() {
       origin: (origin, callback) => {
         // Allow requests with no origin (like mobile apps or curl requests)
         if (!origin) return callback(null, true);
-        
-        // Allow any Vercel frontend deployment
-        if (origin.includes('frontend-') && origin.includes('vercel.app')) {
+
+        // Allow same-origin requests (monorepo deployment)
+        // Both frontend and backend are served from the same domain
+        if (origin.includes('vercel.app')) {
           return callback(null, true);
         }
-        
+
         // Allow localhost for development
         if (origin.includes('localhost')) {
           return callback(null, true);
         }
-        
-        // Allow specific frontend URL if set
-        if (process.env.FRONTEND_URL && origin === process.env.FRONTEND_URL) {
-          return callback(null, true);
-        }
-        
-        // Reject other origins
-        callback(new Error('Not allowed by CORS'));
+
+        // Allow any origin in production (since it's a public API)
+        return callback(null, true);
       },
       methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
       credentials: true,
