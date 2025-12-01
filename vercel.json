@@ -1,5 +1,5 @@
 {
-  "buildCommand": "cd apps/web && yarn build",
+  "buildCommand": "yarn install && cd apps/web && yarn build && cd ../api && yarn build",
   "outputDirectory": "apps/web/build",
   "installCommand": "yarn install",
   "rewrites": [
