@@ -32,16 +32,17 @@ export interface BookWithRelations {
   is_digital?: boolean;
   created_at: string;
   updated_at: string;
-  
+
   // Computed properties for backward compatibility
   author: string;
+  publisher?: string;
   genre: string;
   publishedDate: string;
   createdAt: string;
   updatedAt: string;
-  
+
   // Related data
-  publisher?: { name: string; };
+  publishers?: { name: string; };
   primary_category?: { name: string; };
   series?: { name: string; };
   authors?: Array<{ full_name: string; role: string; }>;
@@ -61,9 +62,13 @@ export class BooksSupabaseService {
     // Extract primary genre
     const genre = book.categories?.name || book.primary_category?.name || '';
 
+    // Extract publisher name
+    const publisherName = book.publishers?.name || book.publisher?.name || '';
+
     return {
       ...book,
       author: authorName,
+      publisher: publisherName,
       genre: genre,
       publishedDate: book.published_date,
       createdAt: book.created_at,
