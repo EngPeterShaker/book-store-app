@@ -13,7 +13,7 @@ import {
 } from '@nestjs/common';
 import { CreateBookDto } from '../dto/create-book.dto';
 import { UpdateBookDto } from '../dto/update-book.dto';
-import { BookWithRelations } from '../types/book.types';
+import { BookWithRelations } from './books.supabase.service';
 
 interface BooksService {
   create(createBookDto: CreateBookDto): Promise<BookWithRelations>;
@@ -25,8 +25,8 @@ interface BooksService {
   getCount(): Promise<number>;
   getAllPublishers(): Promise<string[]>;
   getAllPublishersWithDetails(): Promise<any[]>;
-  getPublisherByName(name: string): Promise<any | null>;
-  getPublisherById(id: number): Promise<any | null>;
+  getPublisherByName(name: string): Promise<any>;
+  getPublisherById(id: number): Promise<any>;
 }
 
 @Controller('books')
@@ -103,7 +103,6 @@ export class BooksController {
         return {
           success: false,
           message: 'Publisher not found',
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
           publisher: null,
         };
       }
