@@ -45,14 +45,14 @@
 
   .edit-btn {
     @include button-base;
-    background-color: $info-color;
+    background-color: $primary-color;
     color: white;
     padding: 0.4rem 0.8rem;
     font-size: $font-size-xs;
     font-weight: $font-weight-medium;
 
     &:hover {
-      background-color: darken($info-color, 10%);
+      background-color: darken($primary-color, 10%);
     }
   }
 
