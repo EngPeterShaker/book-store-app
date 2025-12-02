@@ -1,39 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { LanguageProvider, useLanguage } from './contexts/LanguageContext';
-import BookList from './components/BookList';
+import PublishersGrid from './components/PublishersGrid';
 import BookForm from './components/BookForm';
 import BookDetails from './components/BookDetails';
 import PublisherDetails from './components/PublisherDetails';
-import SearchBar from './components/SearchBar';
 import ApiStatus from './components/ApiStatus';
 import LanguageSwitcher from './components/LanguageSwitcher';
 import './styles/main.scss';
 
 function AppContent() {
   const { t } = useLanguage();
-  const [searchQuery, setSearchQuery] = useState<string>('');
-  const [selectedGenre, setSelectedGenre] = useState<string>('');
-
-  const handleSearch = (query: string) => {
-    setSearchQuery(query);
-    setSelectedGenre(''); // Clear genre filter when searching
-  };
-
-  const handleClearSearch = () => {
-    setSearchQuery('');
-    setSelectedGenre('');
-  };
-
-  const handleGenreFilter = (genre: string) => {
-    setSelectedGenre(genre);
-    setSearchQuery(''); // Clear search when filtering by genre
-  };
-
-  const genres = [
-    'Fiction', 'Non-Fiction', 'Mystery', 'Science Fiction', 'Fantasy',
-    'Romance', 'Thriller', 'Biography', 'History', 'Self-Help', 'Technical'
-  ];
 
   return (
     <Router>
@@ -44,7 +21,7 @@ function AppContent() {
               <h1>📚 BookStore</h1>
             </Link>
             <nav className="main-nav">
-              <Link to="/" className="nav-link">{t('nav.home')}</Link>
+              <Link to="/" className="nav-link">{t('nav.publishers')}</Link>
               <Link to="/books/new" className="nav-link add-book-btn">{t('nav.addBook')}</Link>
             </nav>
             <LanguageSwitcher />
@@ -56,31 +33,7 @@ function AppContent() {
             <Route path="/" element={
               <div>
                 <ApiStatus />
-                <div className="page-header">
-                  <SearchBar
-                    onSearch={handleSearch}
-                    onClear={handleClearSearch}
-                  />
-
-                  <div className="genre-filter">
-                    <label>Filter by Genre:</label>
-                    <select
-                      value={selectedGenre}
-                      onChange={(e) => handleGenreFilter(e.target.value)}
-                      className="genre-select"
-                    >
-                      <option value="">All Genres</option>
-                      {genres.map(genre => (
-                        <option key={genre} value={genre}>{genre}</option>
-                      ))}
-                    </select>
-                  </div>
-                </div>
-
-                <BookList
-                  searchQuery={searchQuery}
-                  genre={selectedGenre}
-                />
+                <PublishersGrid />
               </div>
             } />
             <Route path="/books/new" element={<BookForm />} />

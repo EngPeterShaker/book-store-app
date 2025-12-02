@@ -434,4 +434,66 @@ export class BooksSupabaseService {
       return null;
     }
   }
+
+  async getBranchesByPublisherId(publisherId: number): Promise<any[]> {
+    const supabase = this.supabaseService.getClient();
+
+    try {
+      const { data, error } = await supabase
+        .from('publisher_branches')
+        .select('*')
+        .eq('publisher_id', publisherId)
+        .order('is_main_branch', { ascending: false })
+        .order('branch_name');
+
+      if (error) {
+        console.error('Supabase error in getBranchesByPublisherId:', error);
+        return [];
+      }
+
+      return data || [];
+    } catch (error) {
+      console.error('Error in getBranchesByPublisherId:', error);
+      return [];
+    }
+  }
+
+  async getBranchesByPublisherName(publisherName: string): Promise<any[]> {
+    const supabase = this.supabaseService.getClient();
+
+    try {
+      // First get the publisher
+      const publisher = await this.getPublisherByName(publisherName);
+
+      if (!publisher || !publisher.id) {
+        return [];
+      }
+
+      return this.getBranchesByPublisherId(publisher.id);
+    } catch (error) {
+      console.error('Error in getBranchesByPublisherName:', error);
+      return [];
+    }
+  }
+
+  async getAllBranches(): Promise<any[]> {
+    const supabase = this.supabaseService.getClient();
+
+    try {
+      const { data, error } = await supabase
+        .from('publisher_branches')
+        .select('*, publishers(name)')
+        .order('branch_name');
+
+      if (error) {
+        console.error('Supabase error in getAllBranches:', error);
+        return [];
+      }
+
+      return data || [];
+    } catch (error) {
+      console.error('Error in getAllBranches:', error);
+      return [];
+    }
+  }
 }

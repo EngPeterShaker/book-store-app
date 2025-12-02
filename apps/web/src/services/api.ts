@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { Book, CreateBookDto, UpdateBookDto } from '../types/Book';
 import { Publisher } from '../types/Publisher';
+import { Branch } from '../types/Branch';
 
 // API base URL - configured via environment variable
 // REACT_APP_API_URL should be set in Vercel dashboard for production
@@ -153,6 +154,21 @@ export const booksApi = {
 		} catch (error) {
 			console.error("Error in booksApi.getPublisherByName:", error);
 			return null;
+		}
+	},
+
+	// Get branches for a publisher by name
+	getBranchesByPublisherName: async (name: string): Promise<Branch[]> => {
+		try {
+			const response = await api.get(`/books/publishers/${encodeURIComponent(name)}/branches`);
+			if (response.data.success && Array.isArray(response.data.branches)) {
+				return response.data.branches;
+			} else {
+				return [];
+			}
+		} catch (error) {
+			console.error("Error in booksApi.getBranchesByPublisherName:", error);
+			return [];
 		}
 	},
 };

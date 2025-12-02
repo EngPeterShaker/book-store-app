@@ -27,6 +27,9 @@ interface BooksService {
   getAllPublishersWithDetails(): Promise<any[]>;
   getPublisherByName(name: string): Promise<any>;
   getPublisherById(id: number): Promise<any>;
+  getBranchesByPublisherName(name: string): Promise<any[]>;
+  getBranchesByPublisherId(id: number): Promise<any[]>;
+  getAllBranches(): Promise<any[]>;
 }
 
 @Controller('books')
@@ -87,6 +90,27 @@ export class BooksController {
         success: false,
         error: error.message,
         publishers: [],
+        count: 0,
+      };
+    }
+  }
+
+  @Get('publishers/:name/branches')
+  async getBranchesByPublisherName(@Param('name') name: string) {
+    try {
+      const branches = await this.booksService.getBranchesByPublisherName(
+        decodeURIComponent(name),
+      );
+      return {
+        success: true,
+        branches,
+        count: branches.length,
+      };
+    } catch (error: any) {
+      return {
+        success: false,
+        error: error?.message || 'Unknown error',
+        branches: [],
         count: 0,
       };
     }
