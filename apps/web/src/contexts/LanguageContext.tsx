@@ -45,7 +45,6 @@ const translations = {
     'book.description': 'Description',
     'book.publishedDate': 'Published Date',
     'book.isbn': 'ISBN',
-    'book.stock': 'Stock',
 
     // Publisher related
     'publisher.about': 'About',
@@ -102,7 +101,6 @@ const translations = {
     'book.description': 'الوصف',
     'book.publishedDate': 'تاريخ النشر',
     'book.isbn': 'ISBN',
-    'book.stock': 'المخزون',
 
     // Publisher related
     'publisher.about': 'حول',
