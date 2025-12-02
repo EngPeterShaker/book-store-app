@@ -13,10 +13,27 @@ import {
 } from '@nestjs/common';
 import { CreateBookDto } from '../dto/create-book.dto';
 import { UpdateBookDto } from '../dto/update-book.dto';
+import { BookWithRelations } from '../types/book.types';
+
+interface BooksService {
+  create(createBookDto: CreateBookDto): Promise<BookWithRelations>;
+  findAll(): Promise<BookWithRelations[]>;
+  findOne(id: number): Promise<BookWithRelations>;
+  update(id: number, updateBookDto: UpdateBookDto): Promise<BookWithRelations>;
+  remove(id: number): Promise<void>;
+  findByGenre(genre: string): Promise<BookWithRelations[]>;
+  getCount(): Promise<number>;
+  getAllPublishers(): Promise<string[]>;
+  getAllPublishersWithDetails(): Promise<any[]>;
+  getPublisherByName(name: string): Promise<any | null>;
+  getPublisherById(id: number): Promise<any | null>;
+}
 
 @Controller('books')
 export class BooksController {
-  constructor(@Inject('BooksService') private readonly booksService: any) {}
+  constructor(
+    @Inject('BooksService') private readonly booksService: BooksService,
+  ) {}
 
   @Post()
   create(@Body(ValidationPipe) createBookDto: CreateBookDto) {
@@ -46,7 +63,7 @@ export class BooksController {
         publishers,
         count: publishers.length,
       };
-    } catch (error) {
+    } catch (error: any) {
       return {
         success: false,
         error: error.message,
@@ -65,7 +82,7 @@ export class BooksController {
         publishers,
         count: publishers.length,
       };
-    } catch (error) {
+    } catch (error: any) {
       return {
         success: false,
         error: error.message,
@@ -78,22 +95,28 @@ export class BooksController {
   @Get('publishers/:name')
   async getPublisherByName(@Param('name') name: string) {
     try {
-      const publisher = await this.booksService.getPublisherByName(decodeURIComponent(name));
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+      const publisher: any = await this.booksService.getPublisherByName(
+        decodeURIComponent(name),
+      );
       if (!publisher) {
         return {
           success: false,
           message: 'Publisher not found',
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
           publisher: null,
         };
       }
       return {
         success: true,
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         publisher,
       };
-    } catch (error) {
+    } catch (error: any) {
       return {
         success: false,
-        error: error.message,
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
+        error: error?.message || 'Unknown error',
         publisher: null,
       };
     }
