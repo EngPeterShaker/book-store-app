@@ -1,18 +1,18 @@
 // SCSS Variables and CSS Custom Properties for RTL Support
 
-// Colors
-$primary-color: #667eea;
-$secondary-color: #764ba2;
-$success-color: #28a745;
-$danger-color: #dc3545;
-$warning-color: #ffc107;
-$info-color: #17a2b8;
-$light-color: #f8f9fa;
-$dark-color: #343a40;
-$text-color: #333;
-$text-muted: #666;
-$border-color: #ddd;
-$background-color: #f8f9fa;
+// Colors - Book Store Theme
+$primary-color: #1e3a8a;      // Deep navy blue - trustworthy, professional
+$secondary-color: #f59e0b;    // Warm amber - inviting, literary
+$success-color: #10b981;      // Emerald green - success, growth
+$danger-color: #ef4444;       // Soft red - errors, attention
+$warning-color: #f59e0b;      // Amber - warnings, highlights
+$info-color: #3b82f6;         // Blue - information, links
+$light-color: #f8fafc;        // Soft white - clean backgrounds
+$dark-color: #1f2937;         // Dark gray - text, headers
+$text-color: #111827;         // Dark charcoal - primary text
+$text-muted: #6b7280;         // Medium gray - secondary text
+$border-color: #e5e7eb;       // Light gray - borders, dividers
+$background-color: #f9fafb;   // Very light gray - page backgrounds
 
 // Spacing
 $spacing-xs: 0.25rem;
