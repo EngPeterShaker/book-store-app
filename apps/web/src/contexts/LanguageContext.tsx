@@ -30,6 +30,11 @@ const translations = {
     'common.back': 'Back',
     'common.viewAll': 'View All',
     'common.search': 'Search',
+    'common.delete': 'Delete',
+    'common.edit': 'Edit',
+    'common.viewDetails': 'View Details',
+    'book.by': 'by',
+    'book.stock': 'Stock',
 
     // Book related
     'book.title': 'Title',
@@ -82,6 +87,11 @@ const translations = {
     'common.back': 'العودة',
     'common.viewAll': 'عرض الكل',
     'common.search': 'بحث',
+    'common.delete': 'حذف',
+    'common.edit': 'تعديل',
+    'common.viewDetails': 'عرض التفاصيل',
+    'book.by': 'بواسطة',
+    'book.stock': 'المخزون',
 
     // Book related
     'book.title': 'العنوان',
