@@ -1,0 +1,195 @@
+// Book Card Component Styles
+
+.book-card {
+  @include card-base;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  text-align: var(--text-align-start, left);
+
+  &:hover {
+    @include card-hover;
+  }
+
+  &-header {
+    padding: $spacing-lg $spacing-lg $spacing-md;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: $spacing-md;
+
+    [dir="rtl"] & {
+      flex-direction: row-reverse;
+    }
+  }
+
+  .book-title {
+    color: $text-color;
+    font-size: $font-size-lg;
+    font-weight: $font-weight-semibold;
+    line-height: 1.4;
+    margin: 0;
+    flex: 1;
+  }
+
+  .book-actions {
+    display: flex;
+    gap: $spacing-sm;
+    flex-shrink: 0;
+
+    [dir="rtl"] & {
+      flex-direction: row-reverse;
+    }
+  }
+
+  .edit-btn {
+    @include button-base;
+    background-color: $info-color;
+    color: white;
+    padding: 0.4rem 0.8rem;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-medium;
+
+    &:hover {
+      background-color: darken($info-color, 10%);
+    }
+  }
+
+  .delete-btn {
+    @include button-base;
+    background-color: $danger-color;
+    color: white;
+    padding: 0.4rem 0.8rem;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-medium;
+
+    &:hover {
+      background-color: darken($danger-color, 10%);
+    }
+  }
+
+  .book-details {
+    padding: 0 $spacing-lg $spacing-md;
+    flex: 1;
+  }
+
+  .book-author {
+    color: $text-muted;
+    font-size: $font-size-base;
+    margin: 0 0 $spacing-sm;
+    font-style: italic;
+  }
+
+  .book-genre {
+    background-color: #e9ecef;
+    color: #495057;
+    padding: 0.25rem 0.5rem;
+    border-radius: $border-radius-lg;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-medium;
+    display: inline-block;
+    margin-bottom: $spacing-md;
+  }
+
+  .book-description {
+    color: $text-muted;
+    font-size: $font-size-sm;
+    line-height: 1.5;
+    margin-bottom: $spacing-md;
+  }
+
+  .book-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: $spacing-md;
+
+    [dir="rtl"] & {
+      flex-direction: row-reverse;
+      text-align: right;
+    }
+  }
+
+  .book-price {
+    font-size: $font-size-xl;
+    font-weight: $font-weight-bold;
+    color: $success-color;
+  }
+
+  .book-stock {
+    font-size: $font-size-sm;
+    color: $text-muted;
+  }
+
+  .book-meta {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xs;
+    margin-bottom: $spacing-md;
+
+    [dir="rtl"] & {
+      align-items: flex-end;
+    }
+
+    small {
+      color: #888;
+      font-size: $font-size-xs;
+    }
+  }
+
+  .book-card-footer {
+    padding: $spacing-md $spacing-lg $spacing-lg;
+    margin-top: auto;
+  }
+
+  .view-details-btn {
+    display: block;
+    width: 100%;
+    background: linear-gradient(135deg, $primary-color 0%, $secondary-color 100%);
+    color: white;
+    text-decoration: none;
+    padding: 0.75rem;
+    border-radius: $border-radius-md;
+    text-align: center;
+    font-weight: $font-weight-medium;
+    transition: transform $transition-fast;
+
+    &:hover {
+      transform: translateY(-1px);
+    }
+  }
+}
+
+// Responsive Design
+@media (max-width: $mobile) {
+  .book-card {
+    .book-card-header {
+      flex-direction: column;
+      gap: $spacing-sm;
+
+      [dir="rtl"] & {
+        flex-direction: column;
+      }
+    }
+
+    .book-actions {
+      align-self: var(--flex-end, flex-end);
+
+      [dir="rtl"] & {
+        align-self: flex-start;
+      }
+    }
+
+    .book-info {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: $spacing-sm;
+
+      [dir="rtl"] & {
+        align-items: flex-end;
+        text-align: right;
+      }
+    }
+  }
+}

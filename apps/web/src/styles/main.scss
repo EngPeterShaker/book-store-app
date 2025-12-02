@@ -1,0 +1,14 @@
+// Main SCSS Entry Point
+
+// Import variables and mixins first
+@import 'variables';
+
+// Import base styles
+@import 'base';
+
+// Import component styles
+@import 'components/app';
+@import 'components/book-card';
+@import 'components/publisher-details';
+@import 'components/publisher-details-2';
+@import 'components/language-switcher';

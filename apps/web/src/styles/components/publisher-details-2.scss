@@ -1,0 +1,325 @@
+/* Contact Information Section */
+.publisher-contact {
+  margin-top: 30px;
+  padding-top: 25px;
+  border-top: 2px solid #f0f0f0;
+
+  h2 {
+    font-size: $font-size-xl;
+    margin-bottom: $spacing-xxl;
+    color: var(--publisher-primary, $text-color);
+    font-weight: $font-weight-semibold;
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: $spacing-xxl;
+    margin-top: $spacing-md;
+
+    [dir="rtl"] & {
+      direction: rtl;
+    }
+  }
+
+  .contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: $spacing-sm;
+    padding: $spacing-md;
+    background: $light-color;
+    border-radius: $border-radius-md;
+    transition: transform $transition-fast, box-shadow $transition-fast;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: $shadow-md;
+    }
+
+    [dir="rtl"] & {
+      flex-direction: row-reverse;
+      text-align: right;
+    }
+
+    .contact-icon {
+      font-size: $font-size-xl;
+      flex-shrink: 0;
+    }
+
+    > div {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .contact-label {
+      font-size: $font-size-xs;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: $text-muted;
+      font-weight: $font-weight-semibold;
+    }
+
+    .contact-value {
+      font-size: $font-size-base;
+      color: $text-color;
+      word-break: break-word;
+
+      a {
+        color: var(--publisher-primary, $primary-color);
+        text-decoration: none;
+        transition: color $transition-fast;
+
+        &:hover {
+          color: var(--publisher-secondary, darken($primary-color, 15%));
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}
+
+/* Social Media Section */
+.publisher-social {
+  margin-top: 30px;
+  padding-top: 25px;
+  border-top: 2px solid #f0f0f0;
+
+  h2 {
+    font-size: $font-size-xl;
+    margin-bottom: $spacing-xxl;
+    color: var(--publisher-primary, $text-color);
+    font-weight: $font-weight-semibold;
+  }
+
+  .social-links {
+    display: flex;
+    gap: $spacing-md;
+    flex-wrap: wrap;
+
+    [dir="rtl"] & {
+      flex-direction: row-reverse;
+    }
+  }
+
+  .social-link {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    @include flex-center;
+    transition: transform 0.3s, box-shadow 0.3s;
+    text-decoration: none;
+    box-shadow: $shadow-sm;
+
+    &:hover {
+      transform: translateY(-3px) scale(1.1);
+      box-shadow: $shadow-lg;
+    }
+
+    svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    &.twitter {
+      background: #1DA1F2;
+      color: white;
+    }
+
+    &.linkedin {
+      background: #0077B5;
+      color: white;
+    }
+
+    &.instagram {
+      background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+      color: white;
+    }
+
+    &.facebook {
+      background: #1877F2;
+      color: white;
+    }
+
+    &.youtube {
+      background: #FF0000;
+      color: white;
+    }
+  }
+}
+
+/* Books Section */
+.publisher-books {
+  margin-top: 40px;
+  padding: 30px $spacing-xxl;
+  background: $background-color;
+  border-radius: $border-radius-lg;
+
+  h2 {
+    font-size: $font-size-xl;
+    margin-bottom: 25px;
+    color: $text-color;
+    font-weight: $font-weight-semibold;
+  }
+
+  .books-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: $spacing-xxl;
+    margin-top: $spacing-xxl;
+  }
+
+  .no-books {
+    text-align: center;
+    padding: 40px;
+    background: #f9f9f9;
+    border-radius: $border-radius-md;
+
+    p {
+      color: $text-muted;
+      margin-bottom: $spacing-md;
+    }
+
+    .add-book-btn {
+      display: inline-block;
+      padding: 10px $spacing-xxl;
+      background: $primary-color;
+      color: white;
+      text-decoration: none;
+      border-radius: $border-radius-sm;
+      transition: background $transition-normal;
+
+      &:hover {
+        background: darken($primary-color, 10%);
+      }
+    }
+  }
+}
+
+/* Publisher Not Found */
+.publisher-not-found {
+  max-width: 600px;
+  margin: 100px auto;
+  text-align: center;
+  padding: 40px;
+  background: white;
+  border-radius: $border-radius-md;
+  box-shadow: $shadow-sm;
+
+  h2 {
+    color: $text-color;
+    margin-bottom: $spacing-md;
+  }
+
+  p {
+    color: $text-muted;
+    margin-bottom: $spacing-xxl;
+  }
+
+  .back-btn {
+    padding: 10px $spacing-xxl;
+    background: $secondary-color;
+    color: white;
+    border: none;
+    border-radius: $border-radius-sm;
+    cursor: pointer;
+    font-size: $font-size-base;
+    transition: background $transition-normal;
+
+    &:hover {
+      background: darken($secondary-color, 10%);
+    }
+  }
+
+  .available-publishers {
+    margin-top: 30px;
+
+    h3 {
+      color: $text-color;
+      margin-bottom: $spacing-xxl;
+      font-size: $font-size-xl;
+    }
+
+    .publishers-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: $spacing-xxl;
+      margin-top: $spacing-xxl;
+    }
+
+    .publisher-card {
+      display: block;
+      background: white;
+      padding: $spacing-xxl;
+      border-radius: $border-radius-md;
+      box-shadow: $shadow-sm;
+      text-decoration: none;
+      transition: transform 0.3s, box-shadow 0.3s;
+      border: 1px solid #e9ecef;
+
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: $shadow-lg;
+      }
+
+      h4 {
+        color: $text-color;
+        margin-bottom: $spacing-sm;
+        font-size: $font-size-lg;
+      }
+
+      p {
+        color: $text-muted;
+        line-height: 1.5;
+        margin-bottom: $spacing-md;
+      }
+
+      .location {
+        display: inline-block;
+        color: $primary-color;
+        font-size: $font-size-sm;
+        font-weight: $font-weight-medium;
+      }
+    }
+  }
+}
+
+/* Utility Classes */
+.loading, .error {
+  text-align: center;
+  padding: $spacing-xxl;
+  color: $text-muted;
+}
+
+.error {
+  color: $danger-color;
+}
+
+/* Links */
+.publisher-link {
+  color: $primary-color;
+  text-decoration: none;
+  transition: color $transition-normal;
+
+  &:hover {
+    color: darken($primary-color, 15%);
+    text-decoration: underline;
+  }
+}
+
+.book-card .book-publisher {
+  margin: 5px 0;
+  font-size: $font-size-sm;
+  color: $text-muted;
+}
+
+/* Responsive Design */
+@media (max-width: $mobile) {
+  .publisher-profile {
+    flex-direction: column;
+  }
+
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+}

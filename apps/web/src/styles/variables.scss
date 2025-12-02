@@ -1,0 +1,127 @@
+// SCSS Variables and CSS Custom Properties for RTL Support
+
+// Colors
+$primary-color: #667eea;
+$secondary-color: #764ba2;
+$success-color: #28a745;
+$danger-color: #dc3545;
+$warning-color: #ffc107;
+$info-color: #17a2b8;
+$light-color: #f8f9fa;
+$dark-color: #343a40;
+$text-color: #333;
+$text-muted: #666;
+$border-color: #ddd;
+$background-color: #f8f9fa;
+
+// Spacing
+$spacing-xs: 0.25rem;
+$spacing-sm: 0.5rem;
+$spacing-md: 1rem;
+$spacing-lg: 1.5rem;
+$spacing-xl: 2rem;
+$spacing-xxl: 3rem;
+
+// Border radius
+$border-radius-sm: 5px;
+$border-radius-md: 8px;
+$border-radius-lg: 12px;
+
+// Shadows
+$shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+$shadow-md: 0 2px 8px rgba(0, 0, 0, 0.1);
+$shadow-lg: 0 4px 16px rgba(0, 0, 0, 0.15);
+$shadow-hover: 0 4px 16px rgba(0, 0, 0, 0.15);
+
+// Transitions
+$transition-fast: 0.2s ease;
+$transition-normal: 0.3s ease;
+
+// Font sizes
+$font-size-xs: 0.8rem;
+$font-size-sm: 0.9rem;
+$font-size-base: 1rem;
+$font-size-lg: 1.2rem;
+$font-size-xl: 1.5rem;
+$font-size-xxl: 1.8rem;
+
+// Font weights
+$font-weight-normal: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+
+// Breakpoints
+$mobile: 768px;
+$tablet: 1024px;
+$desktop: 1200px;
+
+// Mixins
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin button-base {
+  border: none;
+  border-radius: $border-radius-sm;
+  cursor: pointer;
+  font-weight: $font-weight-medium;
+  transition: all $transition-normal;
+  display: inline-block;
+  text-decoration: none;
+}
+
+@mixin card-base {
+  background: white;
+  border-radius: $border-radius-lg;
+  box-shadow: $shadow-sm;
+  transition: transform $transition-fast, box-shadow $transition-fast;
+}
+
+@mixin card-hover {
+  transform: translateY(-2px);
+  box-shadow: $shadow-lg;
+}
+
+// RTL CSS Custom Properties
+:root {
+  --direction: ltr;
+  --text-align-start: left;
+  --text-align-end: right;
+  --margin-start: margin-left;
+  --margin-end: margin-right;
+  --padding-start: padding-left;
+  --padding-end: padding-right;
+  --border-start: border-left;
+  --border-end: border-right;
+  --float-start: left;
+  --float-end: right;
+  --flex-start: flex-start;
+  --flex-end: flex-end;
+}
+
+// Arabic/RTL styles
+[dir="rtl"] {
+  --direction: rtl;
+  --text-align-start: right;
+  --text-align-end: left;
+  --margin-start: margin-right;
+  --margin-end: margin-left;
+  --padding-start: padding-right;
+  --padding-end: padding-left;
+  --border-start: border-right;
+  --border-end: border-left;
+  --float-start: right;
+  --float-end: left;
+  --flex-start: flex-end;
+  --flex-end: flex-start;
+}
+
+// Arabic Font Support
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@300;400;500;600;700&display=swap');
+
+[dir="rtl"] {
+  font-family: 'Noto Sans Arabic', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}

@@ -1,0 +1,205 @@
+// Publisher Details Component Styles
+
+.publisher-details {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0;
+  --publisher-primary: $primary-color;
+  --publisher-secondary: $secondary-color;
+}
+
+/* Banner Section */
+.publisher-banner {
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+  position: relative;
+  margin-bottom: -80px;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.publisher-header {
+  position: relative;
+  z-index: 10;
+  padding: $spacing-xxl;
+}
+
+/* Publisher Profile Section */
+.publisher-profile {
+  position: relative;
+  padding: $spacing-xxl;
+  display: flex;
+  gap: 30px;
+  align-items: flex-start;
+
+  [dir="rtl"] & {
+    flex-direction: row-reverse;
+  }
+}
+
+/* Logo */
+.publisher-logo {
+  flex-shrink: 0;
+  width: 160px;
+  height: 160px;
+  background: white;
+  border-radius: $border-radius-lg;
+  box-shadow: $shadow-lg;
+  padding: 15px;
+  @include flex-center;
+  position: relative;
+  z-index: 5;
+
+  img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+}
+
+.publisher-info {
+  flex: 1;
+  background: white;
+  padding: 30px;
+  border-radius: $border-radius-lg;
+  box-shadow: $shadow-sm;
+
+  .publisher-name {
+    font-size: 2.5rem;
+    margin-bottom: $spacing-sm;
+    color: var(--publisher-primary, $text-color);
+    font-weight: $font-weight-bold;
+  }
+
+  .publisher-tagline {
+    font-size: $font-size-lg;
+    color: $text-muted;
+    font-style: italic;
+    margin-bottom: 25px;
+  }
+}
+
+/* Statistics Cards */
+.publisher-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 15px;
+  margin-bottom: 30px;
+
+  [dir="rtl"] & {
+    direction: rtl;
+  }
+}
+
+.stat-card {
+  background: linear-gradient(135deg, var(--publisher-primary, $primary-color) 0%, var(--publisher-secondary, $secondary-color) 100%);
+  padding: $spacing-xxl;
+  border-radius: $border-radius-md;
+  text-align: center;
+  box-shadow: $shadow-sm;
+  color: white;
+
+  .stat-label {
+    display: block;
+    font-size: $font-size-xs;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    opacity: 0.9;
+    margin-bottom: 8px;
+  }
+
+  .stat-value {
+    display: block;
+    font-size: $font-size-xxl;
+    font-weight: $font-weight-bold;
+  }
+}
+
+/* About Section */
+.publisher-description {
+  border-top: 2px solid #f0f0f0;
+  padding-top: 25px;
+  margin-top: $spacing-xxl;
+
+  h2 {
+    font-size: $font-size-xl;
+    margin-bottom: $spacing-md;
+    color: var(--publisher-primary, $text-color);
+    font-weight: $font-weight-semibold;
+  }
+
+  h3 {
+    font-size: $font-size-lg;
+    margin-top: 25px;
+    margin-bottom: $spacing-sm;
+    color: $text-color;
+    font-weight: $font-weight-semibold;
+  }
+
+  p {
+    line-height: 1.8;
+    color: #555;
+    font-size: 1.05rem;
+    margin-bottom: $spacing-md;
+  }
+
+  .mission-statement {
+    background: $light-color;
+    padding: $spacing-xxl;
+    border-radius: $border-radius-md;
+    border-left: 4px solid var(--publisher-primary, $primary-color);
+    margin-top: $spacing-xxl;
+  }
+}
+
+.publisher-specialties {
+  margin-top: 25px;
+
+  .specialties-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-sm;
+    margin-top: $spacing-sm;
+
+    .specialty-tag {
+      background: var(--publisher-primary, $primary-color);
+      color: white;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: $font-size-sm;
+      font-weight: $font-weight-medium;
+    }
+  }
+}
+
+.notable-authors ul,
+.publisher-awards ul {
+  list-style: none;
+  padding: 0;
+  margin-top: $spacing-sm;
+
+  li {
+    padding: 8px 0;
+    padding-left: 25px;
+    position: relative;
+    color: #555;
+
+    &:before {
+      position: absolute;
+      left: 0;
+    }
+  }
+}
+
+.notable-authors li:before {
+  content: "✍️";
+}
+
+.publisher-awards li:before {
+  content: "🏆";
+}

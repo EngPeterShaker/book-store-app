@@ -2,7 +2,7 @@ import React from 'react';
 import { Book } from '../types/Book';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
-import './BookCard.css';
+import './BookCard.scss';
 
 interface BookCardProps {
   book: Book;

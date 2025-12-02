@@ -5,7 +5,7 @@ import { Book } from '../types/Book';
 import { booksApi } from '../services/api';
 import { useLanguage } from '../contexts/LanguageContext';
 import BookCard from './BookCard';
-import './PublisherDetails.css';
+import './PublisherDetails.scss';
 
 // Dynamic publisher data for database publishers
 const DYNAMIC_PUBLISHERS: Record<string, any> = {

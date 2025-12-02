@@ -8,8 +8,7 @@ import PublisherDetails from './components/PublisherDetails';
 import SearchBar from './components/SearchBar';
 import ApiStatus from './components/ApiStatus';
 import LanguageSwitcher from './components/LanguageSwitcher';
-import './App.css';
-import './styles/rtl.css';
+import './styles/main.scss';
 
 function AppContent() {
   const { t } = useLanguage();
