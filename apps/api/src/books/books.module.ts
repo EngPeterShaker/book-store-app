@@ -11,7 +11,7 @@ export class BooksModule {
 
     // Check if database should be disabled via environment variable
     const dbDisabled = process.env.DB_DISABLED === 'true';
-    
+
     if (!dbDisabled) {
       // Use Supabase service when database is enabled
       providers.push({

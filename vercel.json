@@ -1,0 +1,43 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "apps/web/package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "build"
+      }
+    },
+    {
+      "src": "apps/api/src/main.vercel.ts",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/apps/api/src/main.vercel.ts"
+    },
+    {
+      "src": "/static/(.*)",
+      "dest": "/apps/web/static/$1"
+    },
+    {
+      "src": "/(.*\\.(js|css|png|jpg|jpeg|gif|ico|svg))",
+      "dest": "/apps/web/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/apps/web/index.html"
+    }
+  ],
+  "env": {
+    "NODE_ENV": "production",
+    "DB_DISABLED": "false",
+    "SUPABASE_URL": "https://tmytkcwtghcexpdbudki.supabase.co",
+    "SUPABASE_ANON_KEY": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRteXRrY3d0Z2hjZXhwZGJ1ZGtpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQ4Mjk5NzQsImV4cCI6MjA3MDQwNTk3NH0.ZvbEGx6Q01-uS27CTo8mnDkvNf2FtY3eLDbbzhw6M9M",
+    "FRONTEND_URL": "https://book-store-mq7vytzeq-engpetershakers-projects.vercel.app"
+  },
+  "installCommand": "corepack yarn install",
+  "buildCommand": "turbo build --filter=@book-store/web --filter=@book-store/api"
+}

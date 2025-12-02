@@ -29,19 +29,31 @@ export class BooksController {
       const count = await this.booksService.getCount();
       return { success: true, count, message: 'Database connection working!' };
     } catch (error) {
-      return { success: false, error: error.message, message: 'Database connection failed' };
+      return {
+        success: false,
+        error: error.message,
+        message: 'Database connection failed',
+      };
     }
   }
 
-  @Get()
-  findAll(@Query('genre') genre?: string, @Query('search') search?: string) {
-    if (genre) {
-      return this.booksService.findByGenre(genre);
+  @Get('publishers/all')
+  async getAllPublishers() {
+    try {
+      const publishers = await this.booksService.getAllPublishers();
+      return {
+        success: true,
+        publishers,
+        count: publishers.length,
+      };
+    } catch (error) {
+      return {
+        success: false,
+        error: error.message,
+        publishers: [],
+        count: 0,
+      };
     }
-    if (search) {
-      return this.booksService.search(search);
-    }
-    return this.booksService.findAll();
   }
 
   @Get(':id')

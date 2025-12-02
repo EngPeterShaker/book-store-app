@@ -45,60 +45,81 @@ api.interceptors.response.use(
 );
 
 export const booksApi = {
-  // Get all books
-  getAll: async (): Promise<Book[]> => {
-    try {
-      const response = await api.get('/books');
-      if (Array.isArray(response.data)) {
-        return response.data;
-      } else {
-        console.error('API returned non-array data for getAll:', response.data);
-        return [];
-      }
-    } catch (error) {
-      console.error('Error in booksApi.getAll:', error);
-      throw error;
-    }
-  },
+	// Get all books
+	getAll: async (): Promise<Book[]> => {
+		try {
+			const response = await api.get("/books");
+			if (Array.isArray(response.data)) {
+				return response.data;
+			} else {
+				console.error("API returned non-array data for getAll:", response.data);
+				return [];
+			}
+		} catch (error) {
+			console.error("Error in booksApi.getAll:", error);
+			throw error;
+		}
+	},
 
-  // Get a single book by ID
-  getById: async (id: number): Promise<Book> => {
-    const response = await api.get(`/books/${id}`);
-    return response.data;
-  },
+	// Get a single book by ID
+	getById: async (id: number): Promise<Book> => {
+		const response = await api.get(`/books/${id}`);
+		return response.data;
+	},
 
-  // Create a new book
-  create: async (book: CreateBookDto): Promise<Book> => {
-    const response = await api.post('/books', book);
-    return response.data;
-  },
+	// Create a new book
+	create: async (book: CreateBookDto): Promise<Book> => {
+		const response = await api.post("/books", book);
+		return response.data;
+	},
 
-  // Update an existing book
-  update: async (id: number, book: UpdateBookDto): Promise<Book> => {
-    const response = await api.patch(`/books/${id}`, book);
-    return response.data;
-  },
+	// Update an existing book
+	update: async (id: number, book: UpdateBookDto): Promise<Book> => {
+		const response = await api.patch(`/books/${id}`, book);
+		return response.data;
+	},
 
-  // Delete a book
-  delete: async (id: number): Promise<void> => {
-    await api.delete(`/books/${id}`);
-  },
+	// Delete a book
+	delete: async (id: number): Promise<void> => {
+		await api.delete(`/books/${id}`);
+	},
 
-  // Search books
-  search: async (query: string): Promise<Book[]> => {
-    try {
-      const response = await api.get(`/books?search=${encodeURIComponent(query)}`);
-      if (Array.isArray(response.data)) {
-        return response.data;
-      } else {
-        console.error('API returned non-array data for search:', response.data);
-        return [];
-      }
-    } catch (error) {
-      console.error('Error in booksApi.search:', error);
-      throw error;
-    }
-  },
+	// Search books
+	search: async (query: string): Promise<Book[]> => {
+		try {
+			const response = await api.get(
+				`/books?search=${encodeURIComponent(query)}`
+			);
+			if (Array.isArray(response.data)) {
+				return response.data;
+			} else {
+				console.error("API returned non-array data for search:", response.data);
+				return [];
+			}
+		} catch (error) {
+			console.error("Error in booksApi.search:", error);
+			throw error;
+		}
+	},
+
+	// Get all publishers
+	getAllPublishers: async (): Promise<string[]> => {
+		try {
+			const response = await api.get("/books/publishers/all");
+			if (response.data.success && Array.isArray(response.data.publishers)) {
+				return response.data.publishers;
+			} else {
+				console.error(
+					"API returned invalid data for publishers:",
+					response.data
+				);
+				return [];
+			}
+		} catch (error) {
+			console.error("Error in booksApi.getAllPublishers:", error);
+			throw error;
+		}
+	},
 };
 
 export default api;

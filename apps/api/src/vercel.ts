@@ -18,7 +18,7 @@ async function createNestServer(expressInstance: express.Express) {
       new ExpressAdapter(expressInstance),
       {
         logger: ['error', 'warn', 'log'],
-      }
+      },
     );
 
     // Enable CORS
@@ -29,13 +29,15 @@ async function createNestServer(expressInstance: express.Express) {
     });
 
     // Global validation pipe
-    app.useGlobalPipes(new ValidationPipe({
-      transform: true,
-      whitelist: true,
-    }));
+    app.useGlobalPipes(
+      new ValidationPipe({
+        transform: true,
+        whitelist: true,
+      }),
+    );
 
     await app.init();
-    
+
     console.log('Nest Ready for Vercel');
   } catch (error) {
     console.error('Failed to initialize NestJS app:', error);
@@ -45,6 +47,6 @@ async function createNestServer(expressInstance: express.Express) {
 
 createNestServer(server)
   .then(() => console.log('Nest Ready for Vercel'))
-  .catch(err => console.error('Nest Vercel Error', err));
+  .catch((err) => console.error('Nest Vercel Error', err));
 
 export default server;
