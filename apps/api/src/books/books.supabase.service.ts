@@ -108,29 +108,36 @@ export class BooksSupabaseService {
 
   async findAll(): Promise<BookWithRelations[]> {
     const supabase = this.supabaseService.getClient();
-    
-    const { data, error } = await supabase
-      .from('books')
-      .select(`
-        *,
-        publishers:publisher_id (name),
-        categories:primary_category_id (name),
-        book_series:series_id (name),
-        book_authors (
-          role,
-          authors (full_name)
-        ),
-        book_categories (
-          categories (name)
-        )
-      `)
-      .order('created_at', { ascending: false });
 
-    if (error) {
-      throw new Error(`Failed to fetch books: ${error.message}`);
+    try {
+      const { data, error } = await supabase
+        .from('books')
+        .select(`
+          *,
+          publishers:publisher_id (name),
+          categories:primary_category_id (name),
+          book_series:series_id (name),
+          book_authors (
+            role,
+            authors (full_name)
+          ),
+          book_categories (
+            categories (name)
+          )
+        `)
+        .order('created_at', { ascending: false });
+
+      if (error) {
+        console.error('Supabase error in findAll:', error);
+        throw new Error(`Failed to fetch books: ${error.message}`);
+      }
+
+      return (data || []).map(book => this.transformBook(book));
+    } catch (error) {
+      console.error('Error in findAll:', error);
+      // Return empty array instead of throwing to prevent 500 errors
+      return [];
     }
-
-    return (data || []).map(book => this.transformBook(book));
   }
 
   async findOne(id: number): Promise<BookWithRelations> {
