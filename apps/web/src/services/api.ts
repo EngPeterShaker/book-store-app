@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { Book, CreateBookDto, UpdateBookDto } from '../types/Book';
+import { Publisher } from '../types/Publisher';
 
 // API base URL - configured via environment variable
 // REACT_APP_API_URL should be set in Vercel dashboard for production
@@ -102,7 +103,7 @@ export const booksApi = {
 		}
 	},
 
-	// Get all publishers
+	// Get all publishers (names only)
 	getAllPublishers: async (): Promise<string[]> => {
 		try {
 			const response = await api.get("/books/publishers/all");
@@ -118,6 +119,40 @@ export const booksApi = {
 		} catch (error) {
 			console.error("Error in booksApi.getAllPublishers:", error);
 			throw error;
+		}
+	},
+
+	// Get all publishers with full details
+	getAllPublishersWithDetails: async (): Promise<Publisher[]> => {
+		try {
+			const response = await api.get("/books/publishers/details");
+			if (response.data.success && Array.isArray(response.data.publishers)) {
+				return response.data.publishers;
+			} else {
+				console.error(
+					"API returned invalid data for publishers details:",
+					response.data
+				);
+				return [];
+			}
+		} catch (error) {
+			console.error("Error in booksApi.getAllPublishersWithDetails:", error);
+			throw error;
+		}
+	},
+
+	// Get a single publisher by name
+	getPublisherByName: async (name: string): Promise<Publisher | null> => {
+		try {
+			const response = await api.get(`/books/publishers/${encodeURIComponent(name)}`);
+			if (response.data.success && response.data.publisher) {
+				return response.data.publisher;
+			} else {
+				return null;
+			}
+		} catch (error) {
+			console.error("Error in booksApi.getPublisherByName:", error);
+			return null;
 		}
 	},
 };

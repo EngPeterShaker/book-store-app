@@ -56,6 +56,54 @@ export class BooksController {
     }
   }
 
+  @Get('publishers/details')
+  async getAllPublishersWithDetails() {
+    try {
+      const publishers = await this.booksService.getAllPublishersWithDetails();
+      return {
+        success: true,
+        publishers,
+        count: publishers.length,
+      };
+    } catch (error) {
+      return {
+        success: false,
+        error: error.message,
+        publishers: [],
+        count: 0,
+      };
+    }
+  }
+
+  @Get('publishers/:name')
+  async getPublisherByName(@Param('name') name: string) {
+    try {
+      const publisher = await this.booksService.getPublisherByName(decodeURIComponent(name));
+      if (!publisher) {
+        return {
+          success: false,
+          message: 'Publisher not found',
+          publisher: null,
+        };
+      }
+      return {
+        success: true,
+        publisher,
+      };
+    } catch (error) {
+      return {
+        success: false,
+        error: error.message,
+        publisher: null,
+      };
+    }
+  }
+
+  @Get()
+  findAll() {
+    return this.booksService.findAll();
+  }
+
   @Get(':id')
   findOne(@Param('id', ParseIntPipe) id: number) {
     return this.booksService.findOne(id);

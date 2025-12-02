@@ -368,4 +368,70 @@ export class BooksSupabaseService {
       return [];
     }
   }
+
+  async getAllPublishersWithDetails(): Promise<any[]> {
+    const supabase = this.supabaseService.getClient();
+
+    try {
+      const { data, error } = await supabase
+        .from('publishers')
+        .select('*')
+        .eq('is_active', true)
+        .order('name');
+
+      if (error) {
+        console.error('Supabase error in getAllPublishersWithDetails:', error);
+        return [];
+      }
+
+      return data || [];
+    } catch (error) {
+      console.error('Error in getAllPublishersWithDetails:', error);
+      return [];
+    }
+  }
+
+  async getPublisherByName(name: string): Promise<any | null> {
+    const supabase = this.supabaseService.getClient();
+
+    try {
+      const { data, error } = await supabase
+        .from('publishers')
+        .select('*')
+        .eq('name', name)
+        .single();
+
+      if (error) {
+        console.error('Supabase error in getPublisherByName:', error);
+        return null;
+      }
+
+      return data;
+    } catch (error) {
+      console.error('Error in getPublisherByName:', error);
+      return null;
+    }
+  }
+
+  async getPublisherById(id: number): Promise<any | null> {
+    const supabase = this.supabaseService.getClient();
+
+    try {
+      const { data, error } = await supabase
+        .from('publishers')
+        .select('*')
+        .eq('id', id)
+        .single();
+
+      if (error) {
+        console.error('Supabase error in getPublisherById:', error);
+        return null;
+      }
+
+      return data;
+    } catch (error) {
+      console.error('Error in getPublisherById:', error);
+      return null;
+    }
+  }
 }
