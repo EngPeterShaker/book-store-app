@@ -34,7 +34,9 @@ export class AppController {
       status: 'debug',
       timestamp: new Date().toISOString(),
       environment: process.env.NODE_ENV || 'development',
-      dbHost: process.env.DB_HOST ? 'configured' : 'not configured',
+      supabaseUrl: process.env.SUPABASE_URL ? 'configured' : 'not configured',
+      supabaseKey: process.env.SUPABASE_ANON_KEY ? 'configured' : 'not configured',
+      dbDisabled: process.env.DB_DISABLED || 'not set',
       frontendUrl: process.env.FRONTEND_URL || 'not set',
     };
   }
