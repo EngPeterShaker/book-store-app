@@ -6,7 +6,6 @@ import {
   Patch,
   Param,
   Delete,
-  Query,
   ParseIntPipe,
   ValidationPipe,
   Inject,
@@ -48,10 +47,11 @@ export class BooksController {
     try {
       const count = await this.booksService.getCount();
       return { success: true, count, message: 'Database connection working!' };
-    } catch (error) {
+    } catch (error: any) {
       return {
         success: false,
-        error: error.message,
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-assignment
+        error: error?.message || 'Unknown error',
         message: 'Database connection failed',
       };
     }
@@ -69,7 +69,8 @@ export class BooksController {
     } catch (error: any) {
       return {
         success: false,
-        error: error.message,
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-assignment
+        error: error?.message || 'Unknown error',
         publishers: [],
         count: 0,
       };
@@ -88,7 +89,8 @@ export class BooksController {
     } catch (error: any) {
       return {
         success: false,
-        error: error.message,
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-assignment
+        error: error?.message || 'Unknown error',
         publishers: [],
         count: 0,
       };
@@ -109,6 +111,7 @@ export class BooksController {
     } catch (error: any) {
       return {
         success: false,
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-assignment
         error: error?.message || 'Unknown error',
         branches: [],
         count: 0,
