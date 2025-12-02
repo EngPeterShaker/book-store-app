@@ -1,14 +1,18 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { LanguageProvider, useLanguage } from './contexts/LanguageContext';
 import BookList from './components/BookList';
 import BookForm from './components/BookForm';
 import BookDetails from './components/BookDetails';
 import PublisherDetails from './components/PublisherDetails';
 import SearchBar from './components/SearchBar';
 import ApiStatus from './components/ApiStatus';
+import LanguageSwitcher from './components/LanguageSwitcher';
 import './App.css';
+import './styles/rtl.css';
 
-function App() {
+function AppContent() {
+  const { t } = useLanguage();
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [selectedGenre, setSelectedGenre] = useState<string>('');
 
@@ -41,11 +45,10 @@ function App() {
               <h1>📚 BookStore</h1>
             </Link>
             <nav className="main-nav">
-              <Link to="/" className="nav-link">Home</Link>
-              <Link to="/books/new" className="nav-link add-book-btn">
-                Add Book
-              </Link>
+              <Link to="/" className="nav-link">{t('nav.home')}</Link>
+              <Link to="/books/new" className="nav-link add-book-btn">{t('nav.addBook')}</Link>
             </nav>
+            <LanguageSwitcher />
           </div>
         </header>
 
@@ -55,15 +58,15 @@ function App() {
               <div>
                 <ApiStatus />
                 <div className="page-header">
-                  <SearchBar 
+                  <SearchBar
                     onSearch={handleSearch}
                     onClear={handleClearSearch}
                   />
-                  
+
                   <div className="genre-filter">
                     <label>Filter by Genre:</label>
-                    <select 
-                      value={selectedGenre} 
+                    <select
+                      value={selectedGenre}
                       onChange={(e) => handleGenreFilter(e.target.value)}
                       className="genre-select"
                     >
@@ -74,9 +77,9 @@ function App() {
                     </select>
                   </div>
                 </div>
-                
-                <BookList 
-                  searchQuery={searchQuery} 
+
+                <BookList
+                  searchQuery={searchQuery}
                   genre={selectedGenre}
                 />
               </div>
@@ -93,6 +96,14 @@ function App() {
         </footer>
       </div>
     </Router>
+  );
+}
+
+function App() {
+  return (
+    <LanguageProvider>
+      <AppContent />
+    </LanguageProvider>
   );
 }
 

@@ -3,6 +3,7 @@ import { useParams, useNavigate, Link } from 'react-router-dom';
 import { PUBLISHERS, Publisher } from '../types/Publisher';
 import { Book } from '../types/Book';
 import { booksApi } from '../services/api';
+import { useLanguage } from '../contexts/LanguageContext';
 import BookCard from './BookCard';
 import './PublisherDetails.css';
 
@@ -55,6 +56,7 @@ const DYNAMIC_PUBLISHERS: Record<string, any> = {
 const PublisherDetails: React.FC = () => {
   const { name } = useParams<{ name: string }>();
   const navigate = useNavigate();
+  const { t } = useLanguage();
   const [books, setBooks] = useState<Book[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -129,8 +131,8 @@ const PublisherDetails: React.FC = () => {
 
     return (
       <div className="publisher-not-found">
-        <h2>Publisher Not Found</h2>
-        <p>We don't have detailed information about "{publisherName}"</p>
+        <h2>{t('publisher.notFound')}</h2>
+        <p>{t('publisher.notFoundDesc')}</p>
         <p>However, here are all the publishers we have in our database:</p>
 
         <div className="available-publishers">
@@ -151,7 +153,7 @@ const PublisherDetails: React.FC = () => {
         </div>
 
         <button onClick={() => navigate('/')} className="back-btn">
-          ← Back to Books
+          ← {t('common.back')} {t('nav.books')}
         </button>
       </div>
     );
@@ -201,17 +203,17 @@ const PublisherDetails: React.FC = () => {
           <div className="publisher-stats">
             {(publisher.founded || publisher.founded_year) && (
               <div className="stat-card">
-                <span className="stat-label">Founded</span>
+                <span className="stat-label">{t('publisher.founded')}</span>
                 <span className="stat-value">{publisher.founded_year || publisher.founded}</span>
               </div>
             )}
             <div className="stat-card">
-              <span className="stat-label">Books Published</span>
+              <span className="stat-label">{t('book.stock')}</span>
               <span className="stat-value">{books.length}</span>
             </div>
             {(publisher.city || publisher.location) && (
               <div className="stat-card">
-                <span className="stat-label">Location</span>
+                <span className="stat-label">{t('publisher.location')}</span>
                 <span className="stat-value">{publisher.city || publisher.location}</span>
               </div>
             )}
@@ -219,19 +221,19 @@ const PublisherDetails: React.FC = () => {
 
           {/* About Section */}
           <div className="publisher-description">
-            <h2>About</h2>
+            <h2>{t('publisher.about')}</h2>
             <p>{publisher.description}</p>
 
             {publisher.mission_statement && (
               <div className="mission-statement">
-                <h3>Our Mission</h3>
+                <h3>{t('publisher.mission')}</h3>
                 <p>{publisher.mission_statement}</p>
               </div>
             )}
 
             {publisher.specialties && publisher.specialties.length > 0 && (
               <div className="publisher-specialties">
-                <h3>Specialties</h3>
+                <h3>{t('publisher.specialties')}</h3>
                 <div className="specialties-tags">
                   {publisher.specialties.map((specialty, index) => (
                     <span key={index} className="specialty-tag">{specialty}</span>
@@ -242,7 +244,7 @@ const PublisherDetails: React.FC = () => {
 
             {publisher.notable_authors && publisher.notable_authors.length > 0 && (
               <div className="notable-authors">
-                <h3>Featured Authors</h3>
+                <h3>{t('publisher.authors')}</h3>
                 <ul>
                   {publisher.notable_authors.map((author, index) => (
                     <li key={index}>{author}</li>
@@ -253,7 +255,7 @@ const PublisherDetails: React.FC = () => {
 
             {publisher.awards && publisher.awards.length > 0 && (
               <div className="publisher-awards">
-                <h3>Awards & Achievements</h3>
+                <h3>{t('publisher.awards')}</h3>
                 <ul>
                   {publisher.awards.map((award, index) => (
                     <li key={index}>{award}</li>
@@ -266,7 +268,7 @@ const PublisherDetails: React.FC = () => {
           {/* Contact Information */}
           {(publisher.email || publisher.phone || publisher.address || publisher.website) && (
             <div className="publisher-contact">
-              <h2>Contact Information</h2>
+              <h2>{t('publisher.contact')}</h2>
               <div className="contact-grid">
                 {publisher.email && (
                   <div className="contact-item">
@@ -332,7 +334,7 @@ const PublisherDetails: React.FC = () => {
           {(publisher.social_twitter || publisher.social_linkedin || publisher.social_instagram ||
             publisher.social_facebook || publisher.social_youtube) && (
             <div className="publisher-social">
-              <h2>Connect With Us</h2>
+              <h2>{t('publisher.connect')}</h2>
               <div className="social-links">
                 {publisher.social_twitter && (
                   <a
@@ -411,16 +413,16 @@ const PublisherDetails: React.FC = () => {
 
       {/* Books Section */}
       <div className="publisher-books">
-        <h2>Books by {publisher.name}</h2>
+        <h2>{t('publisher.books')} {publisher.name}</h2>
 
-        {loading && <div className="loading">Loading books...</div>}
+        {loading && <div className="loading">{t('common.loading')}</div>}
         {error && <div className="error">{error}</div>}
 
         {!loading && !error && books.length === 0 && (
           <div className="no-books">
             <p>No books from this publisher in our collection yet.</p>
             <Link to="/books/new" className="add-book-btn">
-              Add a Book
+              {t('nav.addBook')}
             </Link>
           </div>
         )}

@@ -1,0 +1,238 @@
+/* RTL (Right-to-Left) Support for Arabic */
+:root {
+  --direction: ltr;
+  --text-align-start: left;
+  --text-align-end: right;
+  --margin-start: margin-left;
+  --margin-end: margin-right;
+  --padding-start: padding-left;
+  --padding-end: padding-right;
+  --border-start: border-left;
+  --border-end: border-right;
+  --float-start: left;
+  --float-end: right;
+  --flex-start: flex-start;
+  --flex-end: flex-end;
+}
+
+/* Arabic/RTL styles */
+[dir="rtl"] {
+  --direction: rtl;
+  --text-align-start: right;
+  --text-align-end: left;
+  --margin-start: margin-right;
+  --margin-end: margin-left;
+  --padding-start: padding-right;
+  --padding-end: padding-left;
+  --border-start: border-right;
+  --border-end: border-left;
+  --float-start: right;
+  --float-end: left;
+  --flex-start: flex-end;
+  --flex-end: flex-start;
+}
+
+/* Arabic Font Support */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@300;400;500;600;700&display=swap');
+
+[dir="rtl"] {
+  font-family: 'Noto Sans Arabic', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Global RTL adjustments */
+[dir="rtl"] * {
+  text-align: var(--text-align-start);
+}
+
+[dir="rtl"] .text-left {
+  text-align: right !important;
+}
+
+[dir="rtl"] .text-right {
+  text-align: left !important;
+}
+
+/* Flexbox RTL adjustments */
+[dir="rtl"] .flex {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .justify-start {
+  justify-content: var(--flex-end);
+}
+
+[dir="rtl"] .justify-end {
+  justify-content: var(--flex-start);
+}
+
+/* Margin and Padding RTL adjustments */
+[dir="rtl"] .ml-1 { margin-right: 0.25rem; margin-left: 0; }
+[dir="rtl"] .ml-2 { margin-right: 0.5rem; margin-left: 0; }
+[dir="rtl"] .ml-3 { margin-right: 0.75rem; margin-left: 0; }
+[dir="rtl"] .ml-4 { margin-right: 1rem; margin-left: 0; }
+
+[dir="rtl"] .mr-1 { margin-left: 0.25rem; margin-right: 0; }
+[dir="rtl"] .mr-2 { margin-left: 0.5rem; margin-right: 0; }
+[dir="rtl"] .mr-3 { margin-left: 0.75rem; margin-right: 0; }
+[dir="rtl"] .mr-4 { margin-left: 1rem; margin-right: 0; }
+
+/* Border RTL adjustments */
+[dir="rtl"] .border-l {
+  border-right: 1px solid;
+  border-left: none;
+}
+
+[dir="rtl"] .border-r {
+  border-left: 1px solid;
+  border-right: none;
+}
+
+/* Float RTL adjustments */
+[dir="rtl"] .float-left {
+  float: right;
+}
+
+[dir="rtl"] .float-right {
+  float: left;
+}
+
+/* Navigation RTL adjustments */
+[dir="rtl"] .navbar {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .navbar .navbar-brand {
+  margin-right: 0;
+  margin-left: 1rem;
+}
+
+/* Form RTL adjustments */
+[dir="rtl"] input,
+[dir="rtl"] textarea,
+[dir="rtl"] select {
+  text-align: right;
+}
+
+[dir="rtl"] .form-group {
+  text-align: right;
+}
+
+/* Button RTL adjustments */
+[dir="rtl"] .btn-group {
+  flex-direction: row-reverse;
+}
+
+/* Card RTL adjustments */
+[dir="rtl"] .card {
+  text-align: right;
+}
+
+/* Dropdown RTL adjustments */
+[dir="rtl"] .dropdown-menu {
+  right: 0;
+  left: auto;
+}
+
+/* Modal RTL adjustments */
+[dir="rtl"] .modal {
+  text-align: right;
+}
+
+[dir="rtl"] .modal-header .close {
+  margin: -1rem auto -1rem -1rem;
+}
+
+/* Table RTL adjustments */
+[dir="rtl"] table {
+  text-align: right;
+}
+
+[dir="rtl"] th,
+[dir="rtl"] td {
+  text-align: right;
+}
+
+/* Icon RTL adjustments */
+[dir="rtl"] .fa-chevron-left:before {
+  content: "\f054";
+}
+
+[dir="rtl"] .fa-chevron-right:before {
+  content: "\f053";
+}
+
+[dir="rtl"] .fa-arrow-left:before {
+  content: "\f061";
+}
+
+[dir="rtl"] .fa-arrow-right:before {
+  content: "\f060";
+}
+
+/* Search and Filter RTL adjustments */
+[dir="rtl"] .search-input {
+  text-align: right;
+  padding-left: 2.5rem;
+  padding-right: 1rem;
+}
+
+[dir="rtl"] .search-input + .search-icon {
+  right: auto;
+  left: 0.75rem;
+}
+
+/* Book Card RTL adjustments */
+[dir="rtl"] .book-card {
+  text-align: right;
+}
+
+[dir="rtl"] .book-card .book-meta {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .book-card .book-price {
+  margin-left: 0;
+  margin-right: 1rem;
+}
+
+/* Publisher Details RTL adjustments */
+[dir="rtl"] .publisher-details {
+  text-align: right;
+}
+
+[dir="rtl"] .publisher-profile {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .publisher-stats {
+  direction: rtl;
+}
+
+[dir="rtl"] .contact-grid {
+  direction: rtl;
+}
+
+[dir="rtl"] .social-links {
+  flex-direction: row-reverse;
+}
+
+/* Loading and Error States RTL */
+[dir="rtl"] .loading-spinner {
+  margin-left: 0;
+  margin-right: 0.5rem;
+}
+
+/* Responsive RTL adjustments */
+@media (max-width: 768px) {
+  [dir="rtl"] .navbar-collapse {
+    text-align: right;
+  }
+
+  [dir="rtl"] .publisher-profile {
+    flex-direction: column;
+  }
+
+  [dir="rtl"] .contact-grid {
+    grid-template-columns: 1fr;
+  }
+}
