@@ -169,9 +169,9 @@ const PublishersGrid: React.FC = () => {
 
             <div className="publisher-card-content">
               <p className="publisher-description">
-                {publisher.description.length > 120
+                {publisher.description && publisher.description.length > 120
                   ? `${publisher.description.substring(0, 120)}...`
-                  : publisher.description}
+                  : publisher.description || 'No description available'}
               </p>
 
               <div className="publisher-meta">
