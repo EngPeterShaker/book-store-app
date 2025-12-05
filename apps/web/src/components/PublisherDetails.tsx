@@ -313,7 +313,19 @@ const PublisherDetails: React.FC = () => {
         const publisherData = await booksApi.getPublisherByName(publisherName);
 
         if (publisherData) {
-          setPublisher(publisherData);
+          // Check if we have enhanced data in DYNAMIC_PUBLISHERS (like events)
+          const enhancedData = DYNAMIC_PUBLISHERS[publisherName];
+          if (enhancedData) {
+            // Merge database data with enhanced mock data
+            setPublisher({
+              ...publisherData,
+              ...enhancedData,
+              // Keep database ID if it exists
+              id: publisherData.id,
+            });
+          } else {
+            setPublisher(publisherData);
+          }
         } else {
           // Fallback to static/dynamic publishers
           const fallbackPublisher = DYNAMIC_PUBLISHERS[publisherName] || PUBLISHERS[publisherName];
