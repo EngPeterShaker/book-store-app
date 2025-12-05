@@ -60,6 +60,11 @@ const translations = {
     'publisher.mission': 'Our Mission',
     'publisher.notFound': 'Publisher Not Found',
     'publisher.notFoundDesc': 'We don\'t have information about this publisher',
+    'publisher.events': 'Event Booths',
+    'publisher.boothLocation': 'Booth Location',
+    'publisher.hall': 'Hall',
+    'publisher.section': 'Section',
+    'publisher.booth': 'Booth',
 
     // Search
     'search.placeholder': 'Search books...',
@@ -116,6 +121,11 @@ const translations = {
     'publisher.mission': 'رسالتنا',
     'publisher.notFound': 'الناشر غير موجود',
     'publisher.notFoundDesc': 'ليس لدينا معلومات عن هذا الناشر',
+    'publisher.events': 'معارض الكتب',
+    'publisher.boothLocation': 'موقع الجناح',
+    'publisher.hall': 'القاعة',
+    'publisher.section': 'القسم',
+    'publisher.booth': 'الجناح',
 
     // Search
     'search.placeholder': 'البحث في الكتب...',

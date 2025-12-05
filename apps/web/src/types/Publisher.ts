@@ -1,48 +1,57 @@
 export interface Publisher {
-  id?: number;
-  name: string;
-  description: string;
-  founded?: string;
-  website?: string;
-  location?: string;
+	id?: number;
+	name: string;
+	description: string;
+	founded?: string;
+	website?: string;
+	location?: string;
 
-  // Contact Information
-  email?: string;
-  phone?: string;
-  address?: string;
-  city?: string;
-  state?: string;
-  country?: string;
-  postal_code?: string;
+	// Contact Information
+	email?: string;
+	phone?: string;
+	address?: string;
+	city?: string;
+	state?: string;
+	country?: string;
+	postal_code?: string;
 
-  // Branding
-  logo_url?: string;
-  banner_url?: string;
-  brand_color_primary?: string;
-  brand_color_secondary?: string;
-  tagline?: string;
+	// Branding
+	logo_url?: string;
+	banner_url?: string;
+	brand_color_primary?: string;
+	brand_color_secondary?: string;
+	tagline?: string;
 
-  // Enhanced Description
-  mission_statement?: string;
-  specialties?: string[];
-  awards?: string[];
-  notable_authors?: string[];
+	// Enhanced Description
+	mission_statement?: string;
+	specialties?: string[];
+	awards?: string[];
+	notable_authors?: string[];
 
-  // Business Info
-  founded_year?: number;
-  business_hours?: Record<string, any>;
-  is_active?: boolean;
+	// Business Info
+	founded_year?: number;
+	business_hours?: Record<string, any>;
+	is_active?: boolean;
 
-  // Social Media
-  social_twitter?: string;
-  social_linkedin?: string;
-  social_instagram?: string;
-  social_facebook?: string;
-  social_youtube?: string;
+	// Event Information
+	events?: Array<{
+		event: string;
+		hall: string;
+		section: string;
+		booth: string;
+		date: string;
+	}>;
 
-  // Timestamps
-  created_at?: string;
-  updated_at?: string;
+	// Social Media
+	social_twitter?: string;
+	social_linkedin?: string;
+	social_instagram?: string;
+	social_facebook?: string;
+	social_youtube?: string;
+
+	// Timestamps
+	created_at?: string;
+	updated_at?: string;
 }
 
 // Mock publisher data

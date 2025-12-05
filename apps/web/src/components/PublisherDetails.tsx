@@ -2,9 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { PUBLISHERS, Publisher } from '../types/Publisher';
 import { Book } from '../types/Book';
+import { Branch } from '../types/Branch';
 import { booksApi } from '../services/api';
 import { useLanguage } from '../contexts/LanguageContext';
 import BookCard from './BookCard';
+import BranchCard from './BranchCard';
+import { getMapUrl } from '../utils/maps';
 import './PublisherDetails.scss';
 
 // Dynamic publisher data for database publishers
@@ -14,28 +17,78 @@ const DYNAMIC_PUBLISHERS: Record<string, any> = {
     description: 'Hachette Book Group is a publishing company owned by Hachette Livre, the largest publishing company in France, and the third largest trade and educational publisher in the world.',
     founded: '2006',
     location: 'New York, USA',
-    website: 'https://www.hachettebookgroup.com'
+    website: 'https://www.hachettebookgroup.com',
+    events: [
+      {
+        event: 'Cairo International Book Fair 2025',
+        hall: '2',
+        section: 'A',
+        booth: '32',
+        date: '2025-01-25'
+      }
+    ]
   },
   'HarperCollins Publishers': {
     name: 'HarperCollins Publishers',
     description: 'HarperCollins Publishers LLC is one of the Big Five English-language publishing companies, headquartered in New York City.',
     founded: '1989',
     location: 'New York, USA',
-    website: 'https://www.harpercollins.com'
+    website: 'https://www.harpercollins.com',
+    events: [
+      {
+        event: 'Cairo International Book Fair 2025',
+        hall: '3',
+        section: 'B',
+        booth: '15',
+        date: '2025-01-25'
+      },
+      {
+        event: 'London Book Fair 2025',
+        hall: '1',
+        section: 'C',
+        booth: '45',
+        date: '2025-04-08'
+      }
+    ]
   },
   'Macmillan Publishers': {
     name: 'Macmillan Publishers',
     description: 'Macmillan Publishers is a global trade publishing company operating in over 70 countries. It is known for publishing quality fiction, nonfiction, and children\'s books.',
     founded: '1843',
     location: 'New York, USA',
-    website: 'https://us.macmillan.com'
+    website: 'https://us.macmillan.com',
+    events: [
+      {
+        event: 'Cairo International Book Fair 2025',
+        hall: '1',
+        section: 'D',
+        booth: '28',
+        date: '2025-01-25'
+      }
+    ]
   },
   'Penguin Random House': {
     name: 'Penguin Random House',
     description: 'Penguin Random House is a multinational publishing house formed in 2013 from the merger of Penguin Books and Random House.',
     founded: '2013',
     location: 'New York, USA',
-    website: 'https://www.penguinrandomhouse.com'
+    website: 'https://www.penguinrandomhouse.com',
+    events: [
+      {
+        event: 'Cairo International Book Fair 2025',
+        hall: '4',
+        section: 'A',
+        booth: '12',
+        date: '2025-01-25'
+      },
+      {
+        event: 'Frankfurt Book Fair 2025',
+        hall: '3.0',
+        section: 'B',
+        booth: '67',
+        date: '2025-10-16'
+      }
+    ]
   },
   'Scholastic Corporation': {
     name: 'Scholastic Corporation',
@@ -49,7 +102,192 @@ const DYNAMIC_PUBLISHERS: Record<string, any> = {
     description: 'Simon & Schuster is a prominent American publishing company and a subsidiary of Paramount Global. It is one of the four largest English-language publishers.',
     founded: '1924',
     location: 'New York, USA',
-    website: 'https://www.simonandschuster.com'
+    website: 'https://www.simonandschuster.com',
+    events: [
+      {
+        event: 'Cairo International Book Fair 2025',
+        hall: '2',
+        section: 'C',
+        booth: '8',
+        date: '2025-01-25'
+      }
+    ]
+  },
+  'Oxford University Press': {
+    name: 'Oxford University Press',
+    description: 'Oxford University Press is the largest university press in the world, publishing in 70 languages and 190 countries.',
+    founded: '1478',
+    location: 'Oxford, UK',
+    website: 'https://www.oup.com',
+    events: [
+      {
+        event: 'Cairo International Book Fair 2025',
+        hall: '1',
+        section: 'B',
+        booth: '21',
+        date: '2025-01-25'
+      }
+    ]
+  },
+  'Cambridge University Press': {
+    name: 'Cambridge University Press',
+    description: 'Cambridge University Press is the publishing business of the University of Cambridge and is the oldest publishing house in the world.',
+    founded: '1534',
+    location: 'Cambridge, UK',
+    website: 'https://www.cambridge.org',
+    events: [
+      {
+        event: 'Cairo International Book Fair 2025',
+        hall: '1',
+        section: 'A',
+        booth: '19',
+        date: '2025-01-25'
+      }
+    ]
+  },
+  'Wiley': {
+    name: 'Wiley',
+    description: 'Wiley is a global leader in research and education, publishing over 1,500 peer-reviewed journals and 1,500 new books annually.',
+    founded: '1807',
+    location: 'Hoboken, USA',
+    website: 'https://www.wiley.com',
+    events: [
+      {
+        event: 'Cairo International Book Fair 2025',
+        hall: '3',
+        section: 'D',
+        booth: '42',
+        date: '2025-01-25'
+      }
+    ]
+  },
+  'Elsevier': {
+    name: 'Elsevier',
+    description: 'Elsevier is a global information analytics business that helps institutions and professionals progress science, advance healthcare and improve performance.',
+    founded: '1880',
+    location: 'Amsterdam, Netherlands',
+    website: 'https://www.elsevier.com',
+    events: [
+      {
+        event: 'Cairo International Book Fair 2025',
+        hall: '4',
+        section: 'B',
+        booth: '33',
+        date: '2025-01-25'
+      }
+    ]
+  },
+  'Pearson': {
+    name: 'Pearson',
+    description: 'Pearson is a British multinational publishing and education company. It is the world\'s leading learning company.',
+    founded: '1844',
+    location: 'London, UK',
+    website: 'https://www.pearson.com',
+    events: [
+      {
+        event: 'Cairo International Book Fair 2025',
+        hall: '2',
+        section: 'D',
+        booth: '56',
+        date: '2025-01-25'
+      }
+    ]
+  },
+  'McGraw-Hill Education': {
+    name: 'McGraw-Hill Education',
+    description: 'McGraw-Hill Education is a learning science company that delivers personalized learning experiences that help students, parents, educators and professionals drive results.',
+    founded: '1888',
+    location: 'New York, USA',
+    website: 'https://www.mheducation.com',
+    events: [
+      {
+        event: 'Cairo International Book Fair 2025',
+        hall: '3',
+        section: 'A',
+        booth: '17',
+        date: '2025-01-25'
+      }
+    ]
+  },
+  'Houghton Mifflin Harcourt': {
+    name: 'Houghton Mifflin Harcourt',
+    description: 'Houghton Mifflin Harcourt is a publisher of textbooks, instructional technology materials, assessments, and services supporting improved learning outcomes.',
+    founded: '1832',
+    location: 'Boston, USA',
+    website: 'https://www.hmhco.com',
+    events: [
+      {
+        event: 'Cairo International Book Fair 2025',
+        hall: '4',
+        section: 'C',
+        booth: '29',
+        date: '2025-01-25'
+      }
+    ]
+  },
+  'Cengage Learning': {
+    name: 'Cengage Learning',
+    description: 'Cengage Learning is a leading provider of innovative teaching, learning and research solutions for the academic, professional and library markets worldwide.',
+    founded: '2007',
+    location: 'Boston, USA',
+    website: 'https://www.cengage.com',
+    events: [
+      {
+        event: 'Cairo International Book Fair 2025',
+        hall: '5',
+        section: 'A',
+        booth: '11',
+        date: '2025-01-25'
+      }
+    ]
+  },
+  'Bloomsbury Publishing': {
+    name: 'Bloomsbury Publishing',
+    description: 'Bloomsbury Publishing is a leading independent publishing house established in 1986. It has companies in London, New York, Sydney, Oxford and New Delhi.',
+    founded: '1986',
+    location: 'London, UK',
+    website: 'https://www.bloomsbury.com',
+    events: [
+      {
+        event: 'Cairo International Book Fair 2025',
+        hall: '1',
+        section: 'C',
+        booth: '35',
+        date: '2025-01-25'
+      }
+    ]
+  },
+  'Farrar, Straus and Giroux': {
+    name: 'Farrar, Straus and Giroux',
+    description: 'Farrar, Straus and Giroux is an American book publishing company, founded in 1946. It publishes literary fiction and non-fiction, and books for children and young adults.',
+    founded: '1946',
+    location: 'New York, USA',
+    website: 'https://www.fsgbooks.com',
+    events: [
+      {
+        event: 'Cairo International Book Fair 2025',
+        hall: '2',
+        section: 'B',
+        booth: '23',
+        date: '2025-01-25'
+      }
+    ]
+  },
+  'Little, Brown and Company': {
+    name: 'Little, Brown and Company',
+    description: 'Little, Brown and Company is an American publisher founded in 1837. It is now a division of the Hachette Book Group.',
+    founded: '1837',
+    location: 'New York, USA',
+    website: 'https://www.littlebrown.com',
+    events: [
+      {
+        event: 'Cairo International Book Fair 2025',
+        hall: '3',
+        section: 'C',
+        booth: '47',
+        date: '2025-01-25'
+      }
+    ]
   }
 };
 
@@ -58,6 +296,7 @@ const PublisherDetails: React.FC = () => {
   const navigate = useNavigate();
   const { t } = useLanguage();
   const [books, setBooks] = useState<Book[]>([]);
+  const [branches, setBranches] = useState<Branch[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [allPublishers, setAllPublishers] = useState<string[]>([]);
@@ -89,6 +328,11 @@ const PublisherDetails: React.FC = () => {
         const allBooks = await booksApi.getAll();
         const publisherBooks = allBooks.filter(book => book.publisher === publisherName);
         setBooks(publisherBooks);
+
+        // Fetch branches for this publisher
+        const branchesData = await booksApi.getBranchesByPublisherName(publisherName);
+        setBranches(branchesData);
+
         setError(null);
       } catch (err) {
         setError('Failed to fetch data');
@@ -316,16 +560,67 @@ const PublisherDetails: React.FC = () => {
                     <span className="contact-icon">📍</span>
                     <div>
                       <span className="contact-label">Address</span>
-                      <span className="contact-value">
+                      <a
+                        href={getMapUrl(publisher.address, publisher.city, publisher.state, publisher.country)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="contact-value contact-value--link"
+                        title="Open in maps"
+                      >
                         {publisher.address}
                         {publisher.city && `, ${publisher.city}`}
                         {publisher.state && `, ${publisher.state}`}
                         {publisher.country && `, ${publisher.country}`}
                         {publisher.postal_code && ` ${publisher.postal_code}`}
-                      </span>
+                      </a>
                     </div>
                   </div>
                 )}
+              </div>
+            </div>
+          )}
+
+          {/* Event Booth Information */}
+          {publisher.events && publisher.events.length > 0 && (
+            <div className="publisher-events">
+              <h2>{t('publisher.events')}</h2>
+              <div className="events-grid">
+                {publisher.events.map((event: any, index: number) => (
+                  <div key={index} className="event-card">
+                    <div className="event-header">
+                      <h3 className="event-name">{event.event}</h3>
+                      <span className="event-date">
+                        📅 {new Date(event.date).toLocaleDateString('en-US', {
+                          year: 'numeric',
+                          month: 'long',
+                          day: 'numeric'
+                        })}
+                      </span>
+                    </div>
+                    <div className="event-details">
+                      <div className="event-location">
+                        <span className="location-label">{t('publisher.boothLocation')}</span>
+                        <span className="location-value">
+                          {t('publisher.hall')} {event.hall} - {event.section} {event.booth}
+                        </span>
+                      </div>
+                      <div className="event-booth-info">
+                        <div className="booth-detail">
+                          <span className="detail-label">{t('publisher.hall')}</span>
+                          <span className="detail-value">{event.hall}</span>
+                        </div>
+                        <div className="booth-detail">
+                          <span className="detail-label">{t('publisher.section')}</span>
+                          <span className="detail-value">{event.section}</span>
+                        </div>
+                        <div className="booth-detail">
+                          <span className="detail-label">{t('publisher.booth')}</span>
+                          <span className="detail-value">{event.booth}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           )}
@@ -410,6 +705,18 @@ const PublisherDetails: React.FC = () => {
           )}
         </div>
       </div>
+
+      {/* Branches & Locations Section */}
+      {branches && branches.length > 0 && (
+        <div className="publisher-branches">
+          <h2>{t('publisher.locations')} ({branches.length})</h2>
+          <div className="branches-grid">
+            {branches.map((branch) => (
+              <BranchCard key={branch.id} branch={branch} />
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* Books Section */}
       <div className="publisher-books">
