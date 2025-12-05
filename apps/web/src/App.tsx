@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { LanguageProvider, useLanguage } from './contexts/LanguageContext';
 import PublishersGrid from './components/PublishersGrid';
+import BentoGrid from './components/BentoGrid';
 import BookForm from './components/BookForm';
 import BookDetails from './components/BookDetails';
 import PublisherDetails from './components/PublisherDetails';
@@ -33,7 +34,7 @@ function AppContent() {
             <Route path="/" element={
               <div>
                 <ApiStatus />
-                <PublishersGrid />
+                <BentoGrid />
               </div>
             } />
             <Route path="/books/new" element={<BookForm />} />

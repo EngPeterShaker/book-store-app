@@ -1,18 +1,22 @@
 // SCSS Variables and CSS Custom Properties for RTL Support
 
-// Colors - Book Store Theme
+// Colors - Book Store Theme (Warm Palette)
 $primary-color: #1e3a8a;      // Deep navy blue - trustworthy, professional
 $secondary-color: #f59e0b;    // Warm amber - inviting, literary
 $success-color: #10b981;      // Emerald green - success, growth
 $danger-color: #ef4444;       // Soft red - errors, attention
 $warning-color: #f59e0b;      // Amber - warnings, highlights
 $info-color: #3b82f6;         // Blue - information, links
-$light-color: #f8fafc;        // Soft white - clean backgrounds
-$dark-color: #1f2937;         // Dark gray - text, headers
-$text-color: #111827;         // Dark charcoal - primary text
-$text-muted: #6b7280;         // Medium gray - secondary text
-$border-color: #e5e7eb;       // Light gray - borders, dividers
-$background-color: #f9fafb;   // Very light gray - page backgrounds
+$light-color: #fefefe;        // Paper White - warm off-white
+$dark-color: #2d3748;         // Ink Black - warm dark tone
+$text-color: #2d3748;         // Ink Black for primary text
+$text-muted: #718096;         // Medium gray - secondary text
+$border-color: #e2e8f0;       // Light gray - borders, dividers
+$background-color: #f7fafc;   // Very light warm gray - page backgrounds
+
+// Typography - Book Store Hierarchy
+$font-family-serif: 'Merriweather', 'Times New Roman', serif;    // For book content
+$font-family-sans: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;  // For UI elements
 
 // Spacing
 $spacing-xs: 0.25rem;
@@ -80,9 +84,14 @@ $desktop: 1200px;
   transition: transform $transition-fast, box-shadow $transition-fast;
 }
 
-@mixin card-hover {
-  transform: translateY(-2px);
-  box-shadow: $shadow-lg;
+@mixin book-3d-tilt {
+  transition: transform 0.3s ease;
+  transform-style: preserve-3d;
+
+  &:hover {
+    transform: perspective(1000px) rotateY(15deg) rotateX(5deg);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  }
 }
 
 // RTL CSS Custom Properties
@@ -120,8 +129,36 @@ $desktop: 1200px;
 }
 
 // Arabic Font Support
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@300;400;500;600;700&display=swap');
+// @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@300;400;500;600;700&display=swap');
 
+// CSS Custom Properties for Fonts and Colors
+:root {
+  --font-family-serif: 'Merriweather', 'Times New Roman', serif;
+  --font-family-sans: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  --font-family-arabic: 'Noto Sans Arabic', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+  --color-primary: #1e3a8a;
+  --color-secondary: #f59e0b;
+  --color-success: #10b981;
+  --color-danger: #ef4444;
+  --color-warning: #f59e0b;
+  --color-info: #3b82f6;
+  --color-light: #fefefe;
+  --color-dark: #2d3748;
+  --color-text: #2d3748;
+  --color-text-muted: #718096;
+  --color-border: #e2e8f0;
+  --color-background: #f7fafc;
+}
+
+// Global Font Settings
+body {
+  font-family: var(--font-family-sans);
+  color: var(--color-text);
+  background-color: var(--color-background);
+}
+
+// Arabic/RTL styles
 [dir="rtl"] {
   font-family: 'Noto Sans Arabic', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
