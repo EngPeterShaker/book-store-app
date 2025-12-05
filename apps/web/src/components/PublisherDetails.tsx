@@ -357,7 +357,11 @@ const PublisherDetails: React.FC = () => {
 
   if (!publisher) {
     // Combine dynamic publishers from API with static mock publishers
-    const combinedPublishers = Array.from(new Set([...allPublishers, ...Object.keys(DYNAMIC_PUBLISHERS), ...Object.keys(PUBLISHERS)]))
+    const combinedPublishers = Array.from(new Set([
+      ...(allPublishers || []),
+      ...Object.keys(DYNAMIC_PUBLISHERS),
+      ...Object.keys(PUBLISHERS)
+    ]))
       .sort()
       .map(publisherName => {
         // Try to get data from dynamic publishers first, then mock publishers
@@ -371,7 +375,8 @@ const PublisherDetails: React.FC = () => {
           description: `Books published by ${publisherName}.`,
           location: 'Location not specified'
         };
-      });
+      })
+      .filter(Boolean); // Remove any null/undefined entries
 
     return (
       <div className="publisher-not-found">
