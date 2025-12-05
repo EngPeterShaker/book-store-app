@@ -40,7 +40,14 @@ const PublishersGrid: React.FC = () => {
         }
 
         // Fallback to names only and create basic publisher objects
-        const publisherNames = await booksApi.getAllPublishers();
+        let publisherNames: string[] = [];
+        try {
+          publisherNames = await booksApi.getAllPublishers();
+        } catch (error) {
+          console.log('Failed to fetch publisher names, using fallback data only');
+          publisherNames = [];
+        }
+        const safePublisherNames = publisherNames || []; // Ensure it's always an array
 
         // Mock publisher data for database publishers
         const DYNAMIC_PUBLISHERS: Record<string, any> = {
@@ -101,7 +108,7 @@ const PublishersGrid: React.FC = () => {
         };
 
         // Convert publisher names to publisher objects
-        const publisherObjects = publisherNames.map(name => {
+        const publisherObjects = safePublisherNames.map(name => {
           return DYNAMIC_PUBLISHERS[name] || {
             name,
             description: `Books published by ${name}.`,
