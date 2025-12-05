@@ -294,7 +294,7 @@ const DYNAMIC_PUBLISHERS: Record<string, any> = {
 const PublisherDetails: React.FC = () => {
   const { name } = useParams<{ name: string }>();
   const navigate = useNavigate();
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [books, setBooks] = useState<Book[]>([]);
   const [branches, setBranches] = useState<Branch[]>([]);
   const [loading, setLoading] = useState(true);
@@ -394,10 +394,10 @@ const PublisherDetails: React.FC = () => {
       <div className="publisher-not-found">
         <h2>{t('publisher.notFound')}</h2>
         <p>{t('publisher.notFoundDesc')}</p>
-        <p>However, here are all the publishers we have in our database:</p>
+        <p>{t('publisher.allPublishers')}</p>
 
         <div className="available-publishers">
-          <h3>Available Publishers ({combinedPublishers.length})</h3>
+          <h3>{t('publisher.availablePublishers')} ({combinedPublishers.length})</h3>
           <div className="publishers-grid">
             {combinedPublishers.map((pub: any) => (
               <Link
@@ -442,7 +442,7 @@ const PublisherDetails: React.FC = () => {
       {/* Header with Logo */}
       <div className="publisher-header">
         <button onClick={() => navigate(-1)} className="back-btn">
-          ← Back
+          ← {t('common.back')}
         </button>
       </div>
 
@@ -535,7 +535,7 @@ const PublisherDetails: React.FC = () => {
                   <div className="contact-item">
                     <span className="contact-icon">✉️</span>
                     <div>
-                      <span className="contact-label">Email</span>
+                      <span className="contact-label">{t('publisher.contact.email')}</span>
                       <a href={`mailto:${publisher.email}`} className="contact-value">
                         {publisher.email}
                       </a>
@@ -547,7 +547,7 @@ const PublisherDetails: React.FC = () => {
                   <div className="contact-item">
                     <span className="contact-icon">📞</span>
                     <div>
-                      <span className="contact-label">Phone</span>
+                      <span className="contact-label">{t('publisher.contact.phone')}</span>
                       <a href={`tel:${publisher.phone}`} className="contact-value">
                         {publisher.phone}
                       </a>
@@ -559,7 +559,7 @@ const PublisherDetails: React.FC = () => {
                   <div className="contact-item">
                     <span className="contact-icon">🌐</span>
                     <div>
-                      <span className="contact-label">Website</span>
+                      <span className="contact-label">{t('publisher.contact.website')}</span>
                       <a
                         href={publisher.website}
                         target="_blank"
@@ -576,7 +576,7 @@ const PublisherDetails: React.FC = () => {
                   <div className="contact-item">
                     <span className="contact-icon">📍</span>
                     <div>
-                      <span className="contact-label">Address</span>
+                      <span className="contact-label">{t('publisher.contact.address')}</span>
                       <a
                         href={getMapUrl(publisher.address, publisher.city, publisher.state, publisher.country)}
                         target="_blank"
@@ -607,7 +607,7 @@ const PublisherDetails: React.FC = () => {
                     <div className="event-header">
                       <h3 className="event-name">{event.event}</h3>
                       <span className="event-date">
-                        📅 {new Date(event.date).toLocaleDateString('en-US', {
+                        📅 {new Date(event.date).toLocaleDateString(language === 'ar' ? 'ar-EG' : 'en-US', {
                           year: 'numeric',
                           month: 'long',
                           day: 'numeric'
@@ -744,7 +744,7 @@ const PublisherDetails: React.FC = () => {
 
         {!loading && !error && books.length === 0 && (
           <div className="no-books">
-            <p>No books from this publisher in our collection yet.</p>
+            <p>{t('publisher.noBooks')}</p>
             <Link to="/books/new" className="add-book-btn">
               {t('nav.addBook')}
             </Link>

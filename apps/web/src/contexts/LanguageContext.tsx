@@ -65,6 +65,13 @@ const translations = {
     'publisher.hall': 'Hall',
     'publisher.section': 'Section',
     'publisher.booth': 'Booth',
+    'publisher.allPublishers': 'However, here are all the publishers we have in our database:',
+    'publisher.availablePublishers': 'Available Publishers',
+    'publisher.contact.email': 'Email',
+    'publisher.contact.phone': 'Phone',
+    'publisher.contact.website': 'Website',
+    'publisher.contact.address': 'Address',
+    'publisher.noBooks': 'No books from this publisher in our collection yet.',
 
     // Search
     'search.placeholder': 'Search books...',
@@ -126,6 +133,13 @@ const translations = {
     'publisher.hall': 'القاعة',
     'publisher.section': 'القسم',
     'publisher.booth': 'الجناح',
+    'publisher.allPublishers': 'ومع ذلك، إليك جميع الناشرين الموجودين في قاعدة بياناتنا:',
+    'publisher.availablePublishers': 'الناشرون المتاحون',
+    'publisher.contact.email': 'البريد الإلكتروني',
+    'publisher.contact.phone': 'الهاتف',
+    'publisher.contact.website': 'الموقع الإلكتروني',
+    'publisher.contact.address': 'العنوان',
+    'publisher.noBooks': 'لا توجد كتب لهذا الناشر في مجموعتنا حتى الآن.',
 
     // Search
     'search.placeholder': 'البحث في الكتب...',
