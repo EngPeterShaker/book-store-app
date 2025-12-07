@@ -724,3 +724,140 @@
 		}
 	}
 }
+
+// RTL Support for BentoGrid
+[dir="rtl"] {
+	.bento-grid-page {
+		text-align: right;
+	}
+
+	.bento-item {
+		text-align: right;
+	}
+
+	// Featured book overlay RTL
+	.book-overlay {
+		right: 0;
+		left: auto;
+		text-align: right;
+
+		h2 {
+			text-align: right;
+		}
+
+		.book-author {
+			text-align: right;
+		}
+
+		.read-more-btn {
+			margin-left: auto;
+			margin-right: 0;
+		}
+	}
+
+	// Author quote RTL
+	.author-quote {
+		text-align: right;
+
+		blockquote {
+			text-align: right;
+		}
+
+		cite {
+			text-align: right;
+		}
+	}
+
+	// Publisher showcase RTL
+	.publisher-showcase {
+		text-align: right;
+
+		h3 {
+			text-align: right;
+		}
+	}
+
+	.publisher-card {
+		text-align: right;
+
+		h4 {
+			text-align: right;
+		}
+
+		p {
+			text-align: right;
+		}
+
+		.publisher-link {
+			margin-left: auto;
+			margin-right: 0;
+		}
+	}
+
+	// Mystery pick RTL
+	.mystery-pick {
+		text-align: center; // Keep centered for both LTR and RTL
+
+		h4 {
+			text-align: center;
+		}
+
+		p {
+			text-align: center;
+		}
+	}
+
+	// Book card compact RTL
+	.book-card-compact {
+		text-align: right;
+
+		.book-info {
+			text-align: right;
+
+			h4 {
+				text-align: right;
+			}
+
+			.book-author,
+			.book-price {
+				text-align: right;
+			}
+
+			.book-link {
+				margin-left: auto;
+				margin-right: 0;
+			}
+		}
+	}
+
+	// Promotional block RTL
+	.promo-block {
+		text-align: right;
+
+		h3 {
+			text-align: right;
+		}
+
+		p {
+			text-align: right;
+		}
+
+		.promo-btn {
+			margin-left: auto;
+			margin-right: 0;
+		}
+	}
+
+	// Statistics block RTL
+	.stats-block {
+		text-align: right;
+
+		.stat {
+			text-align: right;
+
+			.stat-label {
+				text-align: right;
+			}
+		}
+	}
+}

@@ -68,18 +68,18 @@ const MysteryPick: React.FC<{ books: Book[] }> = ({ books }) => {
     <div className="mystery-pick">
       <div className="wrapped-cover" onClick={handleUnwrap}>
         <div className="brown-paper">
-          <span className="unwrap-text">Click to Unwrap!</span>
+          <span className="unwrap-text">{t('mystery.clickToUnwrap')}</span>
         </div>
       </div>
-      <h4>Mystery Pick</h4>
-      <p>Genre: Literary Fiction</p>
-      <p>First sentence: "It was the best of times, it was the worst of times..."</p>
+      <h4>{t('mystery.title')}</h4>
+      <p>{t('mystery.genre')}</p>
+      <p>{t('mystery.firstSentence')}</p>
     </div>
   );
 };
 
 const BentoGrid: React.FC = () => {
-  const { t } = useLanguage();
+  const { t, dir } = useLanguage();
   const [books, setBooks] = useState<Book[]>([]);
   const [publishers, setPublishers] = useState<Publisher[]>([]);
   const [loading, setLoading] = useState(true);
@@ -137,6 +137,7 @@ const BentoGrid: React.FC = () => {
   return (
     <div
       className="bento-grid-page"
+      dir={dir}
       style={{
         background: `linear-gradient(135deg, ${currentBookColor} 0%, #f7fafc 100%)`,
         transition: 'background 0.8s ease'
@@ -234,10 +235,10 @@ const BentoGrid: React.FC = () => {
         {/* Promotional Block */}
         <div className="bento-item bento-item--promo">
           <div className="promo-block">
-            <h3>📚 New Arrivals</h3>
-            <p>Discover the latest books from our curated collection</p>
+            <h3>{t('home.newArrivals')}</h3>
+            <p>{t('home.discoverBooks')}</p>
             <Link to="/books" className="promo-btn">
-              Browse Collection →
+              {t('home.browseCollection')}
             </Link>
           </div>
         </div>
@@ -247,15 +248,15 @@ const BentoGrid: React.FC = () => {
           <div className="stats-block">
             <div className="stat">
               <span className="stat-number">{books.length}+</span>
-              <span className="stat-label">Books</span>
+              <span className="stat-label">{t('home.books')}</span>
             </div>
             <div className="stat">
               <span className="stat-number">{publishers.length}+</span>
-              <span className="stat-label">Publishers</span>
+              <span className="stat-label">{t('home.publishers')}</span>
             </div>
             <div className="stat">
               <span className="stat-number">1000+</span>
-              <span className="stat-label">Readers</span>
+              <span className="stat-label">{t('home.readers')}</span>
             </div>
           </div>
         </div>

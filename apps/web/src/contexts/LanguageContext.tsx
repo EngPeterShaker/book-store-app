@@ -81,6 +81,36 @@ const translations = {
     // Messages
     'error.loading': 'Failed to load data',
     'error.search': 'Failed to search books',
+
+    // Mystery Pick
+    'mystery.title': 'Mystery Pick',
+    'mystery.clickToUnwrap': 'Click to Unwrap!',
+    'mystery.genre': 'Genre: Literary Fiction',
+    'mystery.firstSentence': 'First sentence: "It was the best of times, it was the worst of times..."',
+
+    // Home page
+    'home.newArrivals': '📚 New Arrivals',
+    'home.discoverBooks': 'Discover the latest books from our curated collection',
+    'home.browseCollection': 'Browse Collection →',
+    'home.books': 'Books',
+    'home.publishers': 'Publishers',
+    'home.readers': 'Readers',
+
+    // API Status
+    'api.statusTitle': 'API Status',
+    'api.urlLabel': 'URL',
+    'api.checking': 'Checking connection...',
+    'api.authRequired': '❌ Authentication required (Vercel SSO protection enabled)',
+    'api.connectedPrefix': '✅ Connected successfully',
+    'api.booksFound': 'books found',
+    'api.invalidFormat': '❌ Invalid data format received',
+    'api.httpErrorPrefix': '❌ HTTP Error',
+    'api.connectionFailed': '❌ Connection failed',
+    'api.unknownError': 'Unknown error',
+    'api.solutionsTitle': 'Solutions',
+    'api.solution.local': 'For local development: Make sure backend is running on port 3001',
+    'api.solution.production': 'For production: Disable Vercel SSO protection in dashboard',
+    'api.solution.alternative': 'Alternative: Deploy to a platform without SSO restrictions',
   },
   ar: {
     // Navigation
@@ -149,6 +179,36 @@ const translations = {
     // Messages
     'error.loading': 'فشل في تحميل البيانات',
     'error.search': 'فشل في البحث في الكتب',
+
+    // Mystery Pick
+    'mystery.title': 'اختيار عشوائي',
+    'mystery.clickToUnwrap': 'انقر لفتح الهدية!',
+    'mystery.genre': 'النوع: أدب خيالي',
+    'mystery.firstSentence': 'الجملة الأولى: "كان أفضل الأوقات، وكان أسوأ الأوقات..."',
+
+    // Home page
+    'home.newArrivals': '📚 الوافدون الجدد',
+    'home.discoverBooks': 'اكتشف أحدث الكتب من مجموعتنا المختارة',
+    'home.browseCollection': 'تصفح المجموعة ←',
+    'home.books': 'الكتب',
+    'home.publishers': 'الناشرون',
+    'home.readers': 'القراء',
+
+    // API Status
+    'api.statusTitle': 'حالة API',
+    'api.urlLabel': 'الرابط',
+    'api.checking': 'جارٍ فحص الاتصال...',
+    'api.authRequired': '❌ مطلوب المصادقة (حماية Vercel SSO مفعلة)',
+    'api.connectedPrefix': '✅ تم الاتصال بنجاح',
+    'api.booksFound': 'كتاب تم العثور عليه',
+    'api.invalidFormat': '❌ تنسيق البيانات غير صحيح',
+    'api.httpErrorPrefix': '❌ خطأ HTTP',
+    'api.connectionFailed': '❌ فشل الاتصال',
+    'api.unknownError': 'خطأ غير معروف',
+    'api.solutionsTitle': 'الحلول',
+    'api.solution.local': 'للتطوير المحلي: تأكد من تشغيل الخادم الخلفي على المنفذ 3001',
+    'api.solution.production': 'للإنتاج: قم بتعطيل حماية Vercel SSO في لوحة التحكم',
+    'api.solution.alternative': 'بديل: انشر على منصة بدون قيود SSO',
   },
 };
 
