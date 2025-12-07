@@ -497,3 +497,31 @@
   font-size: 0.9rem;
   font-weight: 500;
 }
+
+/* Branches & Locations Section */
+.publisher-branches {
+  margin: 40px 20px;
+  padding: 30px 20px;
+  background: #f8f9fa;
+  border-radius: 12px;
+}
+
+.publisher-branches h2 {
+  font-size: 1.8rem;
+  margin-bottom: 25px;
+  color: #333;
+  font-weight: 600;
+}
+
+.branches-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 24px;
+}
+
+@media (max-width: 768px) {
+  .branches-grid {
+    grid-template-columns: 1fr;
+  }
+}
+

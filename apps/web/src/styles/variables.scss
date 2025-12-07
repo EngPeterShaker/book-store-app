@@ -1,22 +1,24 @@
 // SCSS Variables and CSS Custom Properties for RTL Support
 
 // Colors - Book Store Theme (Warm Palette)
-$primary-color: #1e3a8a;      // Deep navy blue - trustworthy, professional
-$secondary-color: #f59e0b;    // Warm amber - inviting, literary
-$success-color: #10b981;      // Emerald green - success, growth
-$danger-color: #ef4444;       // Soft red - errors, attention
-$warning-color: #f59e0b;      // Amber - warnings, highlights
-$info-color: #3b82f6;         // Blue - information, links
-$light-color: #fefefe;        // Paper White - warm off-white
-$dark-color: #2d3748;         // Ink Black - warm dark tone
-$text-color: #2d3748;         // Ink Black for primary text
-$text-muted: #718096;         // Medium gray - secondary text
-$border-color: #e2e8f0;       // Light gray - borders, dividers
-$background-color: #f7fafc;   // Very light warm gray - page backgrounds
+$primary-color: #1e3a8a; // Deep navy blue - trustworthy, professional
+$secondary-color: #f59e0b; // Warm amber - inviting, literary
+$success-color: #10b981; // Emerald green - success, growth
+$danger-color: #ef4444; // Soft red - errors, attention
+$warning-color: #f59e0b; // Amber - warnings, highlights
+$info-color: #3b82f6; // Blue - information, links
+$light-color: #fefefe; // Paper White - warm off-white
+$dark-color: #2d3748; // Ink Black - warm dark tone
+$text-color: #2d3748; // Ink Black for primary text
+$text-muted: #718096; // Medium gray - secondary text
+$border-color: #e2e8f0; // Light gray - borders, dividers
+$background-color: #f7fafc; // Very light warm gray - page backgrounds
 
 // Typography - Book Store Hierarchy
-$font-family-serif: 'Merriweather', 'Times New Roman', serif;    // For book content
-$font-family-sans: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;  // For UI elements
+$font-family-serif:
+	"Merriweather", "Times New Roman", serif; // For book content
+$font-family-sans:
+	"Inter", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; // For UI elements
 
 // Spacing
 $spacing-xs: 0.25rem;
@@ -56,98 +58,105 @@ $font-weight-semibold: 600;
 $font-weight-bold: 700;
 
 // Breakpoints
-$mobile-xs: 480px;    // Small mobile phones
-$mobile: 640px;       // Mobile phones
-$tablet: 768px;       // Tablets
-$tablet-lg: 1024px;   // Large tablets
-$desktop: 1200px;     // Desktop
-$desktop-lg: 1440px;  // Large desktop
+$mobile-xs: 480px; // Small mobile phones
+$mobile: 640px; // Mobile phones
+$tablet: 768px; // Tablets
+$tablet-lg: 1024px; // Large tablets
+$desktop: 1200px; // Desktop
+$desktop-lg: 1440px; // Large desktop
 
 // Mixins
 @mixin flex-center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 @mixin button-base {
-  border: none;
-  border-radius: $border-radius-sm;
-  cursor: pointer;
-  font-weight: $font-weight-medium;
-  transition: all $transition-normal;
-  display: inline-block;
-  text-decoration: none;
+	border: none;
+	border-radius: $border-radius-sm;
+	cursor: pointer;
+	font-weight: $font-weight-medium;
+	transition: all $transition-normal;
+	display: inline-block;
+	text-decoration: none;
 
-  // Ensure minimum touch target on mobile
-  @media (max-width: $tablet) {
-    min-height: 44px;
-    min-width: 44px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+	// Ensure minimum touch target on mobile
+	@media (max-width: $tablet) {
+		min-height: 44px;
+		min-width: 44px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
 }
 
 @mixin touch-target {
-  @media (max-width: $tablet) {
-    min-height: 44px;
-    min-width: 44px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+	@media (max-width: $tablet) {
+		min-height: 44px;
+		min-width: 44px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
 }
 
 @mixin card-base {
-  background: white;
-  border-radius: $border-radius-lg;
-  box-shadow: $shadow-sm;
-  transition: transform $transition-fast, box-shadow $transition-fast;
+	background: white;
+	border-radius: $border-radius-lg;
+	box-shadow: $shadow-sm;
+	transition:
+		transform $transition-fast,
+		box-shadow $transition-fast;
+}
+
+@mixin card-hover {
+	transform: translateY(-2px);
+	box-shadow: $shadow-lg;
 }
 
 @mixin book-3d-tilt {
-  transition: transform 0.3s ease;
-  transform-style: preserve-3d;
+	transition: transform 0.3s ease;
+	transform-style: preserve-3d;
 
-  &:hover {
-    transform: perspective(1000px) rotateY(15deg) rotateX(5deg);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-  }
+	&:hover {
+		transform: perspective(1000px) rotateY(15deg) rotateX(5deg);
+		box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+	}
 }
 
 // RTL CSS Custom Properties
 :root {
-  --direction: ltr;
-  --text-align-start: left;
-  --text-align-end: right;
-  --margin-start: margin-left;
-  --margin-end: margin-right;
-  --padding-start: padding-left;
-  --padding-end: padding-right;
-  --border-start: border-left;
-  --border-end: border-right;
-  --float-start: left;
-  --float-end: right;
-  --flex-start: flex-start;
-  --flex-end: flex-end;
+	--direction: ltr;
+	--text-align-start: left;
+	--text-align-end: right;
+	--margin-start: margin-left;
+	--margin-end: margin-right;
+	--padding-start: padding-left;
+	--padding-end: padding-right;
+	--border-start: border-left;
+	--border-end: border-right;
+	--float-start: left;
+	--float-end: right;
+	--flex-start: flex-start;
+	--flex-end: flex-end;
 }
 
 // Arabic/RTL styles
 [dir="rtl"] {
-  --direction: rtl;
-  --text-align-start: right;
-  --text-align-end: left;
-  --margin-start: margin-right;
-  --margin-end: margin-left;
-  --padding-start: padding-right;
-  --padding-end: padding-left;
-  --border-start: border-right;
-  --border-end: border-left;
-  --float-start: right;
-  --float-end: left;
-  --flex-start: flex-end;
-  --flex-end: flex-start;
+	--direction: rtl;
+	--text-align-start: right;
+	--text-align-end: left;
+	--margin-start: margin-right;
+	--margin-end: margin-left;
+	--padding-start: padding-right;
+	--padding-end: padding-left;
+	--border-start: border-right;
+	--border-end: border-left;
+	--float-start: right;
+	--float-end: left;
+	--flex-start: flex-end;
+	--flex-end: flex-start;
 }
 
 // Arabic Font Support
@@ -155,32 +164,34 @@ $desktop-lg: 1440px;  // Large desktop
 
 // CSS Custom Properties for Fonts and Colors
 :root {
-  --font-family-serif: 'Merriweather', 'Times New Roman', serif;
-  --font-family-sans: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  --font-family-arabic: 'Noto Sans Arabic', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	--font-family-serif: "Merriweather", "Times New Roman", serif;
+	--font-family-sans: "Inter", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+	--font-family-arabic:
+		"Noto Sans Arabic", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 
-  --color-primary: #1e3a8a;
-  --color-secondary: #f59e0b;
-  --color-success: #10b981;
-  --color-danger: #ef4444;
-  --color-warning: #f59e0b;
-  --color-info: #3b82f6;
-  --color-light: #fefefe;
-  --color-dark: #2d3748;
-  --color-text: #2d3748;
-  --color-text-muted: #718096;
-  --color-border: #e2e8f0;
-  --color-background: #f7fafc;
+	--color-primary: #1e3a8a;
+	--color-secondary: #f59e0b;
+	--color-success: #10b981;
+	--color-danger: #ef4444;
+	--color-warning: #f59e0b;
+	--color-info: #3b82f6;
+	--color-light: #fefefe;
+	--color-dark: #2d3748;
+	--color-text: #2d3748;
+	--color-text-muted: #718096;
+	--color-border: #e2e8f0;
+	--color-background: #f7fafc;
 }
 
 // Global Font Settings
 body {
-  font-family: var(--font-family-sans);
-  color: var(--color-text);
-  background-color: var(--color-background);
+	font-family: var(--font-family-sans);
+	color: var(--color-text);
+	background-color: var(--color-background);
 }
 
 // Arabic/RTL styles
 [dir="rtl"] {
-  font-family: 'Noto Sans Arabic', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	font-family:
+		"Noto Sans Arabic", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
