@@ -189,7 +189,7 @@ const BentoGrid: React.FC = () => {
                   className="publisher-logo"
                 />
                 <h4>{publishers[0].name}</h4>
-                <p>{publishers[0].description.substring(0, 100)}...</p>
+                <p>{publishers[0].description ? publishers[0].description.substring(0, 100) : 'No description available'}...</p>
                 <Link to={`/publishers/${encodeURIComponent(publishers[0].name)}`} className="publisher-link">
                   {t('publisher.books')} →
                 </Link>

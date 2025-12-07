@@ -406,7 +406,7 @@ const PublisherDetails: React.FC = () => {
                 className="publisher-card"
               >
                 <h4>{pub.name}</h4>
-                <p>{pub.description.substring(0, 100)}...</p>
+                <p>{pub.description ? pub.description.substring(0, 100) : 'No description available'}...</p>
                 {pub.location && <span className="location">📍 {pub.location}</span>}
               </Link>
             ))}
