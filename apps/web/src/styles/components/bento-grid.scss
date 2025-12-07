@@ -444,13 +444,31 @@
 	.bento-item--stats {
 		grid-column: span 8;
 	}
+
+	// Improve touch interactions on tablets
+	.bento-item {
+		min-height: 180px;
+	}
+
+	.mystery-pick .wrapped-cover {
+		cursor: pointer;
+		transition: transform 0.2s ease;
+
+		&:active {
+			transform: scale(0.95);
+		}
+	}
 }
 
 @media (max-width: 768px) {
+	.bento-grid-page {
+		padding: 1rem 0.5rem;
+	}
+
 	.bento-grid {
 		grid-template-columns: repeat(4, 1fr);
-		gap: 1rem;
-		padding: 1rem;
+		gap: 0.75rem;
+		padding: 0;
 	}
 
 	.bento-item--large,
@@ -461,11 +479,25 @@
 	.bento-item--stats,
 	.bento-item--book {
 		grid-column: span 4;
+		min-height: 160px;
+	}
+
+	.bento-item {
+		border-radius: 12px;
+
+		&:hover {
+			transform: none; // Remove hover transform on mobile
+		}
+
+		&:active {
+			transform: scale(0.98); // Add active state for touch
+		}
 	}
 
 	.book-card-compact {
 		flex-direction: column;
 		text-align: center;
+		padding: 1rem 0.75rem;
 	}
 
 	.book-cover-small {
@@ -473,7 +505,222 @@
 		margin-bottom: 1rem;
 
 		img {
-			height: 150px;
+			height: 140px;
+			border-radius: 8px;
+
+			&:hover {
+				transform: none; // Remove 3D effect on mobile
+			}
+
+			&:active {
+				transform: scale(0.95);
+			}
+		}
+	}
+
+	.book-info {
+		text-align: center;
+
+		h4 {
+			font-size: 0.95rem;
+			margin-bottom: 0.5rem;
+		}
+
+		.book-author,
+		.book-price {
+			font-size: 0.85rem;
+		}
+
+		.book-link {
+			margin-top: 1rem;
+			padding: 0.5rem 1rem;
+			font-size: 0.85rem;
+		}
+	}
+
+	// Mystery pick mobile optimization
+	.mystery-pick {
+		padding: 1rem 0.75rem;
+		text-align: center;
+
+		.wrapped-cover {
+			width: 80px;
+			height: 120px;
+			margin: 0 auto 1rem;
+		}
+
+		h4 {
+			font-size: 1rem;
+		}
+
+		p {
+			font-size: 0.8rem;
+		}
+	}
+
+	// Featured book mobile
+	.featured-book .book-overlay {
+		padding: 1.5rem;
+
+		h2 {
+			font-size: 1.5rem;
+		}
+
+		.read-more-btn {
+			padding: 0.6rem 1rem;
+			font-size: 0.9rem;
+		}
+	}
+}
+
+@media (max-width: 640px) {
+	.bento-grid-page {
+		padding: 0.75rem 0.25rem;
+	}
+
+	.bento-grid {
+		gap: 0.5rem;
+	}
+
+	.bento-item {
+		border-radius: 8px;
+		min-height: 140px;
+	}
+
+	// Stack author quote vertically on small screens
+	.author-quote {
+		padding: 1.5rem 1rem;
+
+		blockquote {
+			font-size: 1.1rem;
+			margin-bottom: 0.75rem;
+		}
+
+		cite {
+			font-size: 0.8rem;
+		}
+	}
+
+	// Optimize publisher cards for small screens
+	.publisher-showcase {
+		padding: 1rem 0.75rem;
+
+		h3 {
+			font-size: 1.1rem;
+			margin-bottom: 0.75rem;
+		}
+	}
+
+	.publisher-card {
+		h4 {
+			font-size: 1rem;
+		}
+
+		p {
+			font-size: 0.85rem;
+			line-height: 1.3;
+		}
+	}
+
+	// Promo blocks mobile
+	.promo-block {
+		padding: 1rem 0.75rem;
+
+		h3 {
+			font-size: 1.1rem;
+		}
+
+		p {
+			margin-bottom: 0.75rem;
+		}
+
+		.promo-btn {
+			padding: 0.6rem 1rem;
+			font-size: 0.9rem;
+		}
+	}
+
+	// Stats mobile
+	.stats-block {
+		padding: 1rem 0.75rem;
+
+		.stat-number {
+			font-size: 1.5rem;
+		}
+
+		.stat-label {
+			font-size: 0.8rem;
+		}
+	}
+}
+
+@media (max-width: 480px) {
+	.bento-grid-page {
+		padding: 0.5rem 0.25rem;
+	}
+
+	.bento-grid {
+		gap: 0.5rem;
+	}
+
+	.bento-item {
+		min-height: 120px;
+		border-radius: 6px;
+	}
+
+	// Minimal featured book on very small screens
+	.featured-book .book-cover-large {
+		min-height: 200px;
+	}
+
+	.book-overlay {
+		padding: 1rem;
+
+		h2 {
+			font-size: 1.25rem;
+		}
+
+		.book-author {
+			font-size: 0.9rem;
+		}
+
+		.read-more-btn {
+			padding: 0.5rem 0.75rem;
+			font-size: 0.8rem;
+		}
+	}
+
+	// Compact mystery pick
+	.mystery-pick {
+		padding: 0.75rem 0.5rem;
+
+		.wrapped-cover {
+			width: 70px;
+			height: 100px;
+		}
+
+		h4 {
+			font-size: 0.9rem;
+		}
+	}
+
+	// Touch-friendly book cards
+	.book-card-compact {
+		padding: 0.75rem 0.5rem;
+
+		.book-cover-small img {
+			height: 120px;
+		}
+
+		.book-info {
+			h4 {
+				font-size: 0.9rem;
+			}
+
+			.book-link {
+				padding: 0.4rem 0.75rem;
+				font-size: 0.8rem;
+			}
 		}
 	}
 }

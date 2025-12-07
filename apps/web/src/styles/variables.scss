@@ -56,9 +56,12 @@ $font-weight-semibold: 600;
 $font-weight-bold: 700;
 
 // Breakpoints
-$mobile: 768px;
-$tablet: 1024px;
-$desktop: 1200px;
+$mobile-xs: 480px;    // Small mobile phones
+$mobile: 640px;       // Mobile phones
+$tablet: 768px;       // Tablets
+$tablet-lg: 1024px;   // Large tablets
+$desktop: 1200px;     // Desktop
+$desktop-lg: 1440px;  // Large desktop
 
 // Mixins
 @mixin flex-center {
@@ -75,6 +78,25 @@ $desktop: 1200px;
   transition: all $transition-normal;
   display: inline-block;
   text-decoration: none;
+
+  // Ensure minimum touch target on mobile
+  @media (max-width: $tablet) {
+    min-height: 44px;
+    min-width: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+@mixin touch-target {
+  @media (max-width: $tablet) {
+    min-height: 44px;
+    min-width: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
 @mixin card-base {

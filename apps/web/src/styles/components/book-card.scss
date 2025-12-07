@@ -162,7 +162,7 @@
 }
 
 // Responsive Design
-@media (max-width: $mobile) {
+@media (max-width: $tablet) {
   .book-card {
     .book-card-header {
       flex-direction: column;
@@ -190,6 +190,69 @@
         align-items: flex-end;
         text-align: right;
       }
+    }
+
+    .view-details-btn {
+      width: 100%;
+      padding: 0.75rem;
+      font-size: $font-size-base;
+    }
+  }
+}
+
+@media (max-width: $mobile) {
+  .book-card {
+    .book-title {
+      font-size: $font-size-base;
+      line-height: 1.3;
+    }
+
+    .book-author {
+      font-size: $font-size-sm;
+    }
+
+    .book-price {
+      font-size: $font-size-lg;
+    }
+
+    .book-description {
+      font-size: $font-size-sm;
+      line-height: 1.4;
+    }
+
+    .view-details-btn {
+      padding: 0.875rem;
+      font-size: $font-size-base;
+      font-weight: $font-weight-medium;
+    }
+  }
+}
+
+@media (max-width: $mobile-xs) {
+  .book-card {
+    .book-card-header {
+      padding: $spacing-md $spacing-md $spacing-sm;
+    }
+
+    .book-details {
+      padding: 0 $spacing-md $spacing-sm;
+    }
+
+    .book-card-footer {
+      padding: $spacing-sm $spacing-md $spacing-md;
+    }
+
+    .book-title {
+      font-size: 0.95rem;
+    }
+
+    .book-price {
+      font-size: $font-size-base;
+    }
+
+    .view-details-btn {
+      padding: 0.75rem;
+      font-size: 0.9rem;
     }
   }
 }
