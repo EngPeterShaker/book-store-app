@@ -12,9 +12,17 @@ export class CreateBookDto {
   @IsString()
   title: string;
 
+  @IsOptional()
+  @IsString()
+  title_ar?: string;  // Arabic title
+
   @IsNotEmpty()
   @IsString()
   author: string;
+
+  @IsOptional()
+  @IsString()
+  author_ar?: string;  // Arabic author name
 
   @IsOptional()
   @IsString()
@@ -23,6 +31,10 @@ export class CreateBookDto {
   @IsOptional()
   @IsString()
   description?: string;
+
+  @IsOptional()
+  @IsString()
+  description_ar?: string;  // Arabic description
 
   @IsNotEmpty()
   @IsString()

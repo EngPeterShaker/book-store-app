@@ -1,9 +1,12 @@
 export interface Book {
   id: number;
   title: string;
+  title_ar?: string;  // Arabic title
   author: string;
+  author_ar?: string;  // Arabic author name
   publisher?: string;
   description?: string;
+  description_ar?: string;  // Arabic description
   isbn: string;
   price: number;
   stock: number;
