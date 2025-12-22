@@ -203,3 +203,639 @@
 .publisher-awards li:before {
   content: "🏆";
 }
+
+/* Contact Information */
+.publisher-contact {
+  border-top: 2px solid #f0f0f0;
+  padding-top: 25px;
+  margin-top: $spacing-xxl;
+
+  h2 {
+    font-size: $font-size-xl;
+    margin-bottom: $spacing-lg;
+    color: var(--publisher-primary, $text-color);
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: $spacing-lg;
+  }
+
+  .contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: $spacing-md;
+    padding: $spacing-md;
+    background: $light-color;
+    border-radius: $border-radius-md;
+
+    .contact-icon {
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+
+    .contact-label {
+      display: block;
+      font-size: $font-size-xs;
+      text-transform: uppercase;
+      color: $text-muted;
+      margin-bottom: 0.25rem;
+    }
+
+    .contact-value {
+      color: var(--publisher-primary, $primary-color);
+      text-decoration: none;
+      font-weight: $font-weight-medium;
+      word-break: break-word;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+/* Events Section */
+.publisher-events {
+  border-top: 2px solid #f0f0f0;
+  padding-top: 25px;
+  margin-top: $spacing-xxl;
+
+  h2 {
+    font-size: $font-size-xl;
+    margin-bottom: $spacing-lg;
+    color: var(--publisher-primary, $text-color);
+  }
+
+  .events-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: $spacing-lg;
+  }
+
+  .event-card {
+    background: $light-color;
+    padding: $spacing-lg;
+    border-radius: $border-radius-md;
+    border-left: 4px solid var(--publisher-primary, $primary-color);
+
+    .event-name {
+      font-size: $font-size-lg;
+      margin-bottom: 0.5rem;
+      color: $text-color;
+    }
+
+    .event-date {
+      font-size: $font-size-sm;
+      color: $text-muted;
+    }
+  }
+}
+
+/* Social Media Links */
+.publisher-social {
+  border-top: 2px solid #f0f0f0;
+  padding-top: 25px;
+  margin-top: $spacing-xxl;
+
+  h2 {
+    font-size: $font-size-xl;
+    margin-bottom: $spacing-lg;
+    color: var(--publisher-primary, $text-color);
+  }
+
+  .social-links {
+    display: flex;
+    gap: $spacing-md;
+    flex-wrap: wrap;
+  }
+
+  .social-link {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: $light-color;
+    transition: all 0.3s ease;
+
+    svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    &:hover {
+      transform: translateY(-2px);
+    }
+
+    &.twitter {
+      color: #1da1f2;
+      &:hover { background: rgba(29, 161, 242, 0.1); }
+    }
+
+    &.linkedin {
+      color: #0077b5;
+      &:hover { background: rgba(0, 119, 181, 0.1); }
+    }
+
+    &.instagram {
+      color: #e4405f;
+      &:hover { background: rgba(228, 64, 95, 0.1); }
+    }
+
+    &.facebook {
+      color: #1877f2;
+      &:hover { background: rgba(24, 119, 242, 0.1); }
+    }
+
+    &.youtube {
+      color: #ff0000;
+      &:hover { background: rgba(255, 0, 0, 0.1); }
+    }
+  }
+}
+
+/* Branches Section */
+.publisher-branches {
+  padding: $spacing-xxl;
+
+  h2 {
+    font-size: $font-size-xl;
+    margin-bottom: $spacing-lg;
+    color: var(--publisher-primary, $text-color);
+  }
+
+  .branches-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: $spacing-lg;
+  }
+}
+
+/* Books Section */
+.publisher-books {
+  padding: $spacing-xxl;
+  background: $background-color;
+
+  h2 {
+    font-size: $font-size-xl;
+    margin-bottom: $spacing-lg;
+    color: var(--publisher-primary, $text-color);
+  }
+
+  .books-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: $spacing-lg;
+  }
+
+  .no-books {
+    text-align: center;
+    padding: $spacing-xxl;
+    background: white;
+    border-radius: $border-radius-lg;
+
+    p {
+      margin-bottom: $spacing-md;
+      color: $text-muted;
+    }
+
+    .add-book-btn {
+      display: inline-block;
+      padding: $spacing-md $spacing-lg;
+      background: var(--publisher-primary, $primary-color);
+      color: white;
+      text-decoration: none;
+      border-radius: $border-radius-md;
+      transition: all 0.3s ease;
+
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: $shadow-lg;
+      }
+    }
+  }
+}
+
+/* Publisher Not Found */
+.publisher-not-found {
+  padding: $spacing-xxl;
+  text-align: center;
+
+  h2 {
+    font-size: $font-size-xxl;
+    margin-bottom: $spacing-md;
+    color: $text-color;
+  }
+
+  p {
+    margin-bottom: $spacing-lg;
+    color: $text-muted;
+  }
+
+  .available-publishers {
+    margin-top: $spacing-xxl;
+    text-align: left;
+
+    h3 {
+      font-size: $font-size-xl;
+      margin-bottom: $spacing-lg;
+      color: $text-color;
+    }
+  }
+
+  .publishers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: $spacing-lg;
+    margin-bottom: $spacing-xxl;
+
+    .publisher-card {
+      background: white;
+      padding: $spacing-lg;
+      border-radius: $border-radius-md;
+      text-decoration: none;
+      box-shadow: $shadow-sm;
+      transition: all 0.3s ease;
+
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: $shadow-lg;
+      }
+
+      h4 {
+        font-size: $font-size-lg;
+        margin-bottom: 0.5rem;
+        color: $text-color;
+      }
+
+      p {
+        font-size: $font-size-sm;
+        color: $text-muted;
+        text-align: left;
+        margin-bottom: 0.5rem;
+      }
+
+      .location {
+        font-size: $font-size-xs;
+        color: var(--publisher-primary, $primary-color);
+      }
+    }
+  }
+
+  .back-btn {
+    padding: $spacing-md $spacing-xxl;
+    background: var(--color-primary);
+    color: white;
+    border: none;
+    border-radius: $border-radius-md;
+    cursor: pointer;
+    font-size: $font-size-base;
+    transition: all 0.3s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: $shadow-lg;
+    }
+  }
+}
+
+/* RESPONSIVE DESIGN */
+
+/* Tablet Responsiveness */
+@media (max-width: 1024px) {
+  .publisher-details {
+    padding: 0;
+  }
+
+  .publisher-banner {
+    height: 250px;
+    margin-bottom: -60px;
+  }
+
+  .publisher-profile {
+    padding: $spacing-lg;
+    gap: 20px;
+  }
+
+  .publisher-logo {
+    width: 120px;
+    height: 120px;
+  }
+
+  .publisher-info {
+    padding: 20px;
+
+    .publisher-name {
+      font-size: 2rem;
+    }
+  }
+
+  .publisher-branches,
+  .publisher-books {
+    padding: $spacing-lg;
+  }
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .publisher-details {
+    padding: 0;
+  }
+
+  /* Banner */
+  .publisher-banner {
+    height: 180px;
+    margin-bottom: -40px;
+  }
+
+  /* Header */
+  .publisher-header {
+    padding: $spacing-lg $spacing-md;
+  }
+
+  .back-btn {
+    padding: 0.75rem 1rem;
+    min-height: 44px;
+    font-size: $font-size-sm;
+  }
+
+  /* Profile Section */
+  .publisher-profile {
+    flex-direction: column;
+    padding: $spacing-md;
+    gap: $spacing-md;
+    align-items: center;
+
+    [dir="rtl"] & {
+      flex-direction: column;
+    }
+  }
+
+  .publisher-logo {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+  }
+
+  .publisher-info {
+    padding: $spacing-lg $spacing-md;
+    width: 100%;
+
+    .publisher-name {
+      font-size: 1.75rem;
+      text-align: center;
+    }
+
+    .publisher-tagline {
+      font-size: $font-size-base;
+      text-align: center;
+    }
+  }
+
+  /* Statistics */
+  .publisher-stats {
+    grid-template-columns: 1fr;
+    gap: $spacing-md;
+  }
+
+  .stat-card {
+    padding: $spacing-md;
+
+    .stat-label {
+      font-size: 0.75rem;
+    }
+
+    .stat-value {
+      font-size: $font-size-xl;
+    }
+  }
+
+  /* Description */
+  .publisher-description {
+    padding-top: $spacing-lg;
+
+    h2 {
+      font-size: $font-size-lg;
+    }
+
+    h3 {
+      font-size: $font-size-base;
+    }
+
+    p {
+      font-size: $font-size-base;
+    }
+
+    .mission-statement {
+      padding: $spacing-md;
+      border-left-width: 3px;
+    }
+  }
+
+  /* Specialties */
+  .publisher-specialties .specialties-tags {
+    .specialty-tag {
+      font-size: 0.8rem;
+      padding: 6px 12px;
+    }
+  }
+
+  /* Contact Information */
+  .publisher-contact {
+    .contact-grid {
+      grid-template-columns: 1fr;
+      gap: $spacing-md;
+    }
+
+    .contact-item {
+      padding: $spacing-md;
+
+      .contact-icon {
+        font-size: 1.25rem;
+      }
+    }
+  }
+
+  /* Events */
+  .publisher-events {
+    .events-grid {
+      grid-template-columns: 1fr;
+      gap: $spacing-md;
+    }
+
+    .event-card {
+      padding: $spacing-md;
+      border-left-width: 3px;
+
+      .event-name {
+        font-size: $font-size-base;
+      }
+    }
+  }
+
+  /* Social Media */
+  .publisher-social {
+    .social-links {
+      justify-content: center;
+    }
+
+    .social-link {
+      width: 44px;
+      height: 44px;
+
+      svg {
+        width: 20px;
+        height: 20px;
+      }
+    }
+  }
+
+  /* Branches */
+  .publisher-branches {
+    padding: $spacing-md;
+
+    h2 {
+      font-size: $font-size-lg;
+    }
+
+    .branches-grid {
+      grid-template-columns: 1fr;
+      gap: $spacing-md;
+    }
+  }
+
+  /* Books */
+  .publisher-books {
+    padding: $spacing-md;
+
+    h2 {
+      font-size: $font-size-lg;
+    }
+
+    .books-grid {
+      grid-template-columns: 1fr;
+      gap: $spacing-md;
+    }
+
+    .no-books {
+      padding: $spacing-lg;
+    }
+  }
+
+  /* Publisher Not Found */
+  .publisher-not-found {
+    padding: $spacing-md;
+
+    h2 {
+      font-size: $font-size-xl;
+    }
+
+    .publishers-grid {
+      grid-template-columns: 1fr;
+      gap: $spacing-md;
+
+      .publisher-card {
+        padding: $spacing-md;
+      }
+    }
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+  /* Banner */
+  .publisher-banner {
+    height: 140px;
+    margin-bottom: -30px;
+  }
+
+  /* Profile */
+  .publisher-profile {
+    padding: $spacing-sm;
+  }
+
+  .publisher-logo {
+    width: 80px;
+    height: 80px;
+  }
+
+  .publisher-info {
+    padding: $spacing-md $spacing-sm;
+
+    .publisher-name {
+      font-size: 1.5rem;
+    }
+
+    .publisher-tagline {
+      font-size: $font-size-sm;
+    }
+  }
+
+  /* Statistics */
+  .stat-card {
+    padding: $spacing-sm;
+
+    .stat-value {
+      font-size: $font-size-lg;
+    }
+  }
+
+  /* Description */
+  .publisher-description {
+    h2 {
+      font-size: $font-size-base;
+      margin-bottom: $spacing-sm;
+    }
+
+    h3 {
+      font-size: $font-size-sm;
+    }
+
+    p {
+      font-size: $font-size-sm;
+    }
+
+    .mission-statement {
+      padding: $spacing-sm;
+    }
+  }
+
+  /* Contact */
+  .publisher-contact {
+    .contact-item {
+      padding: $spacing-sm;
+      flex-direction: column;
+      text-align: center;
+
+      .contact-icon {
+        font-size: 1.5rem;
+      }
+    }
+  }
+
+  /* Branches and Books */
+  .publisher-branches,
+  .publisher-books {
+    padding: $spacing-sm;
+
+    h2 {
+      font-size: $font-size-base;
+    }
+  }
+
+  /* Not Found */
+  .publisher-not-found {
+    padding: $spacing-sm;
+
+    h2 {
+      font-size: $font-size-lg;
+    }
+
+    .available-publishers h3 {
+      font-size: $font-size-base;
+    }
+  }
+}
