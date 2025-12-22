@@ -61,6 +61,20 @@
         margin: 0;
         font-style: italic;
       }
+
+      .event-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: $spacing-xs;
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(10px);
+        padding: $spacing-xs $spacing-sm;
+        border-radius: $border-radius-full;
+        font-size: $font-size-xs;
+        font-weight: $font-weight-semibold;
+        margin-top: $spacing-sm;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+      }
     }
 
     &-content {
@@ -111,9 +125,23 @@
 }
 
 // Responsive Design
-@media (max-width: $mobile) {
+
+// Tablet
+@media (max-width: $tablet-lg) {
+  .publishers-page {
+    .publishers-grid {
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: $spacing-lg;
+    }
+  }
+}
+
+// Tablet Small
+@media (max-width: $tablet) {
   .publishers-page {
     .page-header {
+      margin-bottom: $spacing-lg;
+
       .page-title {
         font-size: 2rem;
       }
@@ -124,34 +152,126 @@
     }
 
     .publishers-grid {
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    }
+  }
+}
+
+// Mobile
+@media (max-width: $mobile) {
+  .publishers-page {
+    .page-header {
+      margin-bottom: $spacing-md;
+      padding: 0 $spacing-sm;
+
+      .page-title {
+        font-size: 1.75rem;
+      }
+
+      .page-description {
+        font-size: $font-size-sm;
+        padding: 0 $spacing-sm;
+      }
+    }
+
+    .publishers-grid {
       grid-template-columns: 1fr;
-      gap: $spacing-lg;
+      gap: $spacing-md;
+      margin-top: $spacing-lg;
     }
 
     .publisher-card {
+      border-radius: $border-radius-md;
+
       &-header {
         padding: $spacing-md;
 
         .publisher-name {
           font-size: $font-size-lg;
         }
+
+        .publisher-tagline {
+          font-size: 0.8rem;
+        }
       }
 
       &-content {
         padding: $spacing-md;
+
+        .publisher-description {
+          font-size: 0.85rem;
+        }
+
+        .publisher-meta {
+          gap: $spacing-sm;
+
+          .meta-item {
+            font-size: 0.75rem;
+          }
+        }
       }
 
       &-footer {
         padding: 0 $spacing-md $spacing-md;
+
+        .view-books-link {
+          font-size: 0.85rem;
+        }
       }
     }
   }
 }
 
-@media (max-width: $tablet) {
+// Small Mobile
+@media (max-width: $mobile-xs) {
   .publishers-page {
+    .page-header {
+      padding: 0 $spacing-xs;
+
+      .page-title {
+        font-size: 1.5rem;
+      }
+
+      .page-description {
+        font-size: 0.85rem;
+      }
+    }
+
     .publishers-grid {
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: $spacing-sm;
+    }
+
+    .publisher-card {
+      border-radius: $border-radius-sm;
+
+      &-header {
+        padding: $spacing-sm;
+
+        .publisher-name {
+          font-size: $font-size-base;
+        }
+
+        .publisher-tagline {
+          font-size: 0.75rem;
+        }
+      }
+
+      &-content {
+        padding: $spacing-sm;
+
+        .publisher-description {
+          font-size: 0.8rem;
+          margin-bottom: $spacing-sm;
+        }
+      }
+
+      &-footer {
+        padding: 0 $spacing-sm $spacing-sm;
+
+        .view-books-link {
+          font-size: 0.8rem;
+        }
+      }
     }
   }
 }
