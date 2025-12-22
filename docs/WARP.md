@@ -4,7 +4,13 @@ This file provides guidance to WARP (warp.dev) when working with code in this re
 
 ## Project Overview
 
-A full-stack MERN book store application with NestJS TypeScript backend and React TypeScript frontend, deployed as a **single monolithic application** on Vercel with CI/CD automation.
+A full-stack book store application with:
+- **Backend**: NestJS TypeScript API with PostgreSQL
+- **Web Frontend**: React TypeScript SPA
+- **Mobile App**: React Native with Expo
+- **Shared Packages**: TypeScript types, API client, utilities, and i18n
+
+Deployed as a **monorepo** using Turborepo. Web and API are deployed as a monolithic application on Vercel. Mobile app is deployed to iOS App Store and Google Play Store.
 
 ## Development Commands
 
@@ -24,24 +30,29 @@ cp backend/.env.example backend/.env
 
 ### Development Servers
 ```bash
-# Start both frontend and backend concurrently
+# Start web and API concurrently (from root)
 npm run dev
 
 # Or start separately:
-# Backend (port 3001)
-cd backend && corepack yarn start:dev
+# API (port 3001)
+cd apps/api && corepack yarn start:dev
 
-# Frontend (port 3000) 
-cd frontend && corepack yarn start
+# Web (port 3000)
+cd apps/web && corepack yarn start
+
+# Mobile (Expo development server)
+cd apps/mobile && corepack yarn dev
+cd apps/mobile && corepack yarn ios      # iOS Simulator
+cd apps/mobile && corepack yarn android  # Android Emulator
 ```
 
 ### Database Management
 ```bash
 # Seed the database with sample data
-cd backend && corepack yarn seed
+cd apps/api && corepack yarn seed
 
 # Production seeding
-cd backend && corepack yarn seed:prod
+cd apps/api && corepack yarn seed:prod
 
 # Access pgAdmin: http://localhost:5050
 # Credentials: admin@bookstore.com / admin
@@ -49,32 +60,40 @@ cd backend && corepack yarn seed:prod
 
 ### Testing
 ```bash
-# Backend tests
-cd backend && corepack yarn test
-cd backend && corepack yarn test:watch
-cd backend && corepack yarn test:cov
-cd backend && corepack yarn test:e2e
+# API tests
+cd apps/api && corepack yarn test
+cd apps/api && corepack yarn test:watch
+cd apps/api && corepack yarn test:cov
+cd apps/api && corepack yarn test:e2e
 
-# Frontend tests
-cd frontend && corepack yarn test
-cd frontend && corepack yarn test -- --coverage
+# Web tests
+cd apps/web && corepack yarn test
+cd apps/web && corepack yarn test -- --coverage
+
+# Mobile tests
+cd apps/mobile && corepack yarn test
+cd apps/mobile && corepack yarn test -- --coverage
 ```
 
 ### Build & Production
 ```bash
-# Build backend
-cd backend && corepack yarn build
+# Build API
+cd apps/api && corepack yarn build
 
-# Build frontend
-cd frontend && corepack yarn build
+# Build web
+cd apps/web && corepack yarn build
 
-# Build frontend with production API URL
-cd frontend && REACT_APP_API_URL=/api yarn build
+# Build web with production API URL
+cd apps/web && REACT_APP_API_URL=/api yarn build
+
+# Mobile production builds (via EAS)
+cd apps/mobile && eas build --platform ios --profile production
+cd apps/mobile && eas build --platform android --profile production
 ```
 
 ### Deployment
 ```bash
-# Deploy entire application as one project
+# Web + API: Deploy to Vercel
 vercel --prod
 
 # Current production URL: https://book-store-q53k5qw8j-engpetershakers-projects.vercel.app
@@ -83,42 +102,53 @@ vercel --prod
 # CI/CD: Automatic deployment on git push to main/master
 # GitHub Actions workflow handles testing and deployment
 
-# Manual deployment with custom API URL
-REACT_APP_API_URL=/api vercel --prod
+# Mobile: Deploy to app stores (via EAS)
+cd apps/mobile
+eas build --platform ios --profile production
+eas submit --platform ios
 
-# AWS Lambda deployment (alternative)
-cd backend && corepack yarn sls:deploy
-cd backend && corepack yarn sls:offline  # local testing
+eas build --platform android --profile production
+eas submit --platform android
+
+# AWS Lambda deployment (alternative for API)
+cd apps/api && corepack yarn sls:deploy
+cd apps/api && corepack yarn sls:offline  # local testing
 ```
 
 ### Code Quality
 ```bash
-# Backend linting and formatting
-cd backend && corepack yarn lint
-cd backend && corepack yarn format
+# API linting and formatting
+cd apps/api && corepack yarn lint
+cd apps/api && corepack yarn format
 
-# Frontend uses React Scripts built-in ESLint
+# Web uses React Scripts built-in ESLint
+# Mobile uses Expo's built-in linting
 ```
 
 ## Architecture Overview
 
 ### Monorepo Structure
-- **Root**: Contains deployment scripts and Docker configuration
-- **backend/**: NestJS API with TypeORM and PostgreSQL
-- **frontend/**: React SPA with TypeScript and CSS3
+- **Root**: Contains deployment scripts, Docker configuration, and workspace management
+- **apps/api/**: NestJS API with TypeORM and PostgreSQL
+- **apps/web/**: React SPA with TypeScript and CSS3
+- **apps/mobile/**: React Native mobile app with Expo
+- **packages/**: Shared packages (types, API client, utils, i18n)
 
 ### Key Architectural Decisions
 
 **Framework Choices:**
-- Backend: NestJS 11.x with Express 5.x, targeting Node.js 18+
-- Frontend: React 19.x with React Router 7.x
+- API: NestJS 11.x with Express 5.x, targeting Node.js 18+
+- Web: React 19.x with React Router 7.x
+- Mobile: React Native 0.81.x with Expo 54.x
 - Database: PostgreSQL 15 with TypeORM 0.3.x
 - Package Manager: Yarn with corepack
+- Monorepo: Turborepo for build orchestration
 
 **Deployment Strategy:**
-- Monolithic Vercel deployment (single project)
-- Backend deployed as serverless functions at `/api/*` routes
-- Frontend deployed as static files with SPA routing
+- Web + API: Monolithic Vercel deployment (single project)
+- API deployed as serverless functions at `/api/*` routes
+- Web deployed as static files with SPA routing
+- Mobile: iOS App Store and Google Play Store via EAS Build
 - CI/CD automation via GitHub Actions
 - Alternative AWS Lambda deployment via Serverless Framework
 
@@ -134,7 +164,39 @@ cd backend && corepack yarn format
 - CORS configured for cross-origin requests
 - Centralized error handling and logging
 
-### Frontend Architecture
+### Mobile App Architecture
+
+**Framework and Tools:**
+- React Native 0.81.x with Expo 54.x
+- React Navigation 7.x for routing
+- TypeScript with strict mode
+- StyleSheet for styling (no CSS preprocessors)
+
+**Navigation:**
+- Stack navigator for screen transitions
+- Type-safe navigation with TypeScript
+- Consistent header styling with app theme
+
+**State Management:**
+- React Context API for global state
+- Custom hooks for data fetching
+- API client from shared packages
+
+**Styling:**
+- Theme constants matching web app
+- React Native StyleSheet API
+- Responsive design with platform-specific code
+- Primary color: #15616D (teal)
+
+**Features:**
+- Book management (list, details, add, edit, delete)
+- Search functionality
+- Pull-to-refresh
+- Form validation
+- Error handling and loading states
+- Offline-ready architecture (in progress)
+
+### Web Frontend Architecture
 
 **Component Organization:**
 - Functional components with React hooks
