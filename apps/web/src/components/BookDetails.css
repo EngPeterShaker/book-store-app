@@ -199,43 +199,155 @@
   border-radius: 8px;
 }
 
-@media (max-width: 768px) {
+/* Tablet Responsiveness */
+@media (max-width: 1024px) {
   .book-details {
     margin: 0 1rem;
+  }
+  
+  .book-title {
+    font-size: 2.2rem;
+  }
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .book-details {
+    margin: 0 0.5rem;
   }
   
   .book-details-header {
     flex-direction: column;
     align-items: stretch;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .back-btn {
+    width: 100%;
+    justify-content: center;
+    padding: 0.75rem 1rem;
+    min-height: 44px;
   }
   
   .book-actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+  
+  .edit-btn,
+  .delete-btn {
+    flex: 1;
+    text-align: center;
+    padding: 0.75rem 1rem;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
     justify-content: center;
   }
   
   .book-main-info {
-    padding: 1.5rem;
+    padding: 1.5rem 1rem;
   }
   
   .book-title {
-    font-size: 2rem;
+    font-size: 1.75rem;
+    line-height: 1.3;
   }
   
   .book-author {
-    font-size: 1.1rem;
+    font-size: 1rem;
+  }
+  
+  .book-genre-tag {
+    font-size: 0.85rem;
+    padding: 0.4rem 0.8rem;
   }
   
   .book-pricing {
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 0.75rem;
     text-align: center;
+    padding: 1rem 0.75rem;
   }
   
-  .book-description, .book-metadata {
-    padding: 1.5rem;
+  .book-price {
+    font-size: 1.75rem;
+  }
+  
+  .book-stock {
+    font-size: 0.95rem;
+  }
+  
+  .book-description {
+    padding: 1.5rem 1rem;
+  }
+  
+  .book-description h3 {
+    font-size: 1.2rem;
+  }
+  
+  .book-description p {
+    font-size: 1rem;
+  }
+  
+  .book-metadata {
+    padding: 1.5rem 1rem;
   }
   
   .metadata-grid {
     grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+  
+  .metadata-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+    padding: 1rem 0.75rem;
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+  .book-details {
+    margin: 0 0.25rem;
+  }
+  
+  .book-details-header {
+    margin-bottom: 1rem;
+  }
+  
+  .book-main-info {
+    padding: 1.25rem 0.75rem;
+  }
+  
+  .book-title {
+    font-size: 1.5rem;
+  }
+  
+  .book-author {
+    font-size: 0.95rem;
+  }
+  
+  .book-price {
+    font-size: 1.5rem;
+  }
+  
+  .book-description,
+  .book-metadata {
+    padding: 1.25rem 0.75rem;
+  }
+  
+  .book-description h3 {
+    font-size: 1.1rem;
+  }
+  
+  .book-description p {
+    font-size: 0.95rem;
+  }
+  
+  .metadata-item {
+    padding: 0.75rem;
   }
 }
