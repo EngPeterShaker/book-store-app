@@ -164,22 +164,77 @@
   transform: translateY(-1px);
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
+/* Tablet Responsiveness */
+@media (max-width: 1024px) {
   .book-card-header {
-    flex-direction: column;
-    gap: 0.5rem;
+    padding: 1.25rem 1.25rem 0.75rem;
   }
 
-    [dir="rtl"] .book-card-header {
-      flex-direction: column;
-    }
+  .book-title {
+    font-size: 1.15rem;
+  }
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .book-card {
+    border-radius: 10px;
+  }
+
+  .book-card-header {
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 1.25rem 1rem 0.75rem;
+    align-items: flex-start;
+  }
+
+  [dir="rtl"] .book-card-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .book-title {
+    font-size: 1.1rem;
+    width: 100%;
+  }
+
   .book-actions {
-    align-self: var(--flex-end, flex-end);
-    }
-    
-    [dir="rtl"] .book-actions {
-      align-self: flex-start;
+    width: 100%;
+    justify-content: space-between;
+    align-self: stretch;
+  }
+  
+  [dir="rtl"] .book-actions {
+    align-self: stretch;
+  }
+
+  .edit-btn,
+  .delete-btn {
+    flex: 1;
+    text-align: center;
+    padding: 0.6rem 0.8rem;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+  }
+
+  .book-details {
+    padding: 0 1rem 1rem;
+  }
+
+  .book-author {
+    font-size: 0.95rem;
+  }
+
+  .book-genre {
+    font-size: 0.75rem;
+    padding: 0.3rem 0.6rem;
+  }
+
+  .book-description {
+    font-size: 0.85rem;
   }
 
   .book-info {
@@ -187,8 +242,86 @@
     align-items: flex-start;
     gap: 0.5rem;
   }
-[dir="rtl"] .book-info {
-  align-items: flex-end;
-  text-align: right;
+
+  [dir="rtl"] .book-info {
+    align-items: flex-end;
+    text-align: right;
+  }
+
+  .book-price {
+    font-size: 1.2rem;
+  }
+
+  .book-stock {
+    font-size: 0.85rem;
+  }
+
+  .book-meta {
+    gap: 0.5rem;
+  }
+
+  .book-meta small {
+    font-size: 0.75rem;
+  }
+
+  .book-card-footer {
+    padding: 0.75rem 1rem 1rem;
+  }
+
+  .view-details-btn {
+    padding: 0.85rem;
+    font-size: 0.95rem;
+    min-height: 44px;
+  }
 }
+
+/* Small Mobile */
+@media (max-width: 480px) {
+  .book-card {
+    border-radius: 8px;
+  }
+
+  .book-card-header {
+    padding: 1rem 0.75rem 0.5rem;
+  }
+
+  .book-title {
+    font-size: 1rem;
+  }
+
+  .edit-btn,
+  .delete-btn {
+    padding: 0.5rem 0.6rem;
+    font-size: 0.85rem;
+  }
+
+  .book-details {
+    padding: 0 0.75rem 0.75rem;
+  }
+
+  .book-author {
+    font-size: 0.9rem;
+  }
+
+  .book-description {
+    font-size: 0.8rem;
+    line-height: 1.4;
+  }
+
+  .book-price {
+    font-size: 1.1rem;
+  }
+
+  .book-stock {
+    font-size: 0.8rem;
+  }
+
+  .book-card-footer {
+    padding: 0.5rem 0.75rem 0.75rem;
+  }
+
+  .view-details-btn {
+    padding: 0.75rem;
+    font-size: 0.9rem;
+  }
 }
