@@ -192,28 +192,155 @@
   box-shadow: 0 4px 12px rgba(25, 118, 210, 0.4);
 }
 
-/* Responsive */
-@media (max-width: 768px) {
+/* Tablet Responsiveness */
+@media (max-width: 1024px) {
   .branch-card {
     padding: 20px;
   }
 
+  .branch-title h3 {
+    font-size: 1.2rem;
+  }
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .branch-card {
+    padding: 18px;
+    border-radius: 10px;
+  }
+
+  .main-branch-badge {
+    font-size: 0.75rem;
+    padding: 5px 12px;
+    right: 16px;
+    top: -8px;
+  }
+
   .branch-header {
     gap: 12px;
+    margin-bottom: 14px;
   }
 
   .branch-icon {
     width: 48px;
     height: 48px;
-    font-size: 24px;
+    font-size: 22px;
   }
 
   .branch-title h3 {
     font-size: 1.1rem;
   }
 
-  .main-branch-badge {
+  .branch-type-label {
     font-size: 0.75rem;
-    padding: 5px 12px;
+    padding: 3px 10px;
+  }
+
+  .branch-description {
+    font-size: 0.9rem;
+    margin-bottom: 16px;
+  }
+
+  .branch-details {
+    gap: 14px;
+    margin-bottom: 16px;
+  }
+
+  .detail-icon {
+    font-size: 1.2rem;
+  }
+
+  .detail-label {
+    font-size: 0.75rem;
+  }
+
+  .detail-value {
+    font-size: 0.9rem;
+  }
+
+  .hours-row {
+    padding: 5px 0;
+  }
+
+  .day-name,
+  .hours-value {
+    font-size: 0.85rem;
+  }
+
+  .branch-actions {
+    margin-top: 16px;
+    padding-top: 16px;
+  }
+
+  .get-directions-btn {
+    padding: 12px 18px;
+    min-height: 44px;
+    font-size: 0.95rem;
   }
 }
+
+/* Small Mobile */
+@media (max-width: 480px) {
+  .branch-card {
+    padding: 16px;
+    border-radius: 8px;
+  }
+
+  .main-branch-badge {
+    font-size: 0.7rem;
+    padding: 4px 10px;
+    right: 12px;
+  }
+
+  .branch-header {
+    gap: 10px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .branch-icon {
+    width: 44px;
+    height: 44px;
+    font-size: 20px;
+  }
+
+  .branch-title h3 {
+    font-size: 1rem;
+  }
+
+  .branch-description {
+    font-size: 0.85rem;
+  }
+
+  .branch-details {
+    gap: 12px;
+  }
+
+  .detail-icon {
+    font-size: 1.1rem;
+  }
+
+  .detail-label {
+    font-size: 0.7rem;
+  }
+
+  .detail-value {
+    font-size: 0.85rem;
+  }
+
+  .day-name {
+    width: 40px;
+    font-size: 0.8rem;
+  }
+
+  .hours-value {
+    font-size: 0.8rem;
+  }
+
+  .get-directions-btn {
+    padding: 10px 16px;
+    font-size: 0.9rem;
+  }
+}
+
