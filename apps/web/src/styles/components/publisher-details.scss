@@ -632,7 +632,38 @@
     .mission-statement {
       padding: $spacing-md;
       border-left-width: 3px;
+
+      [dir="rtl"] & {
+        border-left-width: 0;
+        border-right-width: 3px;
+      }
     }
+  }
+
+  /* RTL/Arabic Support for Mobile */
+  [dir="rtl"] .publisher-info {
+    .publisher-name,
+    .publisher-tagline {
+      text-align: center;
+    }
+  }
+
+  [dir="rtl"] .publisher-description {
+    text-align: right;
+
+    h2, h3, p {
+      text-align: right;
+    }
+  }
+
+  [dir="rtl"] .contact-item {
+    flex-direction: row-reverse;
+    text-align: right;
+  }
+
+  [dir="rtl"] .event-card {
+    border-left-width: 0;
+    border-right-width: 3px;
   }
 
   /* Specialties */

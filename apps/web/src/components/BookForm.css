@@ -192,6 +192,21 @@ label:has(+ textarea[required])::after {
     padding: 0.85rem 1.5rem;
     font-size: 1rem;
   }
+
+  /* RTL/Arabic Support */
+  [dir="rtl"] .form-group {
+    text-align: right;
+  }
+
+  [dir="rtl"] .form-group input,
+  [dir="rtl"] .form-group select,
+  [dir="rtl"] .form-group textarea {
+    text-align: right;
+  }
+
+  [dir="rtl"] .form-actions {
+    flex-direction: column-reverse;
+  }
 }
 
 /* Small Mobile */

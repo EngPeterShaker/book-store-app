@@ -306,6 +306,20 @@
     gap: 0.25rem;
     padding: 1rem 0.75rem;
   }
+
+  /* RTL/Arabic Support */
+  [dir="rtl"] .book-details-header {
+    flex-direction: column;
+  }
+
+  [dir="rtl"] .metadata-item {
+    align-items: flex-end;
+    text-align: right;
+  }
+
+  [dir="rtl"] .book-description {
+    text-align: right;
+  }
 }
 
 /* Small Mobile */
@@ -349,5 +363,10 @@
   
   .metadata-item {
     padding: 0.75rem;
+  }
+
+  /* RTL/Arabic Support */
+  [dir="rtl"] .metadata-item {
+    align-items: flex-end;
   }
 }

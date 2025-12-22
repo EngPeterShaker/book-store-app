@@ -219,6 +219,27 @@
         }
       }
     }
+
+    // RTL/Arabic Support for Mobile
+    [dir="rtl"] & {
+      .page-header {
+        text-align: center;
+      }
+
+      .publisher-card {
+        &-header {
+          text-align: right;
+        }
+
+        &-content {
+          text-align: right;
+        }
+
+        &-footer {
+          text-align: left;
+        }
+      }
+    }
   }
 }
 
